@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SelectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+//POST person chosen
+//computer also randomly choses person
+Route::post('/select', [SelectController::class, 'store']);
+
+//GET computer guesses characteristic
+//return matching characters
+Route::get('/guess', function (Request $request) {
+    return $request->session()->get('selection');
+});
+
+//POST guessed characteristic
+//returns matching characters
+Route::post('/guess', function () {
+    return 'Hello World';
 });

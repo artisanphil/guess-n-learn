@@ -19,6 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//GET list of objects
+Route::get('/index', [SelectController::class, 'index']);
+
 //POST person chosen
 //computer also randomly choses person
 Route::post('/select', [SelectController::class, 'store']);

@@ -1,217 +1,265 @@
 [
-    "Liam",
     [
-        "Male",
-        "Glasses",
-        "Brown eyes",
-        "Bald",
-        "White hair",
-        "Small mouth",
-        "Small nose"
+        "Liam",
+        [
+            "Male",
+            "Glasses",
+            "Brown eyes",
+            "Bald",
+            "White hair",
+            "Small mouth",
+            "Small nose"
+        ]
     ],
-    "Noah",
     [
-        "Male",
-        "Mustache",
-        "Brown eyes",
-        "Brown hair",
-        "Big mouth",
-        "Small nose"
+        "Noah",
+        [
+            "Male",
+            "Mustache",
+            "Brown eyes",
+            "Brown hair",
+            "Big mouth",
+            "Small nose"
+        ]
     ],
-    "Oliver",
     [
-        "Male",
-        "White hair",
-        "Big nose",
-        "Big mouth",
-        "Blue eyes"
+        "Oliver",
+        [
+            "Male",
+            "White hair",
+            "Big nose",
+            "Big mouth",
+            "Blue eyes"
+        ]
     ],
-    "Emma",
     [
-        "Female",
-        "Hat",
-        "Brown hair",
-        "Small mouth",
-        "Long hair",
-        "Brown eyes",
-        "Small nose"
+        "Emma",
+        [
+            "Female",
+            "Hat",
+            "Brown hair",
+            "Small mouth",
+            "Long hair",
+            "Brown eyes",
+            "Small nose"
+        ]
     ],
-    "Sophia",
     [
-        "Female",
-        "Black hair",
-        "Earrings",
-        "Small mouth",
-        "Brown eyes",
-        "Big nose"
+        "Sophia",
+        [
+            "Female",
+            "Black hair",
+            "Earrings",
+            "Small mouth",
+            "Brown eyes",
+            "Big nose"
+        ]
     ],
-    "Isabelle",
     [
-        "Female",
-        "Blonde hair",
-        "Glasses",
-        "Hat",
-        "Small mouth",
-        "Small nose",
-        "Brown eyes"
+        "Isabelle",
+        [
+            "Female",
+            "Blonde hair",
+            "Glasses",
+            "Hat",
+            "Small mouth",
+            "Small nose",
+            "Brown eyes"
+        ]
     ],
-    "William",
     [
-        "Male",
-        "Brown eyes",
-        "Black hair",
-        "Small nose",
-        "Big mouth"
+        "William",
+        [
+            "Male",
+            "Brown eyes",
+            "Black hair",
+            "Small nose",
+            "Big mouth"
+        ]
     ],
-    "James",
     [
-        "Male",
-        "Brown eyes",
-        "Brown hair",
-        "Small nose",
-        "Hat"
+        "James",
+        [
+            "Male",
+            "Brown eyes",
+            "Brown hair",
+            "Small nose",
+            "Hat"
+        ]
     ],
-    "Benjamin",
     [
-        "Male",
-        "Blue eyes",
-        "Blonde hair",
-        "Small nose",
-        "Small mouth"
+        "Benjamin",
+        [
+            "Male",
+            "Blue eyes",
+            "Blonde hair",
+            "Small nose",
+            "Small mouth"
+        ]
     ],
-    "Lucas",
     [
-        "Male",
-        "Brown eyes",
-        "Blonde hair",
-        "Small nose",
-        "Small mouth",
-        "Bald",
-        "Beard"
+        "Lucas",
+        [
+            "Male",
+            "Brown eyes",
+            "Blonde hair",
+            "Small nose",
+            "Small mouth",
+            "Bald",
+            "Beard"
+        ]
     ],
-    "Ethan",
     [
-        "Male",
-        "Brown eyes",
-        "Blonde hair",
-        "Big nose",
-        "Small mouth",
-        "Bald"
+        "Ethan",
+        [
+            "Male",
+            "Brown eyes",
+            "Blonde hair",
+            "Big nose",
+            "Small mouth",
+            "Bald"
+        ]
     ],
-    "Christine",
     [
-        "Female",
-        "Blue eyes",
-        "Blonde hair",
-        "Small nose",
-        "Small mouth",
-        "Long hair"
+        "Christine",
+        [
+            "Female",
+            "Blue eyes",
+            "Blonde hair",
+            "Small nose",
+            "Small mouth",
+            "Long hair"
+        ]
     ],
-    "Alexander",
     [
-        "Male",
-        "Brown eyes",
-        "White hair",
-        "Small nose",
-        "Small mouth",
-        "Glasses"
+        "Alexander",
+        [
+            "Male",
+            "Brown eyes",
+            "White hair",
+            "Small nose",
+            "Small mouth",
+            "Glasses"
+        ]
     ],
-    "Henry",
     [
-        "Male",
-        "Brown eyes",
-        "Ginger hair",
-        "Small nose",
-        "Small mouth"
+        "Henry",
+        [
+            "Male",
+            "Brown eyes",
+            "Ginger hair",
+            "Small nose",
+            "Small mouth"
+        ]
     ],
-    "John",
     [
-        "Male",
-        "Brown eyes",
-        "Brown hair",
-        "Big nose",
-        "Big mouth",
-        "Mustache"
+        "John",
+        [
+            "Male",
+            "Brown eyes",
+            "Brown hair",
+            "Big nose",
+            "Big mouth",
+            "Mustache"
+        ]
     ],
-    "Michael",
     [
-        "Male",
-        "Brown eyes",
-        "Brown hair",
-        "Small mouth",
-        "Small nose",
-        "Mustache",
-        "Beard"
+        "Michael",
+        [
+            "Male",
+            "Brown eyes",
+            "Brown hair",
+            "Small mouth",
+            "Small nose",
+            "Mustache",
+            "Beard"
+        ]
     ],
-    "Robert",
     [
-        "Male",
-        "Blue eyes",
-        "Brown hair",
-        "Big nose",
-        "Big mouth"
+        "Robert",
+        [
+            "Male",
+            "Blue eyes",
+            "Brown hair",
+            "Big nose",
+            "Big mouth"
+        ]
     ],
-    "Charlotte",
     [
-        "Female",
-        "Brown hair",
-        "White hair",
-        "Small nose",
-        "Big mouth"
+        "Charlotte",
+        [
+            "Female",
+            "Brown hair",
+            "White hair",
+            "Small nose",
+            "Big mouth"
+        ]
     ],
-    "Daniel",
     [
-        "Male",
-        "Brown eyes",
-        "Blonde hair",
-        "Small nose",
-        "Big mouth",
-        "Mustache"
+        "Daniel",
+        [
+            "Male",
+            "Brown eyes",
+            "Blonde hair",
+            "Small nose",
+            "Big mouth",
+            "Mustache"
+        ]
     ],
-    "Tim",
     [
-        "Male",
-        "Brown eyes",
-        "Blonde hair",
-        "Small nose",
-        "Big mouth",
-        "Beard"
+        "Tim",
+        [
+            "Male",
+            "Brown eyes",
+            "Blonde hair",
+            "Small nose",
+            "Big mouth",
+            "Beard"
+        ]
     ],
-    "Jack",
     [
-        "Male",
-        "Blue eyes",
-        "Brown hair",
-        "Small nose",
-        "Small mouth",
-        "Bald",
-        "Glasses"
+        "Jack",
+        [
+            "Male",
+            "Blue eyes",
+            "Brown hair",
+            "Small nose",
+            "Small mouth",
+            "Bald",
+            "Glasses"
+        ]
     ],
-    "Samuel",
     [
-        "Male",
-        "Brown eyes",
-        "Blonde hair",
-        "Small nose",
-        "Small mouth",
-        "Glasses"
+        "Samuel",
+        [
+            "Male",
+            "Brown eyes",
+            "Blonde hair",
+            "Small nose",
+            "Small mouth",
+            "Glasses"
+        ]
     ],
-    "Matthew",
     [
-        "Male",
-        "Brown eyes",
-        "White hair",
-        "Small nose",
-        "Big mouth",
-        "Hat"
+        "Matthew",
+        [
+            "Male",
+            "Brown eyes",
+            "White hair",
+            "Small nose",
+            "Big mouth",
+            "Hat"
+        ]
     ],
-    "David",
     [
-        "Male",
-        "Brown eyes",
-        "Blonde hair",
-        "Small nose",
-        "Big mouth",
-        "Hat"
+        "David",
+        [
+            "Male",
+            "Brown eyes",
+            "Blonde hair",
+            "Small nose",
+            "Big mouth",
+            "Hat"
+        ]
     ]
 ]

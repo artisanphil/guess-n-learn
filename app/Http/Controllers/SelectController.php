@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SelectionRequest;
+use App\Repositories\ObjectRepository;
+use App\Repositories\Objects;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Routing\Controller as BaseController;
@@ -10,12 +13,12 @@ class SelectController extends BaseController
 {
     public function index()
     {
-        $objects = file_get_contents(base_path('resources/json/characters.json'));
+        $objectRepository = new ObjectRepository();
 
-        return json_decode($objects, true);
+        return $objectRepository->getObjects();
     }
 
-    public function store(Request $request)
+    public function store(SelectionRequest $request)
     {
         $request->session()->put('selection', $request->selection);
 

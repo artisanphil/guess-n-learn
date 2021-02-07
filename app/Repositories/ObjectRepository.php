@@ -21,4 +21,20 @@ class ObjectRepository
             return $value[0];
         }, $objects);
     }
+
+    public function getObjectByName(string $name): array
+    {
+        $objects = $this->getObjects();
+
+        return current(array_filter($objects, function ($value) use ($name) {
+            return $value[0] == $name;
+        }));
+    }
+
+    public function getComputerSelection(): array
+    {
+        $objects = $this->getObjects();
+
+        return Arr::random($objects);
+    }
 }

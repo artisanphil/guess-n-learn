@@ -29,7 +29,7 @@ Route::post('/select', [SelectController::class, 'store']);
 //GET computer guesses characteristic
 //return matching characters
 Route::get('/guess', function (Request $request) {
-    return $request->session()->get('selection');
+    return $request->session()->get('user-selection');
 });
 
 //POST guessed characteristic

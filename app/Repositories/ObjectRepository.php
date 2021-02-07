@@ -31,6 +31,20 @@ class ObjectRepository
         }));
     }
 
+    public function getAttributes(): array
+    {
+        $objects = $this->getObjects();
+
+        $allAttributes = array_map(function ($value) {
+            return $value[1];
+        }, $objects);
+
+        $allAttributesFlattened = Arr::flatten($allAttributes);
+        $uniqueAttributes = array_unique($allAttributesFlattened);
+
+        return array_values($uniqueAttributes);
+    }
+
     public function getComputerSelection(): array
     {
         $objects = $this->getObjects();

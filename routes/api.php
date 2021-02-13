@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GuessController;
 use App\Http\Controllers\SelectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,9 +29,7 @@ Route::post('/select', [SelectController::class, 'store']);
 
 //GET computer guesses characteristic
 //return matching characters
-Route::get('/guess', function (Request $request) {
-    return $request->session()->get('user-selection');
-});
+Route::get('/guess', [GuessController::class, 'index']);
 
 //POST guessed characteristic
 //returns matching characters

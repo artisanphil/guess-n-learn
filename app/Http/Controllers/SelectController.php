@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SelectionRequest;
 use App\Repositories\ObjectRepository;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Session;
 
 class SelectController extends BaseController
 {
@@ -23,7 +24,7 @@ class SelectController extends BaseController
     public function store(SelectionRequest $request)
     {
         $userSelection = $this->objectRepository->getObjectByName($request->selection);
-        $request->session()->put('user-selection', $userSelection);
+        Session::put('user-selection', $userSelection);
 
         $computerSelection = $this->objectRepository->getComputerSelection();
         $computerSelection = $request->session()->put('computer-selection', $computerSelection);

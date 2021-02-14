@@ -52,20 +52,39 @@ class ObjectRepository
         return Arr::random($objects);
     }
 
-    public function getMatchingObjects(string $chosenAttribute, array $selection): array
+    public function hasAttribute(string $chosenAttribute, array $selection)
+    {
+        return in_array($chosenAttribute, $selection[1]);
+    }
+
+    public function getMatchingObjects(string $chosenAttribute, bool $hasAttribute): array
     {
         $objects = $this->getObjects();
 
-        dump($selection);
+        $matchingObjects = [];
 
-        $hasAttribute = array_filter($selection, function ($value) use ($chosenAttribute) {
-            return $value[1] === $chosenAttribute;
-        });
+        foreach ($objects as $object) {
+            foreach ($object[1] as $attribute) {
+                if ($attribute === $chosenAttribute) {
+                    $matchingObjects[] = $object;
+                }
+            }
+        }
 
+        $matching = $matchingObjects;
 
-        dump($hasAttribute);
+        if (!$hasAttribute) {
+            $matchingObjectNames = array_map(function ($value) {
+                return $value[0];
+            }, $matchingObjects);
 
-        $matching = []; //array_filter depending on $hasAttribute
+            //This returns the wrong values...
+            $matching[] = array_filter($objects[0], function ($value) use ($matchingObjectNames) {
+                foreach ($matchingObjectNames as $matchingName) {
+                    return $value === $matchingName;
+                }
+            });
+        }
 
         return $matching;
     }

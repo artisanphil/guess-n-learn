@@ -20,11 +20,13 @@ class GuessService
         $attributes = $this->getRemainingAttributes();
 
         $chosenAttribute = Arr::random($attributes);
+        $hasAttribute = $this->objectRepository->hasAttribute($chosenAttribute, Session::get('user-selection'));
 
         return [
             'choice' => $chosenAttribute,
+            'correct' => $hasAttribute,
             'matching' => $this->objectRepository
-                ->getMatchingObjects($chosenAttribute, Session::get('user-selection'))
+                ->getMatchingObjects($chosenAttribute, $hasAttribute)
         ];
     }
 

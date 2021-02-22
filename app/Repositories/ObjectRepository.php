@@ -31,10 +31,8 @@ class ObjectRepository
         }));
     }
 
-    public function getAttributes(): array
+    public function getAttributes($objects): array
     {
-        $objects = $this->getObjects();
-
         $allAttributes = array_map(function ($value) {
             return $value[1];
         }, $objects);
@@ -57,10 +55,8 @@ class ObjectRepository
         return in_array($chosenAttribute, $selection[1]);
     }
 
-    public function getMatchingObjects(string $chosenAttribute, bool $hasAttribute): array
+    public function getMatchingObjects(array $objects, string $chosenAttribute, bool $hasAttribute): array
     {
-        $objects = $this->getObjects();
-
         $matchingObjects = [];
 
         foreach ($objects as $object) {
@@ -68,7 +64,10 @@ class ObjectRepository
             foreach ($object[1] as $attribute) {
                 if ($attribute === $chosenAttribute) {
                     $hasMatch = true;
+                }
+                if ($hasAttribute && $hasMatch) {
                     $matchingObjects[] = $object;
+                    $hasMatch = false;
                 }
             }
             if (!$hasAttribute && !$hasMatch) {

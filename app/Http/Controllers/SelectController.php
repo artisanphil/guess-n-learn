@@ -25,6 +25,7 @@ class SelectController extends BaseController
     {
         $userSelection = $this->objectRepository->getObjectByName($request->selection);
         Session::put('user-selection', $userSelection);
+        Session::remove('remaining-user-objects');
 
         $computerSelection = $this->objectRepository->getComputerSelection();
         $computerSelection = $request->session()->put('computer-selection', $computerSelection);

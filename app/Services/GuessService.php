@@ -25,17 +25,33 @@ class GuessService
         return [
             'choice' => $chosenAttribute,
             'correct' => $hasAttribute,
-            'matching' => $this->objectRepository
-                ->getMatchingObjects($chosenAttribute, $hasAttribute)
+            'matching' => $this->getRemainingMatchingObjects($chosenAttribute, $hasAttribute)
         ];
+    }
+
+    protected function getRemainingMatchingObjects(string $chosenAttribute, bool $hasAttribute): array
+    {
+        if (Session::get('remaining-user-objects')) {
+            $objects = Session::get('remaining-user-objects');
+        } else {
+            $objects = $this->objectRepository->getObjects();
+        }
+
+        $remainingObjects = $this->objectRepository->getMatchingObjects($objects, $chosenAttribute, $hasAttribute);
+
+        Session::put('remaining-user-objects', $remainingObjects);
+
+        return $remainingObjects;
     }
 
     protected function getRemainingAttributes(): array
     {
-        if (Session::get('computer-attributes')) {
-            return Session::get('computer-attributes');
+        if (Session::get('remaining-user-objects')) {
+            $objects = Session::get('remaining-user-objects');
+        } else {
+            $objects = $this->objectRepository->getObjects();
         }
 
-        return $this->objectRepository->getAttributes();
+        return $this->objectRepository->getAttributes($objects);
     }
 }

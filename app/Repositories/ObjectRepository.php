@@ -64,28 +64,18 @@ class ObjectRepository
         $matchingObjects = [];
 
         foreach ($objects as $object) {
+            $hasMatch = false;
             foreach ($object[1] as $attribute) {
                 if ($attribute === $chosenAttribute) {
+                    $hasMatch = true;
                     $matchingObjects[] = $object;
                 }
             }
+            if (!$hasAttribute && !$hasMatch) {
+                $matchingObjects[] = $object;
+            }
         }
 
-        $matching = $matchingObjects;
-
-        if (!$hasAttribute) {
-            $matchingObjectNames = array_map(function ($value) {
-                return $value[0];
-            }, $matchingObjects);
-
-            //This returns the wrong values...
-            $matching[] = array_filter($objects[0], function ($value) use ($matchingObjectNames) {
-                foreach ($matchingObjectNames as $matchingName) {
-                    return $value === $matchingName;
-                }
-            });
-        }
-
-        return $matching;
+        return $matchingObjects;
     }
 }

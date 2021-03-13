@@ -69,4 +69,74 @@ class ObjectRepositoryTest extends TestCase
         $hasAttribute = $this->objectRepository->hasAttribute('Beard', $object);
         $this->assertFalse($hasAttribute);
     }
+
+    public function testHasMatchingObjects()
+    {
+        $objects = $this->objectRepository->getObjects();
+        $matchingObjects = $this->objectRepository->getMatchingObjects($objects, 'Bald', true);
+
+        $expectedData = [
+            'Liam',
+            [
+                'Male',
+                'Glasses',
+                'Brown eyes',
+                'Bald',
+                'White hair',
+                'Small mouth',
+                'Small nose',
+            ]
+        ];
+
+        $notExpected = [
+            'Noah',
+            [
+                'Male',
+                'Mustache',
+                'Brown eyes',
+                'Brown hair',
+                'Big mouth',
+                'Small nose'
+            ]
+        ];
+
+        $this->assertCount(4, $matchingObjects);
+        $this->assertContains($expectedData, $matchingObjects);
+        $this->assertNotContains($notExpected, $matchingObjects);
+    }
+
+    public function testNotHasMatchingObjects()
+    {
+        $objects = $this->objectRepository->getObjects();
+        $matchingObjects = $this->objectRepository->getMatchingObjects($objects, 'Bald', false);
+
+        $expectedData = [
+            'Noah',
+            [
+                'Male',
+                'Mustache',
+                'Brown eyes',
+                'Brown hair',
+                'Big mouth',
+                'Small nose'
+            ]
+        ];
+
+        $notExpected = [
+            'Liam',
+            [
+                'Male',
+                'Glasses',
+                'Brown eyes',
+                'Bald',
+                'White hair',
+                'Small mouth',
+                'Small nose',
+            ]
+        ];
+
+        $this->assertCount(20, $matchingObjects);
+        $this->assertContains($expectedData, $matchingObjects);
+        $this->assertNotContains($notExpected, $matchingObjects);
+    }
 }

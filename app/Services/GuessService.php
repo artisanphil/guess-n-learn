@@ -15,11 +15,8 @@ class GuessService
         $this->objectRepository = new ObjectRepository();
     }
 
-    public function handle(): array
+    public function handle(string $chosenAttribute): array
     {
-        $attributes = $this->getRemainingAttributes();
-
-        $chosenAttribute = Arr::random($attributes);
         $hasAttribute = $this->objectRepository->hasAttribute($chosenAttribute, Session::get('user-selection'));
 
         return [
@@ -42,16 +39,5 @@ class GuessService
         Session::put('remaining-user-objects', $remainingObjects);
 
         return $remainingObjects;
-    }
-
-    protected function getRemainingAttributes(): array
-    {
-        if (Session::get('remaining-user-objects')) {
-            $objects = Session::get('remaining-user-objects');
-        } else {
-            $objects = $this->objectRepository->getObjects();
-        }
-
-        return $this->objectRepository->getAttributes($objects);
     }
 }

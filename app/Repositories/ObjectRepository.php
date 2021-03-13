@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Session;
 
 class ObjectRepository
 {
@@ -76,5 +77,16 @@ class ObjectRepository
         }
 
         return $matchingObjects;
+    }
+
+    public function getRemainingAttributes(): array
+    {
+        if (Session::get('remaining-user-objects')) {
+            $objects = Session::get('remaining-user-objects');
+        } else {
+            $objects = $this->getObjects();
+        }
+
+        return $this->getAttributes($objects);
     }
 }

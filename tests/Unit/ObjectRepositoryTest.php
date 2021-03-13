@@ -2,8 +2,9 @@
 
 namespace Tests\Unit;
 
-use App\Repositories\ObjectRepository;
 use Tests\TestCase;
+use App\Repositories\ObjectRepository;
+use Illuminate\Support\Facades\Session;
 
 class ObjectRepositoryTest extends TestCase
 {
@@ -138,5 +139,36 @@ class ObjectRepositoryTest extends TestCase
         $this->assertCount(20, $matchingObjects);
         $this->assertContains($expectedData, $matchingObjects);
         $this->assertNotContains($notExpected, $matchingObjects);
+    }
+
+    public function testRemainingAttributes()
+    {
+        $attributes = $this->objectRepository->getRemainingAttributes();
+
+        $this->assertCount(20, $attributes);
+
+        $objects = $this->objectRepository->getObjects();
+        $remainingObjects = $this->objectRepository->getMatchingObjects($objects, 'Bald', true);
+        Session::put('remaining-user-objects', $remainingObjects);
+
+        $attributes = $this->objectRepository->getRemainingAttributes();
+
+        $expectedData = [
+            'Male',
+            'Glasses',
+            'Brown eyes',
+            'Bald',
+            'White hair',
+            'Small mouth',
+            'Small nose',
+            'Blonde hair',
+            'Beard',
+            'Big nose',
+            'Blue eyes',
+            'Brown hair'
+        ];
+
+        $this->assertCount(12, $attributes);
+        $this->assertEquals($expectedData, $attributes);
     }
 }

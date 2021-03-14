@@ -19,6 +19,10 @@ class GuessService
     {
         $hasAttribute = $this->objectRepository->hasAttribute($chosenAttribute, Session::get('user-selection'));
 
+        $guessHistory = Session::get('computer-guess-history') ?: [];
+        array_push($guessHistory, $chosenAttribute);
+        Session::put('computer-guess-history', $guessHistory);
+
         return [
             'choice' => $chosenAttribute,
             'correct' => $hasAttribute,

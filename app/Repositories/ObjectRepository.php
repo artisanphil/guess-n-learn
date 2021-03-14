@@ -40,8 +40,29 @@ class ObjectRepository
 
         $allAttributesFlattened = Arr::flatten($allAttributes);
         $uniqueAttributes = array_unique($allAttributesFlattened);
+        $attributes = array_values($uniqueAttributes);
 
-        return array_values($uniqueAttributes);
+        return $this->removeOppositeAttributes($attributes);
+    }
+
+    protected function removeOppositeAttributes(array $attributes): array
+    {
+        $guessHistory = Session::get('computer-guess-history');
+
+        $opposites = [
+            'Female' => 'Male',
+            'Male' => 'Female'
+        ];
+
+        foreach ($opposites as $key => $value) {
+            if (isset($guessHistory) && in_array($key, $guessHistory)) {
+                if (($key = array_search($value, $attributes)) !== false) {
+                    array_splice($attributes, $key, 1);
+                }
+            }
+        }
+
+        return $attributes;
     }
 
     public function getComputerSelection(): array

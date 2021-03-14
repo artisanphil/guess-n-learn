@@ -63,4 +63,34 @@ class GuessServiceTest extends TestCase
         $attributesThirdGuess = $this->guessService->handle('Male');
         $this->assertCount(1, $attributesThirdGuess['matching']);
     }
+
+    public function testRemainingAttributesDoesNotContainOpposite()
+    {
+        $userSelection = $this->objectRepository->getObjectByName('David');
+        Session::put('user-selection', $userSelection);
+        $this->guessService->handle('Female');
+
+        $attributes = $this->objectRepository->getRemainingAttributes();
+
+        $expectedData = [
+            'Glasses',
+            'Brown eyes',
+            'Bald',
+            'White hair',
+            'Small mouth',
+            'Small nose',
+            'Mustache',
+            'Brown hair',
+            'Big mouth',
+            'Big nose',
+            'Blue eyes',
+            'Black hair',
+            'Hat',
+            'Blonde hair',
+            'Beard',
+            'Ginger hair'
+        ];
+
+        $this->assertEquals($expectedData, $attributes);
+    }
 }

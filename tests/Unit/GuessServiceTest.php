@@ -93,4 +93,18 @@ class GuessServiceTest extends TestCase
 
         $this->assertEquals($expectedData, $attributes);
     }
+
+    public function testAskSameQuestionOnlyOnce()
+    {
+        $userSelection = $this->objectRepository->getObjectByName('David');
+        Session::put('user-selection', $userSelection);
+
+        $guessWord = 'Small nose';
+
+        $this->guessService->handle($guessWord);
+
+        $attributes = $this->objectRepository->getRemainingAttributes();
+
+        $this->assertNotContains($guessWord, $attributes);
+    }
 }

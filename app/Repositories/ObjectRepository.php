@@ -42,7 +42,25 @@ class ObjectRepository
         $uniqueAttributes = array_unique($allAttributesFlattened);
         $attributes = array_values($uniqueAttributes);
 
-        return $this->removeOppositeAttributes($attributes);
+        return $this->removeAlreadyAsked($attributes);
+    }
+
+    protected function removeAlreadyAsked(array $attributes): array
+    {
+        $guessHistory = Session::get('computer-guess-history');
+        $attributes = $this->removeOppositeAttributes($attributes);
+
+        if (!isset($guessHistory)) {
+            return $attributes;
+        }
+
+        foreach ($guessHistory as $key => $value) {
+            if (($key = array_search($value, $attributes)) !== false) {
+                array_splice($attributes, $key, 1);
+            }
+        }
+
+        return $attributes;
     }
 
     protected function removeOppositeAttributes(array $attributes): array

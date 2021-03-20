@@ -33,6 +33,4 @@ Route::get('/guess', [GuessController::class, 'index']);
 
 //POST guessed characteristic
 //returns matching characters
-Route::post('/guess', function () {
-    return 'Hello World';
-});
+Route::post('/guess', [GuessController::class, 'store']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GuessRequest;
 use Illuminate\Support\Arr;
 use App\Services\GuessService;
 use App\Repositories\ObjectRepository;
@@ -24,5 +25,10 @@ class GuessController extends BaseController
         $chosenAttribute = Arr::random($attributes);
 
         return $this->guessService->handle($chosenAttribute);
+    }
+
+    public function store(GuessRequest $request)
+    {
+        dump($request->guess);
     }
 }

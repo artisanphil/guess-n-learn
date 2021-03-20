@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\GuessController;
-use App\Http\Controllers\SelectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SelectController;
+use App\Http\Controllers\UserGuessController;
+use App\Http\Controllers\ComputerGuessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +29,11 @@ Route::get('/index', [SelectController::class, 'index']);
 Route::post('/select', [SelectController::class, 'store']);
 
 //GET computer guesses characteristic
-//return matching characters
-Route::get('/guess', [GuessController::class, 'index']);
+Route::get('/computer-guess', [ComputerGuessController::class, 'index']);
 
-//POST guessed characteristic
+//Computer return matching characters
+Route::post('/computer-guess', [ComputerGuessController::class, 'store']);
+
+//User POST guessed characteristic
 //returns matching characters
-Route::post('/guess', [GuessController::class, 'store']);
+Route::post('/user-guess', [UserGuessController::class, 'store']);

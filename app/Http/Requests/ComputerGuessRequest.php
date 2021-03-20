@@ -4,15 +4,19 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GuessRequest extends FormRequest
+class ComputerGuessRequest extends FormRequest
 {
     public function rules()
     {
         return [
-            'guess' => [
+            'choice' => [
                 'required',
                 'string',
             ],
+            'correct' => [
+                'required',
+                'boolean'
+            ]
         ];
     }
 }

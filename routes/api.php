@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SelectController;
 use App\Http\Controllers\UserGuessController;
 use App\Http\Controllers\ComputerGuessController;
+use App\Http\Controllers\UserAttributesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,16 +25,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //GET list of objects
 Route::get('/index', [SelectController::class, 'index']);
 
-//POST person chosen
-//computer also randomly choses person
+//POST object chosen
+//computer also randomly choses object
 Route::post('/select', [SelectController::class, 'store']);
 
-//GET computer guesses characteristic
+//GET computer guesses attribute
 Route::get('/computer-guess', [ComputerGuessController::class, 'index']);
 
-//Computer return matching characters
+//Computer return matching objects
 Route::post('/computer-guess', [ComputerGuessController::class, 'store']);
 
-//User POST guessed characteristic
-//returns matching characters
+//GET all available attributes user can choose from
+Route::get('/remaining-attributes', [UserAttributesController::class, 'index']);
+
+//User POST guessed attribute
+//returns matching objects
 Route::post('/user-guess', [UserGuessController::class, 'store']);

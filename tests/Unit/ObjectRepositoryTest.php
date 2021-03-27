@@ -171,4 +171,13 @@ class ObjectRepositoryTest extends TestCase
         $this->assertCount(12, $attributes);
         $this->assertEquals($expectedData, $attributes);
     }
+
+    public function testGetSentenceByAttribute()
+    {
+        $sentence = $this->objectRepository->getSentenceByAttribute('Mustache');
+
+        $expectedSentence = 'Does the person have a mustache?';
+
+        $this->assertEquals($expectedSentence, $sentence);
+    }
 }

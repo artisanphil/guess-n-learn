@@ -24,8 +24,8 @@ class SelectController extends BaseController
     public function store(SelectionRequest $request)
     {
         $userSelection = $this->objectRepository->getObjectByName($request->selection);
+        Session::flush();
         Session::put('user-selection', $userSelection);
-        Session::remove('remaining-user-objects');
 
         $computerSelection = $this->objectRepository->getComputerSelection();
         $computerSelection = $request->session()->put('computer-selection', $computerSelection);

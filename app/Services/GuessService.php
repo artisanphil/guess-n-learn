@@ -15,32 +15,33 @@ class GuessService
         $this->objectRepository = new ObjectRepository();
     }
 
-    public function handle(string $chosenAttribute): array
+    public function handle(string $chosenAttribute, string $guesser = 'computer'): array
     {
-        $hasAttribute = $this->objectRepository->hasAttribute($chosenAttribute, Session::get('user-selection'));
+        $who = $guesser == 'computer' ? 'user' : 'computer';
+        $hasAttribute = $this->objectRepository->hasAttribute($chosenAttribute, Session::get("{$who}-selection"));
 
-        $guessHistory = Session::get('computer-guess-history') ?: [];
+        $guessHistory = Session::get("{$guesser}-guess-history") ?: [];
         array_push($guessHistory, $chosenAttribute);
-        Session::put('computer-guess-history', $guessHistory);
+        Session::put("{$guesser}-guess-history", $guessHistory);
 
         return [
             'choice' => $chosenAttribute,
             'correct' => $hasAttribute,
-            'matching' => $this->getRemainingMatchingObjects($chosenAttribute, $hasAttribute)
+            'matching' => $this->getRemainingMatchingObjects($chosenAttribute, $hasAttribute, $who)
         ];
     }
 
-    protected function getRemainingMatchingObjects(string $chosenAttribute, bool $hasAttribute): array
+    protected function getRemainingMatchingObjects(string $chosenAttribute, bool $hasAttribute, string $who): array
     {
-        if (Session::get('remaining-user-objects')) {
-            $objects = Session::get('remaining-user-objects');
+        if (Session::get("remaining-{$who}-objects")) {
+            $objects = Session::get("remaining-{$who}-objects");
         } else {
             $objects = $this->objectRepository->getObjects();
         }
 
         $remainingObjects = $this->objectRepository->getMatchingObjects($objects, $chosenAttribute, $hasAttribute);
 
-        Session::put('remaining-user-objects', $remainingObjects);
+        Session::put("remaining-{$who}-objects", $remainingObjects);
 
         return $remainingObjects;
     }

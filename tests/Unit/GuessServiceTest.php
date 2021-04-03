@@ -86,9 +86,9 @@ class GuessServiceTest extends TestCase
             'Blue eyes',
             'Black hair',
             'Hat',
+            'Ginger hair',
             'Blonde hair',
             'Beard',
-            'Ginger hair'
         ];
 
         $this->assertEquals($expectedData, $attributes);

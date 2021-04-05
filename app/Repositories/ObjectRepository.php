@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Constants\UserType;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Session;
 
@@ -41,7 +42,7 @@ class ObjectRepository
         }));
     }
 
-    public function getAttributes($objects): array
+    public function getAttributes(array $objects, string $guesser): array
     {
         $allAttributes = array_map(function ($value) {
             return $value[1];
@@ -51,13 +52,13 @@ class ObjectRepository
         $uniqueAttributes = array_unique($allAttributesFlattened);
         $attributes = array_values($uniqueAttributes);
 
-        return $this->removeAlreadyAsked($attributes);
+        return $this->removeAlreadyAsked($attributes, $guesser);
     }
 
-    protected function removeAlreadyAsked(array $attributes): array
+    protected function removeAlreadyAsked(array $attributes, string $guesser): array
     {
-        $guessHistory = Session::get('computer-guess-history');
-        $attributes = $this->removeOppositeAttributes($attributes);
+        $guessHistory = Session::get("{$guesser}-guess-history");
+        $attributes = $this->removeOppositeAttributes($attributes, $guesser);
 
         if (!isset($guessHistory)) {
             return $attributes;
@@ -72,9 +73,9 @@ class ObjectRepository
         return $attributes;
     }
 
-    protected function removeOppositeAttributes(array $attributes): array
+    protected function removeOppositeAttributes(array $attributes, string $guesser): array
     {
-        $guessHistory = Session::get('computer-guess-history');
+        $guessHistory = Session::get("{$guesser}-guess-history");
 
         $opposites = [
             'Female' => 'Male',
@@ -127,14 +128,16 @@ class ObjectRepository
         return $matchingObjects;
     }
 
-    public function getRemainingAttributes(): array
+    public function getRemainingAttributes(string $guesser): array
     {
-        if (Session::get('remaining-user-objects')) {
-            $objects = Session::get('remaining-user-objects');
+        $userType = $guesser == UserType::COMPUTER ? UserType::PERSON : UserType::COMPUTER;
+
+        if (Session::get("remaining-{$userType}-objects")) {
+            $objects = Session::get("remaining-{$userType}-objects");
         } else {
             $objects = $this->getObjects();
         }
 
-        return $this->getAttributes($objects);
+        return $this->getAttributes($objects, $guesser);
     }
 }

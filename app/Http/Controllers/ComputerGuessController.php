@@ -6,7 +6,7 @@ use App\Http\Requests\ComputerGuessRequest;
 use Illuminate\Support\Arr;
 use App\Services\GuessService;
 use App\Repositories\ObjectRepository;
-use Illuminate\Http\Request;
+use App\Constants\UserType;
 use Illuminate\Routing\Controller as BaseController;
 
 class ComputerGuessController extends BaseController
@@ -22,7 +22,7 @@ class ComputerGuessController extends BaseController
 
     public function index()
     {
-        $attributes = $this->objectRepository->getRemainingAttributes();
+        $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
         $chosenAttribute = Arr::random($attributes);
 
         return $this->objectRepository->getSentenceByAttribute($chosenAttribute);

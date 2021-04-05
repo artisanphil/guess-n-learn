@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SelectionRequest;
+use App\Constants\UserType;
 use App\Repositories\ObjectRepository;
-use Illuminate\Routing\Controller as BaseController;
+use App\Http\Requests\SelectionRequest;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Routing\Controller as BaseController;
 
 class SelectController extends BaseController
 {
@@ -25,10 +26,12 @@ class SelectController extends BaseController
     {
         $userSelection = $this->objectRepository->getObjectByName($request->selection);
         Session::flush();
-        Session::put('user-selection', $userSelection);
+        $person = UserType::PERSON;
+        Session::put("{$person}-selection", $userSelection);
 
         $computerSelection = $this->objectRepository->getComputerSelection();
-        $computerSelection = $request->session()->put('computer-selection', $computerSelection);
+        $computer = UserType::COMPUTER;
+        $computerSelection = $request->session()->put("{$computer}-selection", $computerSelection);
 
         return response('OK', 200);
     }

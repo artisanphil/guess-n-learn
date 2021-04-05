@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\UserType;
+use App\Repositories\Constants;
 use App\Repositories\ObjectRepository;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -16,6 +18,6 @@ class UserAttributesController extends BaseController
 
     public function index()
     {
-        return $this->objectRepository->getRemainingAttributes();
+        return $this->objectRepository->getRemainingAttributes(UserType::PERSON);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Constants\UserType;
 use Tests\TestCase;
 use App\Services\GuessService;
 use App\Repositories\ObjectRepository;
@@ -23,12 +24,13 @@ class GuessServiceTest extends TestCase
     public function testSuccess()
     {
         $userSelection = $this->objectRepository->getObjectByName('David');
-        Session::put('user-selection', $userSelection);
-        $attributesFirstGuess = $this->guessService->handle('Hat');
+        $person = UserType::PERSON;
+        Session::put("{$person}-selection", $userSelection);
+        $attributesFirstGuess = $this->guessService->handle('Hat', UserType::COMPUTER);
 
         $this->assertCount(5, $attributesFirstGuess['matching']);
 
-        $attributesSecondGuess = $this->guessService->handle('Blonde hair');
+        $attributesSecondGuess = $this->guessService->handle('Blonde hair', UserType::COMPUTER);
         $this->assertCount(2, $attributesSecondGuess['matching']);
 
         $expectedData = [
@@ -60,17 +62,18 @@ class GuessServiceTest extends TestCase
 
         $this->assertEquals($expectedData, $attributesSecondGuess);
 
-        $attributesThirdGuess = $this->guessService->handle('Male');
+        $attributesThirdGuess = $this->guessService->handle('Male', UserType::COMPUTER);
         $this->assertCount(1, $attributesThirdGuess['matching']);
     }
 
     public function testRemainingAttributesDoesNotContainOpposite()
     {
         $userSelection = $this->objectRepository->getObjectByName('David');
-        Session::put('user-selection', $userSelection);
-        $this->guessService->handle('Female');
+        $person = UserType::PERSON;
+        Session::put("{$person}-selection", $userSelection);
+        $this->guessService->handle('Female', UserType::COMPUTER);
 
-        $attributes = $this->objectRepository->getRemainingAttributes();
+        $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
 
         $expectedData = [
             'Glasses',
@@ -84,11 +87,13 @@ class GuessServiceTest extends TestCase
             'Big mouth',
             'Big nose',
             'Blue eyes',
-            'Black hair',
             'Hat',
-            'Ginger hair',
+            'Long hair',
+            'Black hair',
+            'Earrings',
             'Blonde hair',
-            'Beard',
+            'Ginger hair',
+            'Beard'
         ];
 
         $this->assertEquals($expectedData, $attributes);
@@ -97,13 +102,14 @@ class GuessServiceTest extends TestCase
     public function testAskSameQuestionOnlyOnce()
     {
         $userSelection = $this->objectRepository->getObjectByName('David');
-        Session::put('user-selection', $userSelection);
+        $person = UserType::PERSON;
+        Session::put("{$person}-selection", $userSelection);
 
         $guessWord = 'Small nose';
 
-        $this->guessService->handle($guessWord);
+        $this->guessService->handle($guessWord, UserType::COMPUTER);
 
-        $attributes = $this->objectRepository->getRemainingAttributes();
+        $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
 
         $this->assertNotContains($guessWord, $attributes);
     }

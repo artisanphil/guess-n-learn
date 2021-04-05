@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Arr;
+use App\Constants\UserType;
 use App\Repositories\ObjectRepository;
 use Illuminate\Support\Facades\Session;
 
@@ -15,10 +15,10 @@ class GuessService
         $this->objectRepository = new ObjectRepository();
     }
 
-    public function handle(string $chosenAttribute, string $guesser = 'computer'): array
+    public function handle(string $chosenAttribute, string $guesser = UserType::COMPUTER): array
     {
-        $who = $guesser == 'computer' ? 'user' : 'computer';
-        $hasAttribute = $this->objectRepository->hasAttribute($chosenAttribute, Session::get("{$who}-selection"));
+        $userType = $guesser == UserType::COMPUTER ? UserType::PERSON : UserType::COMPUTER;
+        $hasAttribute = $this->objectRepository->hasAttribute($chosenAttribute, Session::get("{$userType}-selection"));
 
         $guessHistory = Session::get("{$guesser}-guess-history") ?: [];
         array_push($guessHistory, $chosenAttribute);
@@ -27,21 +27,21 @@ class GuessService
         return [
             'choice' => $chosenAttribute,
             'correct' => $hasAttribute,
-            'matching' => $this->getRemainingMatchingObjects($chosenAttribute, $hasAttribute, $who)
+            'matching' => $this->getRemainingMatchingObjects($chosenAttribute, $hasAttribute, $guesser)
         ];
     }
 
-    protected function getRemainingMatchingObjects(string $chosenAttribute, bool $hasAttribute, string $who): array
+    protected function getRemainingMatchingObjects(string $chosenAttribute, bool $hasAttribute, string $guesser): array
     {
-        if (Session::get("remaining-{$who}-objects")) {
-            $objects = Session::get("remaining-{$who}-objects");
+        if (Session::get("remaining-{$guesser}-objects")) {
+            $objects = Session::get("remaining-{$guesser}-objects");
         } else {
             $objects = $this->objectRepository->getObjects();
         }
 
         $remainingObjects = $this->objectRepository->getMatchingObjects($objects, $chosenAttribute, $hasAttribute);
 
-        Session::put("remaining-{$who}-objects", $remainingObjects);
+        Session::put("remaining-{$guesser}-objects", $remainingObjects);
 
         return $remainingObjects;
     }

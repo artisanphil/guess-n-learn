@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Constants\UserType;
 use Tests\TestCase;
 use App\Repositories\ObjectRepository;
 use Illuminate\Support\Facades\Session;
@@ -47,7 +48,7 @@ class ObjectRepositoryTest extends TestCase
     public function testGetAttributes()
     {
         $objects = $this->objectRepository->getObjects();
-        $attributes = $this->objectRepository->getAttributes($objects);
+        $attributes = $this->objectRepository->getAttributes($objects, UserType::COMPUTER);
 
         $this->assertContains('Mustache', $attributes);
         $this->assertCount(20, $attributes);
@@ -143,15 +144,16 @@ class ObjectRepositoryTest extends TestCase
 
     public function testRemainingAttributes()
     {
-        $attributes = $this->objectRepository->getRemainingAttributes();
+        $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
 
         $this->assertCount(20, $attributes);
 
         $objects = $this->objectRepository->getObjects();
         $remainingObjects = $this->objectRepository->getMatchingObjects($objects, 'Bald', true);
-        Session::put('remaining-user-objects', $remainingObjects);
+        $person = UserType::PERSON;
+        Session::put("remaining-{$person}-objects", $remainingObjects);
 
-        $attributes = $this->objectRepository->getRemainingAttributes();
+        $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
 
         $expectedData = [
             'Male',

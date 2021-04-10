@@ -38,6 +38,9 @@ Route::post('/computer-guess', [ComputerGuessController::class, 'store']);
 //GET all available attributes user can choose from
 Route::get('/remaining-attributes', [UserAttributesController::class, 'index']);
 
+//GET sentence(s) based on question type and guessed attribute
+Route::get('/user-guess', [UserController::class, 'index']);
+
 //User POST guessed attribute
 //returns matching objects
 Route::post('/user-guess', [UserGuessController::class, 'store']);

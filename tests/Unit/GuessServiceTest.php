@@ -21,7 +21,7 @@ class GuessServiceTest extends TestCase
         $this->objectRepository = new ObjectRepository();
     }
 
-    public function testSuccess()
+    public function testComputerGuesses()
     {
         $userSelection = $this->objectRepository->getObjectByName('David');
         $person = UserType::PERSON;
@@ -64,6 +64,46 @@ class GuessServiceTest extends TestCase
 
         $attributesThirdGuess = $this->guessService->handle('Male', UserType::COMPUTER);
         $this->assertCount(1, $attributesThirdGuess['matching']);
+    }
+
+    public function testUserGuesses()
+    {
+        $computerSelection = $this->objectRepository->getObjectByName('Benjamin');
+        $computer = UserType::COMPUTER;
+        Session::put("{$computer}-selection", $computerSelection);
+
+
+        $attributesFirstGuess = $this->guessService->handle('Ginger hair', UserType::PERSON);
+        $this->assertCount(2, $attributesFirstGuess['matching']);
+
+        $expectedData = [
+            'choice' => 'Ginger hair',
+            'correct' => true,
+            'matching' =>  [[
+                'Benjamin',
+                [
+                    'Male',
+                    'Blue eyes',
+                    'Ginger hair',
+                    'Small nose',
+                    'Small mouth',
+                ],
+            ], [
+                'Henry',
+                [
+                    'Male',
+                    'Brown eyes',
+                    'Ginger hair',
+                    'Small nose',
+                    'Small mouth',
+                ]
+            ]]
+        ];
+
+        $this->assertEquals($expectedData, $attributesFirstGuess);
+
+        $attributesSecondGuess = $this->guessService->handle('Blue eyes', UserType::PERSON);
+        $this->assertCount(1, $attributesSecondGuess['matching']);
     }
 
     public function testRemainingAttributesDoesNotContainOpposite()

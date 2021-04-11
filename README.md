@@ -20,7 +20,7 @@ There will also be a subscription mode for teachers where they can have their st
 ## Technologies:
 
 Laravel API
-GraphQL
+Nginx
 Vue JS (possibly with Typescript)
 Tailwind
 Deploy with Docker

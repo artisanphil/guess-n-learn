@@ -176,7 +176,7 @@ class ObjectRepositoryTest extends TestCase
 
     public function testGetSentenceByAttribute()
     {
-        $sentence = $this->objectRepository->getSentenceByAttribute('Mustache');
+        $sentence = $this->sentenceRepository->getSentenceByAttribute('Mustache');
 
         $expectedSentence = 'Does the person have a mustache?';
 

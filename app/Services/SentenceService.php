@@ -2,20 +2,23 @@
 
 namespace App\Services;
 
-use App\Constants\QuestionType;
 use App\Constants\UserType;
+use Illuminate\Support\Arr;
+use App\Constants\QuestionType;
 use App\Repositories\ObjectRepository;
 use Illuminate\Support\Facades\Session;
+use App\Repositories\SentenceRepository;
 
 class SentenceService
 {
     protected $chosenAttribute;
     protected $correctSentence;
+    protected $sentenceRepository;
 
     public function __construct(string $chosenAttribute)
     {
-        $objectRepository = new ObjectRepository();
-        $this->correctSentence = $objectRepository->getSentenceByAttribute($chosenAttribute);
+        $this->sentenceRepository = new SentenceRepository();
+        $this->correctSentence = $this->sentenceRepository->getSentenceByAttribute($chosenAttribute);
         $this->chosenAttribute = $chosenAttribute;
     }
 
@@ -28,6 +31,18 @@ class SentenceService
 
     protected function getMultipleChoiceSentences(): array
     {
-        return [$this->correctSentence];
+        $arrSentences = [];
+        $arrSentenceCorrect[$this->chosenAttribute] = $this->correctSentence;
+        array_push($arrSentences, $arrSentenceCorrect);
+
+        $randomSentence1 = $this->sentenceRepository->getRandomSentenceWithKeys($arrSentences);
+        array_push($arrSentences, $randomSentence1);
+
+        $randomSentence2 = $this->sentenceRepository->getRandomSentenceWithKeys($arrSentences);
+        array_push($arrSentences, $randomSentence2);
+
+        shuffle($arrSentences);
+
+        return $arrSentences;
     }
 }

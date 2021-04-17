@@ -15,15 +15,6 @@ class ObjectRepository
         return json_decode($objects, true);
     }
 
-    public function getSentenceByAttribute(string $attribute): string
-    {
-        $sentencesJson = file_get_contents(base_path('resources/json/character-sentences_en.json'));
-
-        $sentences = json_decode($sentencesJson, true);
-
-        return $sentences[$attribute];
-    }
-
     public function getObjectNames(): array
     {
         $objects = $this->getObjects();

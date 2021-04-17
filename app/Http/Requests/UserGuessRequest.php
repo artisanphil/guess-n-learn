@@ -3,15 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Validation\Rule;
-use App\Repositories\ObjectRepository;
+use App\Repositories\SentenceRepository;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserGuessRequest extends FormRequest
 {
     public function rules()
     {
-        $objectRepository = new ObjectRepository();
-        $correctSentence = $objectRepository->getSentenceByAttribute($this->choice);
+        $sentenceRepository = new SentenceRepository();
+        $correctSentence = $sentenceRepository->getSentenceByAttribute($this->choice);
 
         return [
             'choice' => [

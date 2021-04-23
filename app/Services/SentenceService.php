@@ -2,18 +2,20 @@
 
 namespace App\Services;
 
-use App\Constants\UserType;
-use Illuminate\Support\Arr;
 use App\Constants\QuestionType;
-use App\Repositories\ObjectRepository;
-use Illuminate\Support\Facades\Session;
+use App\Strategies\SentenceStrategy;
 use App\Repositories\SentenceRepository;
+use App\Services\QuestionTypes\MultipleChoiceService;
 
 class SentenceService
 {
     protected $chosenAttribute;
     protected $correctSentence;
     protected $sentenceRepository;
+
+    const MAPPING = [
+        QuestionType::MCHOICE => MultipleChoiceService::class,
+    ];
 
     public function __construct(string $chosenAttribute)
     {
@@ -24,25 +26,8 @@ class SentenceService
 
     public function handle(string $questionType): array
     {
-        if ($questionType === QuestionType::MCHOICE) {
-            return $this->getMultipleChoiceSentences();
-        }
-    }
+        $strategy = SentenceStrategy::handle($questionType);
 
-    protected function getMultipleChoiceSentences(): array
-    {
-        $arrSentences = [];
-        $arrSentenceCorrect[$this->chosenAttribute] = $this->correctSentence;
-        array_push($arrSentences, $arrSentenceCorrect);
-
-        $randomSentence1 = $this->sentenceRepository->getRandomSentenceWithKeys($arrSentences);
-        array_push($arrSentences, $randomSentence1);
-
-        $randomSentence2 = $this->sentenceRepository->getRandomSentenceWithKeys($arrSentences);
-        array_push($arrSentences, $randomSentence2);
-
-        shuffle($arrSentences);
-
-        return $arrSentences;
+        return $strategy->handle($this->chosenAttribute, $this->correctSentence);
     }
 }

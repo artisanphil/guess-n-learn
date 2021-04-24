@@ -2,20 +2,14 @@
 
 namespace App\Services;
 
-use App\Constants\QuestionType;
 use App\Strategies\SentenceStrategy;
 use App\Repositories\SentenceRepository;
-use App\Services\QuestionTypes\MultipleChoiceService;
 
 class SentenceService
 {
     protected $chosenAttribute;
     protected $correctSentence;
     protected $sentenceRepository;
-
-    const MAPPING = [
-        QuestionType::MCHOICE => MultipleChoiceService::class,
-    ];
 
     public function __construct(string $chosenAttribute)
     {

@@ -2,10 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Constants\UserType;
 use Tests\TestCase;
 use App\Repositories\SentenceRepository;
-use Illuminate\Support\Facades\Session;
 
 class SentenceRepositoryTest extends TestCase
 {
@@ -20,7 +18,7 @@ class SentenceRepositoryTest extends TestCase
 
     public function testGetSentenceByAttribute()
     {
-        $sentence = $this->sentenceRepository->getSentenceByAttribute('Mustache');
+        $sentence = $this->sentenceRepository->getSentenceByAttribute('mustache');
 
         $expectedSentence = 'Does the person have a mustache?';
 

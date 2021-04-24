@@ -69,8 +69,8 @@ class ObjectRepository
         $guessHistory = Session::get("{$guesser}-guess-history");
 
         $opposites = [
-            'Female' => 'Male',
-            'Male' => 'Female',
+            'female' => 'male',
+            'male' => 'female',
         ];
 
         foreach ($opposites as $key => $value) {

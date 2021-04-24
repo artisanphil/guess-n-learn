@@ -26,43 +26,43 @@ class GuessServiceTest extends TestCase
         $userSelection = $this->objectRepository->getObjectByName('David');
         $person = UserType::PERSON;
         Session::put("{$person}-selection", $userSelection);
-        $attributesFirstGuess = $this->guessService->handle('Hat', UserType::COMPUTER);
+        $attributesFirstGuess = $this->guessService->handle('hat', UserType::COMPUTER);
 
         $this->assertCount(5, $attributesFirstGuess['matching']);
 
-        $attributesSecondGuess = $this->guessService->handle('Blonde hair', UserType::COMPUTER);
+        $attributesSecondGuess = $this->guessService->handle('blonde hair', UserType::COMPUTER);
         $this->assertCount(2, $attributesSecondGuess['matching']);
 
         $expectedData = [
-            'choice' => 'Blonde hair',
+            'choice' => 'blonde hair',
             'correct' => true,
             'matching' =>  [[
                 'Isabelle',
                 [
-                    'Female',
-                    'Blonde hair',
-                    'Glasses',
-                    'Hat',
-                    'Small mouth',
-                    'Small nose',
-                    'Brown eyes',
+                    'female',
+                    'blonde hair',
+                    'glasses',
+                    'hat',
+                    'small mouth',
+                    'small nose',
+                    'brown eyes',
                 ],
             ], [
                 'David',
                 [
-                    'Male',
-                    'Brown eyes',
-                    'Blonde hair',
-                    'Small nose',
-                    'Big mouth',
-                    'Hat',
+                    'male',
+                    'brown eyes',
+                    'blonde hair',
+                    'small nose',
+                    'big mouth',
+                    'hat',
                 ]
             ]]
         ];
 
         $this->assertEquals($expectedData, $attributesSecondGuess);
 
-        $attributesThirdGuess = $this->guessService->handle('Male', UserType::COMPUTER);
+        $attributesThirdGuess = $this->guessService->handle('male', UserType::COMPUTER);
         $this->assertCount(1, $attributesThirdGuess['matching']);
     }
 
@@ -73,36 +73,36 @@ class GuessServiceTest extends TestCase
         Session::put("{$computer}-selection", $computerSelection);
 
 
-        $attributesFirstGuess = $this->guessService->handle('Ginger hair', UserType::PERSON);
+        $attributesFirstGuess = $this->guessService->handle('ginger hair', UserType::PERSON);
         $this->assertCount(2, $attributesFirstGuess['matching']);
 
         $expectedData = [
-            'choice' => 'Ginger hair',
+            'choice' => 'ginger hair',
             'correct' => true,
             'matching' =>  [[
                 'Benjamin',
                 [
-                    'Male',
-                    'Blue eyes',
-                    'Ginger hair',
-                    'Small nose',
-                    'Small mouth',
+                    'male',
+                    'blue eyes',
+                    'ginger hair',
+                    'small nose',
+                    'small mouth',
                 ],
             ], [
                 'Henry',
                 [
-                    'Male',
-                    'Brown eyes',
-                    'Ginger hair',
-                    'Small nose',
-                    'Small mouth',
+                    'male',
+                    'brown eyes',
+                    'ginger hair',
+                    'small nose',
+                    'small mouth',
                 ]
             ]]
         ];
 
         $this->assertEquals($expectedData, $attributesFirstGuess);
 
-        $attributesSecondGuess = $this->guessService->handle('Blue eyes', UserType::PERSON);
+        $attributesSecondGuess = $this->guessService->handle('blue eyes', UserType::PERSON);
         $this->assertCount(1, $attributesSecondGuess['matching']);
     }
 
@@ -111,29 +111,29 @@ class GuessServiceTest extends TestCase
         $userSelection = $this->objectRepository->getObjectByName('David');
         $person = UserType::PERSON;
         Session::put("{$person}-selection", $userSelection);
-        $this->guessService->handle('Female', UserType::COMPUTER);
+        $this->guessService->handle('female', UserType::COMPUTER);
 
         $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
 
         $expectedData = [
-            'Glasses',
-            'Brown eyes',
-            'Bald',
-            'White hair',
-            'Small mouth',
-            'Small nose',
-            'Mustache',
-            'Brown hair',
-            'Big mouth',
-            'Big nose',
-            'Blue eyes',
-            'Hat',
-            'Long hair',
-            'Black hair',
-            'Earrings',
-            'Blonde hair',
-            'Ginger hair',
-            'Beard'
+            'glasses',
+            'brown eyes',
+            'bald',
+            'white hair',
+            'small mouth',
+            'small nose',
+            'mustache',
+            'brown hair',
+            'big mouth',
+            'big nose',
+            'blue eyes',
+            'hat',
+            'long hair',
+            'black hair',
+            'earrings',
+            'blonde hair',
+            'ginger hair',
+            'beard'
         ];
 
         $this->assertEquals($expectedData, $attributes);
@@ -145,7 +145,7 @@ class GuessServiceTest extends TestCase
         $person = UserType::PERSON;
         Session::put("{$person}-selection", $userSelection);
 
-        $guessWord = 'Small nose';
+        $guessWord = 'small nose';
 
         $this->guessService->handle($guessWord, UserType::COMPUTER);
 

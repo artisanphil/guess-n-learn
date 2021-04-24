@@ -14,7 +14,7 @@ class SentenceServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->sentenceService = new SentenceService('Bald');
+        $this->sentenceService = new SentenceService('bald');
     }
 
     public function testMultipleChoiceSentences()
@@ -22,6 +22,13 @@ class SentenceServiceTest extends TestCase
         $sentences = $this->sentenceService->handle(QuestionType::MCHOICE);
 
         $this->assertCount(3, $sentences);
-        $this->assertContains(['Bald' => 'Is the person bald?'], $sentences);
+        $this->assertContains(['bald' => 'Is the person bald?'], $sentences);
+    }
+
+    public function testGapSentences()
+    {
+        $sentence = $this->sentenceService->handle(QuestionType::GAP);
+
+        $this->assertEquals(['Is the person {gap}?'], $sentence);
     }
 }

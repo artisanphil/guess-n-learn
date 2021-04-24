@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\QuestionType;
 use App\Constants\UserType;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class UserGuessController extends BaseController
         $attribute = $request->choice;
         //$questionType = Arr::random(config('question.types'));
 
-        return (new SentenceService($attribute))->handle('multiple-choice');
+        return (new SentenceService($attribute))->handle(QuestionType::GAP);
     }
 
     public function store(UserGuessRequest $request)

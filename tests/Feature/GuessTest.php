@@ -10,7 +10,7 @@ class GuessTest extends TestCase
     public function testWrongSentenceTest()
     {
         $data = [
-            'choice' => 'Glasses',
+            'choice' => 'glasses',
             'sentence' => 'gibberish'
         ];
 

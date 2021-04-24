@@ -33,12 +33,12 @@ class ObjectRepositoryTest extends TestCase
         $expectedData = [
             'David',
             [
-                'Male',
-                'Brown eyes',
-                'Blonde hair',
-                'Small nose',
-                'Big mouth',
-                'Hat'
+                'male',
+                'brown eyes',
+                'blonde hair',
+                'small nose',
+                'big mouth',
+                'hat'
             ]
         ];
 
@@ -50,7 +50,7 @@ class ObjectRepositoryTest extends TestCase
         $objects = $this->objectRepository->getObjects();
         $attributes = $this->objectRepository->getAttributes($objects, UserType::COMPUTER);
 
-        $this->assertContains('Mustache', $attributes);
+        $this->assertContains('mustache', $attributes);
         $this->assertCount(20, $attributes);
     }
 
@@ -65,40 +65,40 @@ class ObjectRepositoryTest extends TestCase
     public function testHasAttribute()
     {
         $object = $this->objectRepository->getObjectByName('David');
-        $hasAttribute = $this->objectRepository->hasAttribute('Hat', $object);
+        $hasAttribute = $this->objectRepository->hasAttribute('hat', $object);
         $this->assertTrue($hasAttribute);
 
-        $hasAttribute = $this->objectRepository->hasAttribute('Beard', $object);
+        $hasAttribute = $this->objectRepository->hasAttribute('beard', $object);
         $this->assertFalse($hasAttribute);
     }
 
     public function testHasMatchingObjects()
     {
         $objects = $this->objectRepository->getObjects();
-        $matchingObjects = $this->objectRepository->getMatchingObjects($objects, 'Bald', true);
+        $matchingObjects = $this->objectRepository->getMatchingObjects($objects, 'bald', true);
 
         $expectedData = [
             'Liam',
             [
-                'Male',
-                'Glasses',
-                'Brown eyes',
-                'Bald',
-                'White hair',
-                'Small mouth',
-                'Small nose',
+                'nale',
+                'glasses',
+                'brown eyes',
+                'bald',
+                'white hair',
+                'small mouth',
+                'small nose',
             ]
         ];
 
         $notExpected = [
             'Noah',
             [
-                'Male',
-                'Mustache',
-                'Brown eyes',
-                'Brown hair',
-                'Big mouth',
-                'Small nose'
+                'male',
+                'mustache',
+                'brown eyes',
+                'brown hair',
+                'big mouth',
+                'small nose'
             ]
         ];
 
@@ -110,30 +110,30 @@ class ObjectRepositoryTest extends TestCase
     public function testNotHasMatchingObjects()
     {
         $objects = $this->objectRepository->getObjects();
-        $matchingObjects = $this->objectRepository->getMatchingObjects($objects, 'Bald', false);
+        $matchingObjects = $this->objectRepository->getMatchingObjects($objects, 'bald', false);
 
         $expectedData = [
             'Noah',
             [
-                'Male',
-                'Mustache',
-                'Brown eyes',
-                'Brown hair',
-                'Big mouth',
-                'Small nose'
+                'male',
+                'mustache',
+                'brown eyes',
+                'brown hair',
+                'big mouth',
+                'small nose'
             ]
         ];
 
         $notExpected = [
             'Liam',
             [
-                'Male',
-                'Glasses',
-                'Brown eyes',
-                'Bald',
-                'White hair',
-                'Small mouth',
-                'Small nose',
+                'male',
+                'glasses',
+                'brown eyes',
+                'bald',
+                'white hair',
+                'small mouth',
+                'small nose',
             ]
         ];
 
@@ -149,25 +149,25 @@ class ObjectRepositoryTest extends TestCase
         $this->assertCount(20, $attributes);
 
         $objects = $this->objectRepository->getObjects();
-        $remainingObjects = $this->objectRepository->getMatchingObjects($objects, 'Bald', true);
+        $remainingObjects = $this->objectRepository->getMatchingObjects($objects, 'bald', true);
         $person = UserType::PERSON;
         Session::put("remaining-{$person}-objects", $remainingObjects);
 
         $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
 
         $expectedData = [
-            'Male',
-            'Glasses',
-            'Brown eyes',
-            'Bald',
-            'White hair',
-            'Small mouth',
-            'Small nose',
-            'Blonde hair',
-            'Beard',
-            'Big nose',
-            'Blue eyes',
-            'Brown hair'
+            'male',
+            'glasses',
+            'brown eyes',
+            'bald',
+            'white hair',
+            'small mouth',
+            'small nose',
+            'blonde hair',
+            'beard',
+            'big nose',
+            'blue eyes',
+            'brown hair'
         ];
 
         $this->assertCount(12, $attributes);

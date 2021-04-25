@@ -31,4 +31,14 @@ class SentenceServiceTest extends TestCase
 
         $this->assertEquals(['Is the person {gap}?'], $sentence);
     }
+
+    public function testDragDropSentences()
+    {
+        $sentence = $this->sentenceService->handle(QuestionType::DRAGDROP);
+
+        $this->assertContains('Is', $sentence);
+        $this->assertContains('the', $sentence);
+        $this->assertContains('person', $sentence);
+        $this->assertContains('bald', $sentence);
+    }
 }

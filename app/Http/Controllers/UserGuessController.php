@@ -23,7 +23,7 @@ class UserGuessController extends BaseController
         $attribute = $request->choice;
         //$questionType = Arr::random(config('question.types'));
 
-        return (new SentenceService($attribute))->handle(QuestionType::GAP);
+        return (new SentenceService($attribute))->handle(QuestionType::DRAGDROP);
     }
 
     public function store(UserGuessRequest $request)

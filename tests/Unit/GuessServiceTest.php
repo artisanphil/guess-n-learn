@@ -37,8 +37,8 @@ class GuessServiceTest extends TestCase
             'choice' => 'blonde hair',
             'correct' => true,
             'matching' =>  [[
-                'Isabelle',
-                [
+                'name' => 'Isabelle',
+                'attributes' => [
                     'female',
                     'blonde hair',
                     'glasses',
@@ -48,8 +48,8 @@ class GuessServiceTest extends TestCase
                     'brown eyes',
                 ],
             ], [
-                'David',
-                [
+                'name' => 'David',
+                'attributes' => [
                     'male',
                     'brown eyes',
                     'blonde hair',
@@ -80,8 +80,8 @@ class GuessServiceTest extends TestCase
             'choice' => 'ginger hair',
             'correct' => true,
             'matching' =>  [[
-                'Benjamin',
-                [
+                'name' => 'Benjamin',
+                'attributes' => [
                     'male',
                     'blue eyes',
                     'ginger hair',
@@ -89,8 +89,8 @@ class GuessServiceTest extends TestCase
                     'small mouth',
                 ],
             ], [
-                'Henry',
-                [
+                'name' => 'Henry',
+                'attributes' => [
                     'male',
                     'brown eyes',
                     'ginger hair',

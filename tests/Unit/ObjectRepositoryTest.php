@@ -31,8 +31,8 @@ class ObjectRepositoryTest extends TestCase
         $object = $this->objectRepository->getObjectByName('David');
 
         $expectedData = [
-            'David',
-            [
+            'name' => 'David',
+            'attributes' => [
                 'male',
                 'brown eyes',
                 'blonde hair',
@@ -78,9 +78,9 @@ class ObjectRepositoryTest extends TestCase
         $matchingObjects = $this->objectRepository->getMatchingObjects($objects, 'bald', true);
 
         $expectedData = [
-            'Liam',
-            [
-                'nale',
+            'name' => 'Liam',
+            'attributes' => [
+                'male',
                 'glasses',
                 'brown eyes',
                 'bald',
@@ -91,8 +91,8 @@ class ObjectRepositoryTest extends TestCase
         ];
 
         $notExpected = [
-            'Noah',
-            [
+            'name' => 'Noah',
+            'attributes' => [
                 'male',
                 'mustache',
                 'brown eyes',
@@ -113,8 +113,8 @@ class ObjectRepositoryTest extends TestCase
         $matchingObjects = $this->objectRepository->getMatchingObjects($objects, 'bald', false);
 
         $expectedData = [
-            'Noah',
-            [
+            'name' => 'Noah',
+            'attributes' => [
                 'male',
                 'mustache',
                 'brown eyes',
@@ -125,8 +125,8 @@ class ObjectRepositoryTest extends TestCase
         ];
 
         $notExpected = [
-            'Liam',
-            [
+            'name' => 'Liam',
+            'attributes' => [
                 'male',
                 'glasses',
                 'brown eyes',
@@ -172,14 +172,5 @@ class ObjectRepositoryTest extends TestCase
 
         $this->assertCount(12, $attributes);
         $this->assertEquals($expectedData, $attributes);
-    }
-
-    public function testGetSentenceByAttribute()
-    {
-        $sentence = $this->sentenceRepository->getSentenceByAttribute('Mustache');
-
-        $expectedSentence = 'Does the person have a mustache?';
-
-        $this->assertEquals($expectedSentence, $sentence);
     }
 }

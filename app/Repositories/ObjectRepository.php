@@ -20,7 +20,7 @@ class ObjectRepository
         $objects = $this->getObjects();
 
         return array_map(function ($value) {
-            return $value[0];
+            return $value['name'];
         }, $objects);
     }
 
@@ -29,14 +29,14 @@ class ObjectRepository
         $objects = $this->getObjects();
 
         return current(array_filter($objects, function ($value) use ($name) {
-            return $value[0] == $name;
+            return $value['name'] === $name;
         }));
     }
 
     public function getAttributes(array $objects, string $guesser): array
     {
         $allAttributes = array_map(function ($value) {
-            return $value[1];
+            return $value['attributes'];
         }, $objects);
 
         $allAttributesFlattened = Arr::flatten($allAttributes);
@@ -93,7 +93,7 @@ class ObjectRepository
 
     public function hasAttribute(string $chosenAttribute, array $selection)
     {
-        return in_array($chosenAttribute, $selection[1]);
+        return in_array($chosenAttribute, $selection['attributes']);
     }
 
     public function getMatchingObjects(array $objects, string $chosenAttribute, bool $hasAttribute): array
@@ -102,7 +102,7 @@ class ObjectRepository
 
         foreach ($objects as $object) {
             $hasMatch = false;
-            foreach ($object[1] as $attribute) {
+            foreach ($object['attributes'] as $attribute) {
                 if ($attribute === $chosenAttribute) {
                     $hasMatch = true;
                 }

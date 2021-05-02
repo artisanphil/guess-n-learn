@@ -1,7 +1,6 @@
-[
-    [
-        "Liam",
-        [
+[{
+        "name": "Liam",
+        "attributes": [
             "male",
             "glasses",
             "brown eyes",
@@ -10,10 +9,10 @@
             "small mouth",
             "small nose"
         ]
-    ],
-    [
-        "Noah",
-        [
+    },
+    {
+        "name": "Noah",
+        "attributes": [
             "male",
             "mustache",
             "brown eyes",
@@ -21,20 +20,20 @@
             "big mouth",
             "small nose"
         ]
-    ],
-    [
-        "Oliver",
-        [
+    },
+    {
+        "name": "Oliver",
+        "attributes": [
             "male",
             "white hair",
             "big nose",
             "big mouth",
             "blue eyes"
         ]
-    ],
-    [
-        "Emma",
-        [
+    },
+    {
+        "name": "Emma",
+        "attributes": [
             "female",
             "hat",
             "brown hair",
@@ -43,10 +42,10 @@
             "brown eyes",
             "small nose"
         ]
-    ],
-    [
-        "Sophia",
-        [
+    },
+    {
+        "name": "Sophia",
+        "attributes": [
             "female",
             "black hair",
             "earrings",
@@ -54,10 +53,10 @@
             "brown eyes",
             "big nose"
         ]
-    ],
-    [
-        "Isabelle",
-        [
+    },
+    {
+        "name": "Isabelle",
+        "attributes": [
             "female",
             "blonde hair",
             "glasses",
@@ -66,40 +65,40 @@
             "small nose",
             "brown eyes"
         ]
-    ],
-    [
-        "William",
-        [
+    },
+    {
+        "name": "William",
+        "attributes": [
             "male",
             "brown eyes",
             "black hair",
             "small nose",
             "big mouth"
         ]
-    ],
-    [
-        "James",
-        [
+    },
+    {
+        "name": "James",
+        "attributes": [
             "male",
             "brown eyes",
             "brown hair",
             "small nose",
             "hat"
         ]
-    ],
-    [
-        "Benjamin",
-        [
+    },
+    {
+        "name": "Benjamin",
+        "attributes": [
             "male",
             "blue eyes",
             "ginger hair",
             "small nose",
             "small mouth"
         ]
-    ],
-    [
-        "Lucas",
-        [
+    },
+    {
+        "name": "Lucas",
+        "attributes": [
             "male",
             "brown eyes",
             "blonde hair",
@@ -108,10 +107,10 @@
             "bald",
             "beard"
         ]
-    ],
-    [
-        "Ethan",
-        [
+    },
+    {
+        "name": "Ethan",
+        "attributes": [
             "male",
             "brown eyes",
             "blonde hair",
@@ -119,10 +118,10 @@
             "small mouth",
             "bald"
         ]
-    ],
-    [
-        "Christine",
-        [
+    },
+    {
+        "name": "Christine",
+        "attributes": [
             "female",
             "blue eyes",
             "blonde hair",
@@ -130,10 +129,10 @@
             "small mouth",
             "long hair"
         ]
-    ],
-    [
-        "Alexander",
-        [
+    },
+    {
+        "name": "Alexander",
+        "attributes": [
             "male",
             "brown eyes",
             "white hair",
@@ -141,20 +140,20 @@
             "small mouth",
             "glasses"
         ]
-    ],
-    [
-        "Henry",
-        [
+    },
+    {
+        "name": "Henry",
+        "attributes": [
             "male",
             "brown eyes",
             "ginger hair",
             "small nose",
             "small mouth"
         ]
-    ],
-    [
-        "John",
-        [
+    },
+    {
+        "name": "John",
+        "attributes": [
             "male",
             "brown eyes",
             "brown hair",
@@ -162,10 +161,10 @@
             "big mouth",
             "mustache"
         ]
-    ],
-    [
-        "Michael",
-        [
+    },
+    {
+        "name": "Michael",
+        "attributes": [
             "male",
             "brown eyes",
             "brown hair",
@@ -174,30 +173,30 @@
             "mustache",
             "beard"
         ]
-    ],
-    [
-        "Robert",
-        [
+    },
+    {
+        "name": "Robert",
+        "attributes": [
             "male",
             "blue eyes",
             "brown hair",
             "big nose",
             "big mouth"
         ]
-    ],
-    [
-        "Charlotte",
-        [
+    },
+    {
+        "name": "Charlotte",
+        "attributes": [
             "female",
             "brown hair",
             "earrings",
             "small nose",
             "big mouth"
         ]
-    ],
-    [
-        "Daniel",
-        [
+    },
+    {
+        "name": "Daniel",
+        "attributes": [
             "male",
             "brown eyes",
             "blonde hair",
@@ -205,10 +204,10 @@
             "big mouth",
             "mustache"
         ]
-    ],
-    [
-        "Tim",
-        [
+    },
+    {
+        "name": "Tim",
+        "attributes": [
             "male",
             "brown eyes",
             "blonde hair",
@@ -216,10 +215,10 @@
             "big mouth",
             "beard"
         ]
-    ],
-    [
-        "Jack",
-        [
+    },
+    {
+        "name": "Jack",
+        "attributes": [
             "male",
             "blue eyes",
             "brown hair",
@@ -228,10 +227,10 @@
             "bald",
             "glasses"
         ]
-    ],
-    [
-        "Samuel",
-        [
+    },
+    {
+        "name": "Samuel",
+        "attributes": [
             "male",
             "brown eyes",
             "blonde hair",
@@ -239,10 +238,10 @@
             "small mouth",
             "glasses"
         ]
-    ],
-    [
-        "Matthew",
-        [
+    },
+    {
+        "name": "Matthew",
+        "attributes": [
             "male",
             "brown eyes",
             "white hair",
@@ -250,10 +249,10 @@
             "big mouth",
             "hat"
         ]
-    ],
-    [
-        "David",
-        [
+    },
+    {
+        "name": "David",
+        "attributes": [
             "male",
             "brown eyes",
             "blonde hair",
@@ -261,5 +260,5 @@
             "big mouth",
             "hat"
         ]
-    ]
+    }
 ]

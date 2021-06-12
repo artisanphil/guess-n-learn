@@ -28,7 +28,9 @@ class ComputerGuessController extends BaseController
         $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
         $chosenAttribute = Arr::random($attributes);
 
-        return $this->sentenceRepository->getSentenceByAttribute($chosenAttribute);
+        return [
+            'sentence' => $this->sentenceRepository->getSentenceByAttribute($chosenAttribute)
+        ];
     }
 
     public function store(ComputerGuessRequest $request)

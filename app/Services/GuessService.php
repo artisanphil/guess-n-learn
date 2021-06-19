@@ -23,15 +23,28 @@ class GuessService
         $guessHistory = Session::get("{$guesser}-guess-history") ?: [];
         array_push($guessHistory, $chosenAttribute);
         Session::put("{$guesser}-guess-history", $guessHistory);
+        $matching = $this->setAndGetRemainingMatchingObjects($chosenAttribute, $hasAttribute, $guesser);
+        $matchingAttribute = [];
+
+        if ($guesser == UserType::PERSON) {
+            $matchingAttribute = [
+                'matching' => $matching
+            ];
+        }
+
+        if ($guesser == UserType::COMPUTER) {
+            $matchingAttribute = [
+                'match-count' => count($matching)
+            ];
+        }
 
         return [
             'choice' => $chosenAttribute,
             'correct' => $hasAttribute,
-            'matching' => $this->getRemainingMatchingObjects($chosenAttribute, $hasAttribute, $guesser)
-        ];
+        ] + $matchingAttribute;
     }
 
-    protected function getRemainingMatchingObjects(string $chosenAttribute, bool $hasAttribute, string $guesser): array
+    protected function setAndGetRemainingMatchingObjects(string $chosenAttribute, bool $hasAttribute, string $guesser): array
     {
         if (Session::get("remaining-{$guesser}-objects")) {
             $objects = Session::get("remaining-{$guesser}-objects");

@@ -29,7 +29,8 @@ class ComputerGuessController extends BaseController
         $chosenAttribute = Arr::random($attributes);
 
         return [
-            'sentence' => $this->sentenceRepository->getSentenceByAttribute($chosenAttribute)
+            'sentence' => $this->sentenceRepository->getSentenceByAttribute($chosenAttribute),
+            'choice' => $chosenAttribute
         ];
     }
 

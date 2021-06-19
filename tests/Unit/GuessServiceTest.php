@@ -28,42 +28,13 @@ class GuessServiceTest extends TestCase
         Session::put("{$person}-selection", $userSelection);
         $attributesFirstGuess = $this->guessService->handle('hat', UserType::COMPUTER);
 
-        $this->assertCount(5, $attributesFirstGuess['matching']);
+        $this->assertEquals(5, $attributesFirstGuess['match-count']);
 
         $attributesSecondGuess = $this->guessService->handle('blonde hair', UserType::COMPUTER);
-        $this->assertCount(2, $attributesSecondGuess['matching']);
-
-        $expectedData = [
-            'choice' => 'blonde hair',
-            'correct' => true,
-            'matching' =>  [[
-                'name' => 'Isabelle',
-                'attributes' => [
-                    'female',
-                    'blonde hair',
-                    'glasses',
-                    'hat',
-                    'small mouth',
-                    'small nose',
-                    'brown eyes',
-                ],
-            ], [
-                'name' => 'David',
-                'attributes' => [
-                    'male',
-                    'brown eyes',
-                    'blonde hair',
-                    'small nose',
-                    'big mouth',
-                    'hat',
-                ]
-            ]]
-        ];
-
-        $this->assertEquals($expectedData, $attributesSecondGuess);
+        $this->assertEquals(2, $attributesSecondGuess['match-count']);
 
         $attributesThirdGuess = $this->guessService->handle('male', UserType::COMPUTER);
-        $this->assertCount(1, $attributesThirdGuess['matching']);
+        $this->assertEquals(1, $attributesThirdGuess['match-count']);
     }
 
     public function testUserGuesses()

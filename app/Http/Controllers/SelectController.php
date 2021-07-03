@@ -6,6 +6,7 @@ use App\Constants\UserType;
 use App\Repositories\ObjectRepository;
 use App\Http\Requests\SelectionRequest;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Routing\Controller as BaseController;
 
 class SelectController extends BaseController
@@ -33,6 +34,8 @@ class SelectController extends BaseController
         $computer = UserType::COMPUTER;
         $computerSelection = $request->session()->put("{$computer}-selection", $computerSelection);
 
-        return response('OK', 200);
+        return Response::json([
+            'session' => session()->getId()
+        ], 200);
     }
 }

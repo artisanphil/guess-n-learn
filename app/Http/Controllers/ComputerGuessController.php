@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ComputerGuessRequest;
+use App\Constants\UserType;
 use Illuminate\Support\Arr;
 use App\Services\GuessService;
 use App\Repositories\ObjectRepository;
-use App\Constants\UserType;
 use App\Repositories\SentenceRepository;
+use App\Http\Requests\ComputerGuessRequest;
 use Illuminate\Routing\Controller as BaseController;
 
 class ComputerGuessController extends BaseController

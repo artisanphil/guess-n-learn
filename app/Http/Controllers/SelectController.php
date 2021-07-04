@@ -34,8 +34,6 @@ class SelectController extends BaseController
         $computer = UserType::COMPUTER;
         $computerSelection = $request->session()->put("{$computer}-selection", $computerSelection);
 
-        return Response::json([
-            'session' => session()->getId()
-        ], 200);
+        return Response::json([], 200);
     }
 }

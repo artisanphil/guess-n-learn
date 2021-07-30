@@ -51,7 +51,7 @@ class ObjectRepositoryTest extends TestCase
         $attributes = $this->objectRepository->getAttributes($objects, UserType::COMPUTER);
 
         $this->assertContains('mustache', $attributes);
-        $this->assertCount(20, $attributes);
+        $this->assertCount(21, $attributes);
     }
 
     public function testGetComputerSelection()
@@ -117,7 +117,7 @@ class ObjectRepositoryTest extends TestCase
             'attributes' => [
                 'male',
                 'mustache',
-                'brown eyes',
+                'green eyes',
                 'brown hair',
                 'big mouth',
                 'small nose'
@@ -146,7 +146,7 @@ class ObjectRepositoryTest extends TestCase
     {
         $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
 
-        $this->assertCount(20, $attributes);
+        $this->assertCount(21, $attributes);
 
         $objects = $this->objectRepository->getObjects();
         $remainingObjects = $this->objectRepository->getMatchingObjects($objects, 'bald', true);
@@ -163,14 +163,15 @@ class ObjectRepositoryTest extends TestCase
             'white hair',
             'small mouth',
             'small nose',
+            'blue eyes',
             'blonde hair',
             'beard',
+            'green eyes',
             'big nose',
-            'blue eyes',
             'brown hair'
         ];
 
-        $this->assertCount(12, $attributes);
+        $this->assertCount(13, $attributes);
         $this->assertEquals($expectedData, $attributes);
     }
 }

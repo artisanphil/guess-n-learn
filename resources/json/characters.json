@@ -15,7 +15,7 @@
         "attributes": [
             "male",
             "mustache",
-            "brown eyes",
+            "green eyes",
             "brown hair",
             "big mouth",
             "small nose"
@@ -39,7 +39,7 @@
             "brown hair",
             "small mouth",
             "long hair",
-            "brown eyes",
+            "blue eyes",
             "small nose"
         ]
     },
@@ -50,7 +50,7 @@
             "black hair",
             "earrings",
             "small mouth",
-            "brown eyes",
+            "green eyes",
             "big nose"
         ]
     },
@@ -80,7 +80,7 @@
         "name": "James",
         "attributes": [
             "male",
-            "brown eyes",
+            "green eyes",
             "brown hair",
             "small nose",
             "hat"
@@ -100,7 +100,7 @@
         "name": "Lucas",
         "attributes": [
             "male",
-            "brown eyes",
+            "blue eyes",
             "blonde hair",
             "small nose",
             "small mouth",
@@ -112,7 +112,7 @@
         "name": "Ethan",
         "attributes": [
             "male",
-            "brown eyes",
+            "green eyes",
             "blonde hair",
             "big nose",
             "small mouth",

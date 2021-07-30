@@ -94,6 +94,7 @@ class GuessServiceTest extends TestCase
             'small mouth',
             'small nose',
             'mustache',
+            'green eyes',
             'brown hair',
             'big mouth',
             'big nose',

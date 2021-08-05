@@ -8,6 +8,7 @@ use App\Services\Interfaces\SentenceInterface;
 class MultipleChoiceService implements SentenceInterface
 {
     protected $sentenceRepository;
+    protected array $arrSentences = [];
 
     public function __construct()
     {
@@ -16,18 +17,26 @@ class MultipleChoiceService implements SentenceInterface
 
     public function handle(string $chosenAttribute, string $correctSentence): array
     {
-        $arrSentences = [];
         $arrSentenceCorrect[$chosenAttribute] = $correctSentence;
-        array_push($arrSentences, $arrSentenceCorrect);
+        $this->addSentence($arrSentenceCorrect);
 
-        $randomSentence1 = $this->sentenceRepository->getRandomSentenceWithKeys($arrSentences);
-        array_push($arrSentences, $randomSentence1);
+        $randomSentence1 = $this->sentenceRepository->getRandomSentenceWithKeys($this->arrSentences);
+        $this->addSentence($randomSentence1);
 
-        $randomSentence2 = $this->sentenceRepository->getRandomSentenceWithKeys($arrSentences);
-        array_push($arrSentences, $randomSentence2);
+        $randomSentence2 = $this->sentenceRepository->getRandomSentenceWithKeys($this->arrSentences);
+        $this->addSentence($randomSentence2);
 
-        shuffle($arrSentences);
+        shuffle($this->arrSentences);
 
-        return $arrSentences;
+        return $this->arrSentences;
+    }
+
+    protected function addSentence(array $arrSentence): void
+    {
+        $key = key($arrSentence);
+        $arrSentenceCorrect['attribute'] = $key;
+        $arrSentenceCorrect['sentence'] = $arrSentence[$key];
+
+        array_push($this->arrSentences, $arrSentenceCorrect);
     }
 }

@@ -22,7 +22,17 @@ class SentenceServiceTest extends TestCase
         $sentences = $this->sentenceService->handle(QuestionType::MCHOICE);
 
         $this->assertCount(3, $sentences);
-        $this->assertContains(['bald' => 'Is the person bald?'], $sentences);
+        $expected = [
+            'attribute' => 'bald',
+            'sentence' => 'Is the person bald?'
+        ];
+        $found = false;
+        foreach ($sentences as $sentence) {
+            if ($sentence == $expected) {
+                $found = true;
+            }
+        }
+        $this->assertTrue($found);
     }
 
     public function testGapSentences()

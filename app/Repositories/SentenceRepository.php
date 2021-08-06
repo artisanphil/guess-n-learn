@@ -22,7 +22,7 @@ class SentenceRepository
 
     public function getRandomSentenceWithKeys(array $excludeSentences)
     {
-        $excludeAttributes = array_keys($excludeSentences);
+        $excludeAttributes = array_column($excludeSentences, 'attribute');
         $sentences = Arr::except($this->sentencesWithKeys, $excludeAttributes);
 
         $randomSentenceKey = array_rand($sentences);

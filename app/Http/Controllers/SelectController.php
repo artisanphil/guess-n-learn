@@ -23,7 +23,14 @@ class SelectController extends BaseController
         return $this->objectRepository->getObjects();
     }
 
-    public function store(SelectionRequest $request)
+    public function show(): array
+    {
+        $person = UserType::PERSON;
+
+        return Session::get("{$person}-selection");
+    }
+
+    public function store(SelectionRequest $request): array
     {
         $userSelection = $this->objectRepository->getObjectByName($request->selection);
         Session::flush();

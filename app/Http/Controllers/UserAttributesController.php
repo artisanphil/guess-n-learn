@@ -16,7 +16,7 @@ class UserAttributesController extends BaseController
         $this->objectRepository = new ObjectRepository();
     }
 
-    public function index()
+    public function index(): array
     {
         return $this->objectRepository->getRemainingAttributes(UserType::PERSON);
     }

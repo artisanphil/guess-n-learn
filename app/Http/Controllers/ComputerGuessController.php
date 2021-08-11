@@ -23,7 +23,7 @@ class ComputerGuessController extends BaseController
         $this->sentenceRepository = new SentenceRepository();
     }
 
-    public function index()
+    public function index(): array
     {
         $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
         $chosenAttribute = Arr::random($attributes);
@@ -34,7 +34,7 @@ class ComputerGuessController extends BaseController
         ];
     }
 
-    public function store(ComputerGuessRequest $request)
+    public function store(ComputerGuessRequest $request): array
     {
         return $this->guessService->handle($request->choice);
     }

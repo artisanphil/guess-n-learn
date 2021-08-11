@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Services\GuessService;
 use App\Http\Requests\UserGuessRequest;
 use App\Services\SentenceService;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
 
 class UserGuessController extends BaseController
@@ -18,7 +19,7 @@ class UserGuessController extends BaseController
         $this->guessService = new GuessService();
     }
 
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $attribute = $request->choice;
         //$questionType = Arr::random(config('question.types'));
@@ -30,7 +31,7 @@ class UserGuessController extends BaseController
             ->header('Question-Type', $questionType);
     }
 
-    public function store(UserGuessRequest $request)
+    public function store(UserGuessRequest $request): array
     {
         return $this->guessService->handle($request->choice, UserType::PERSON);
     }

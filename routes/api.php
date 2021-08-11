@@ -29,6 +29,9 @@ Route::get('/index', [SelectController::class, 'index']);
 //computer also randomly choses object
 Route::post('/select', [SelectController::class, 'store']);
 
+//GET object chosen
+Route::get('/select', [SelectController::class, 'show']);
+
 //GET computer guesses attribute
 Route::get('/computer-guess', [ComputerGuessController::class, 'index']);
 

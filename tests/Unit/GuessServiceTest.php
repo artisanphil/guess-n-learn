@@ -99,12 +99,10 @@ class GuessServiceTest extends TestCase
             'big mouth',
             'big nose',
             'blue eyes',
-            'hat',
-            'long hair',
             'black hair',
-            'earrings',
-            'blonde hair',
+            'hat',
             'ginger hair',
+            'blonde hair',
             'beard'
         ];
 

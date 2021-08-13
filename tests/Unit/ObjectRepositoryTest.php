@@ -144,7 +144,7 @@ class ObjectRepositoryTest extends TestCase
 
     public function testRemainingAttributes()
     {
-        $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
+        $attributes = $this->objectRepository->getRemainingAttributes(UserType::PERSON);
 
         $this->assertCount(21, $attributes);
 
@@ -153,7 +153,7 @@ class ObjectRepositoryTest extends TestCase
         $person = UserType::PERSON;
         Session::put("remaining-{$person}-objects", $remainingObjects);
 
-        $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
+        $attributes = $this->objectRepository->getRemainingAttributes(UserType::PERSON);
 
         $expectedData = [
             'male',

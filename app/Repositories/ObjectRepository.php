@@ -121,10 +121,9 @@ class ObjectRepository
 
     public function getRemainingAttributes(string $guesser): array
     {
-        $userType = $guesser == UserType::COMPUTER ? UserType::PERSON : UserType::COMPUTER;
 
-        if (Session::get("remaining-{$userType}-objects")) {
-            $objects = Session::get("remaining-{$userType}-objects");
+        if (Session::get("remaining-{$guesser}-objects")) {
+            $objects = Session::get("remaining-{$guesser}-objects");
         } else {
             $objects = $this->getObjects();
         }

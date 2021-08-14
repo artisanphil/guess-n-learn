@@ -121,7 +121,6 @@ class ObjectRepository
 
     public function getRemainingAttributes(string $guesser): array
     {
-
         if (Session::get("remaining-{$guesser}-objects")) {
             $objects = Session::get("remaining-{$guesser}-objects");
         } else {

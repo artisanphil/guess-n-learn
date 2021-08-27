@@ -25,7 +25,7 @@ Deploy with Docker
 
 ## Installation
 
-Start Docker and run `./vendor/bin/sail up` then go to http://localhost
+Start Docker and run `docker-compose up -d` then go to http://localhost:8000/
 
 ## Flow
 

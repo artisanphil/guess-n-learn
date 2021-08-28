@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SelectController;
 use App\Http\Controllers\UserGuessController;
 use App\Http\Controllers\ComputerGuessController;
+use App\Http\Controllers\ComputerSelectController;
 use App\Http\Controllers\UserAttributesController;
 
 /*
@@ -28,6 +29,10 @@ Route::get('/index', [SelectController::class, 'index']);
 //POST object chosen
 //computer also randomly choses object
 Route::post('/select', [SelectController::class, 'store']);
+
+//POST object chosen
+//set computer object (for test purposes)
+Route::post('/computer-select', [ComputerSelectController::class, 'store']);
 
 //GET object chosen
 Route::get('/select', [SelectController::class, 'show']);

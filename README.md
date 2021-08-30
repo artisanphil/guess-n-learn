@@ -51,6 +51,7 @@ Display all available attributes (not yet selected) for user:
 
 User makes a guess:
 [POST] api/user-guess?choice={attribute}
+one can add attribute questiontype testing purposes
 
 Sentence options get presented based on attribute choice
 [GET] api/user-guess

@@ -25,6 +25,7 @@ Deploy with Docker
 
 ## Installation
 
+docker run --rm -v $(pwd):/app composer install
 Copy env.example to .env
 Start Docker and run `docker-compose up -d` then go to http://localhost:8000/
 

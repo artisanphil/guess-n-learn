@@ -22,8 +22,15 @@ class UserGuessController extends BaseController
     public function index(Request $request): Response
     {
         $attribute = $request->choice;
-        //$questionType = Arr::random(config('question.types'));
-        $questionType = QuestionType::MCHOICE;
+
+        $questionType = Arr::random(config('question.types'));
+
+        //for testing purposes
+        if (isset($request->questiontype)) {
+            $questionType = $request->questiontype;
+        }
+
+        $questionType = $questionType;
 
         $data = (new SentenceService($attribute))->handle($questionType);
 

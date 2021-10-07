@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Constants\UserType;
 use App\Repositories\ObjectRepository;
 use App\Http\Requests\SelectionRequest;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Log;
 
 class SelectController extends BaseController
 {
@@ -33,7 +33,6 @@ class SelectController extends BaseController
     public function store(SelectionRequest $request): array
     {
         $userSelection = $this->objectRepository->getObjectByName($request->selection);
-        Session::flush();
         $person = UserType::PERSON;
         Session::put("{$person}-selection", $userSelection);
 

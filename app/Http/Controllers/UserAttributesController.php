@@ -18,6 +18,6 @@ class UserAttributesController extends BaseController
 
     public function index(): array
     {
-        return $this->objectRepository->getRemainingAttributes(UserType::PERSON);
+        return $this->objectRepository->getRemainingAttributesWithTranslations(UserType::PERSON);
     }
 }

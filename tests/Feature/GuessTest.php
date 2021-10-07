@@ -10,6 +10,16 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class GuessTest extends TestCase
 {
+    public function testComputerGuess()
+    {
+        $this->getJson('api/computer-guess')
+            ->assertOk()
+            ->assertJsonStructure([
+                'sentence',
+                'choice'
+            ]);
+    }
+
     public function testWrongSentenceTest()
     {
         $data = [

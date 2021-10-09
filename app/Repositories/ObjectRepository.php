@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Constants\UserType;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class ObjectRepository
@@ -128,5 +129,21 @@ class ObjectRepository
         }
 
         return $this->getAttributes($objects, $guesser);
+    }
+
+    public function getRemainingAttributesWithTranslations(string $guesser): array
+    {
+        $remainingAttributes = $this->getRemainingAttributes($guesser);
+        $remainingAttributesTranslated = [];
+        $learnLanguage = Session::get('learn-language', 'en');
+
+        $i = 0;
+        foreach ($remainingAttributes as $value) {
+            $remainingAttributesTranslated[$i]['key'] = $value;
+            $remainingAttributesTranslated[$i]['value'] = __($value, [], $learnLanguage);
+            $i++;
+        }
+
+        return $remainingAttributesTranslated;
     }
 }

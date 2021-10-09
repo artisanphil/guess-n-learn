@@ -37,6 +37,9 @@ Start Docker and run `docker-compose up -d` then go to http://localhost:8000/
 
 ## Flow
 
+Set the language the user wants to learn, for example en_uk
+[GET] api/learn-language/{locale}
+
 Display all available objects:
 [GET] api/index
 

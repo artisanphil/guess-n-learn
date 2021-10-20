@@ -7,7 +7,8 @@ use App\Constants\UserType;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Services\GuessService;
-use App\Http\Requests\UserGuessRequest;
+use App\Http\Requests\AttributeGuessRequest;
+use App\Http\Requests\ObjectGuessRequest;
 use App\Services\SentenceService;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
@@ -38,8 +39,18 @@ class UserGuessController extends BaseController
             ->header('Question-Type', $questionType);
     }
 
-    public function store(UserGuessRequest $request): array
+    public function attribute(AttributeGuessRequest $request): array
     {
         return $this->guessService->handle($request->choice, UserType::PERSON);
+    }
+
+    public function object(ObjectGuessRequest $request): array
+    {
+        $computer = UserType::COMPUTER;
+        $computerSelection = $request->session()->get("{$computer}-selection");
+
+        return [
+            'correct' => $request->name === $computerSelection['name']
+        ];
     }
 }

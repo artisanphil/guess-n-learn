@@ -6,7 +6,7 @@ use Illuminate\Validation\Rule;
 use App\Repositories\SentenceRepository;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserGuessRequest extends FormRequest
+class AttributeGuessRequest extends FormRequest
 {
     public function rules()
     {

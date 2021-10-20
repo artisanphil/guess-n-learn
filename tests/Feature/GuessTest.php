@@ -20,6 +20,32 @@ class GuessTest extends TestCase
             ]);
     }
 
+    public function testUserObjectGuess()
+    {
+        $objectSelectedByComputer = 'David';
+        Session::flush();
+        $objectRepository = new ObjectRepository();
+        $computerSelection = $objectRepository->getObjectByName($objectSelectedByComputer);
+        $computer = UserType::COMPUTER;
+        Session::put("{$computer}-selection", $computerSelection);
+
+        $this->postJson('api/user-guess/object', [
+            'name' => $objectSelectedByComputer
+        ])
+            ->assertOk()
+            ->assertExactJson([
+                'correct' => true
+            ]);
+
+        $response = $this->postJson('api/user-guess/object', [
+            'name' => 'Peter'
+        ])
+            ->assertOk()
+            ->assertExactJson([
+                'correct' => false
+            ]);
+    }
+
     public function testWrongSentenceTest()
     {
         $data = [

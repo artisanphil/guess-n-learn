@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\SelectController;
@@ -28,6 +29,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('learn-language/{locale}', function ($locale) {
     Session::flush();
     Session::put('learn-language', $locale);
+
+    return response(200);
 });
 
 //GET list of objects

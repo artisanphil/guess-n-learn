@@ -20,18 +20,28 @@ class SentenceRepository
 
     public function getSentenceByAttribute(string $attribute): string
     {
-        return __($this->sentencesWithKeys[$attribute], [], $this->learnLanguage);
+        $attribute = strtolower($attribute);
+
+        if (!in_array($attribute, array_keys($this->sentencesWithKeys))) {
+            return '';
+        }
+
+        $key = array_search($attribute, array_column($this->sentencesWithKeys, 'attribute'));
+
+        return __($this->sentencesWithKeys[$key]['sentence'], [], $this->learnLanguage);
     }
 
-    public function getRandomSentenceWithKeys(array $excludeSentences)
+    public function getRandomSentenceWithKeys(array $excludeSentences): array
     {
         $excludeAttributes = array_column($excludeSentences, 'attribute');
-        $sentences = Arr::except($this->sentencesWithKeys, $excludeAttributes);
 
-        $randomSentenceKey = array_rand($sentences);
+        foreach ($excludeAttributes as $excludeAttribute) {
+            $key = array_search($excludeAttribute, array_column($this->sentencesWithKeys, 'attribute'));
+            unset($this->sentencesWithKeys[$key]);
+        }
 
-        return [
-            $randomSentenceKey => __($sentences[$randomSentenceKey], [], $this->learnLanguage)
-        ];
+        $randomSentenceKey = array_rand($this->sentencesWithKeys);
+
+        return $this->sentencesWithKeys[$randomSentenceKey];
     }
 }

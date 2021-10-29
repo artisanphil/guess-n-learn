@@ -2,6 +2,7 @@
 
 namespace App\Services\QuestionTypes;
 
+use Illuminate\Support\Facades\Session;
 use App\Repositories\SentenceRepository;
 use App\Services\Interfaces\SentenceInterface;
 
@@ -17,7 +18,8 @@ class MultipleChoiceService implements SentenceInterface
 
     public function handle(string $chosenAttribute, string $correctSentence): array
     {
-        $arrSentenceCorrect[$chosenAttribute] = $correctSentence;
+        $arrSentenceCorrect['attribute'] = $chosenAttribute;
+        $arrSentenceCorrect['sentence'] = $correctSentence;
         $this->addSentence($arrSentenceCorrect);
 
         $randomSentence1 = $this->sentenceRepository->getRandomSentenceWithKeys($this->arrSentences);
@@ -33,9 +35,9 @@ class MultipleChoiceService implements SentenceInterface
 
     protected function addSentence(array $arrSentence): void
     {
-        $key = key($arrSentence);
-        $arrSentenceCorrect['attribute'] = $key;
-        $arrSentenceCorrect['sentence'] = $arrSentence[$key];
+        $learnLanguage = Session::get('learn-language', 'en');
+        $arrSentenceCorrect['attribute'] = $arrSentence['attribute'];
+        $arrSentenceCorrect['sentence'] = __($arrSentence['sentence'], [], $learnLanguage);
 
         array_push($this->arrSentences, $arrSentenceCorrect);
     }

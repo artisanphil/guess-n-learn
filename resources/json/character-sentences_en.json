@@ -1,23 +1,86 @@
-{
-    "male": "Is the person male?",
-    "mustache": "Does the person have a mustache?",
-    "brown eyes": "Does the person have brown eyes?",
-    "brown hair": "Does the person have brown hair?",
-    "big mouth": "Does the person have a big mouth?",
-    "small nose": "Does the person have a small nose?",
-    "white hair": "Does the person have white hair?",
-    "big nose": "Does the person have a big nose?",
-    "blue eyes": "Does the person have blue eyes?",
-    "female": "Is the person female?",
-    "hat": "Does the person wear a hat?",
-    "small mouth": "Does the person have a small mouth?",
-    "long hair": "Does the person have long hair?",
-    "black hair": "Does the person have black hair?",
-    "earrings": "Does the person wear earrings?",
-    "blonde hair": "Does the person have blonde hair?",
-    "glasses": "Does the person wear glasses?",
-    "ginger hair": "Does the person have ginger hair?",
-    "beard": "Does the person have a beard?",
-    "bald": "Is the person bald?",
-    "green eyes": "Does the person have green eyes?"
-}
+[
+    {
+        "attribute": "male",
+        "sentence": "Is the person male?"
+    },
+    {
+        "attribute": "mustache",
+        "sentence": "Does the person have a mustache?"
+    },
+    {
+        "attribute": "brown eyes",
+        "sentence": "Does the person have brown eyes?"
+    },
+    {
+        "attribute": "brown hair",
+        "sentence": "Does the person have brown hair?"
+    },
+    {
+        "attribute": "big mouth",
+        "sentence": "Does the person have a big mouth?"
+    },
+    {
+        "attribute": "small nose",
+        "sentence": "Does the person have a small nose?"
+    },
+    {
+        "attribute": "white hair",
+        "sentence": "Does the person have white hair?"
+    },
+    {
+        "attribute": "big nose",
+        "sentence": "Does the person have a big nose?"
+    },
+    {
+        "attribute": "blue eyes",
+        "sentence": "Does the person have blue eyes?"
+    },
+    {
+        "attribute": "female",
+        "sentence": "Is the person female?"
+    },
+    {
+        "attribute": "hat",
+        "sentence": "Does the person wear a hat?"
+    },
+    {
+        "attribute": "small mouth",
+        "sentence": "Does the person have a small mouth?"
+    },
+    {
+        "attribute": "long hair",
+        "sentence": "Does the person have long hair?"
+    },
+    {
+        "attribute": "black hair",
+        "sentence": "Does the person have black hair?"
+    },
+    {
+        "attribute": "earrings",
+        "sentence": "Does the person wear earrings?"
+    },
+    {
+        "attribute": "blonde hair;blond hair",
+        "sentence": "Does the person have blonde hair?"
+    },
+    {
+        "attribute": "glasses",
+        "sentence": "Does the person wear glasses?"
+    },
+    {
+        "attribute": "ginger hair",
+        "sentence": "Does the person have ginger hair?"
+    },
+    {
+        "attribute": "beard",
+        "sentence": "Does the person have a beard?"
+    },
+    {
+        "attribute": "bald",
+        "sentence": "Is the person bald?"
+    },
+    {
+        "attribute": "green eyes",
+        "sentence": "Does the person have green eyes?"
+    }
+]

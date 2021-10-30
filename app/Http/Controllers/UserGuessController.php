@@ -22,7 +22,8 @@ class UserGuessController extends BaseController
 
     public function index(Request $request): Response
     {
-        $attribute = $request->choice;
+        $attributeKey = $request->attributeKey;
+        $attributeValue = $request->attributeValue;
 
         $questionType = Arr::random(config('question.types'));
 
@@ -33,7 +34,7 @@ class UserGuessController extends BaseController
 
         $questionType = $questionType;
 
-        $data = (new SentenceService($attribute))->handle($questionType);
+        $data = (new SentenceService($attributeKey))->handle($questionType, $attributeValue);
 
         return response($data)
             ->header('Question-Type', $questionType);

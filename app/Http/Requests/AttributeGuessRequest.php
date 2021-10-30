@@ -11,7 +11,7 @@ class AttributeGuessRequest extends FormRequest
     public function rules()
     {
         $sentenceRepository = new SentenceRepository();
-        $correctSentence = $sentenceRepository->getSentenceByAttribute($this->choice);
+        $correctSentence = $sentenceRepository->getSentenceByAttribute($this->choice, false);
 
         return [
             'choice' => [

@@ -18,7 +18,7 @@ class SentenceRepositoryTest extends TestCase
 
     public function testGetSentenceByAttribute()
     {
-        $sentence = $this->sentenceRepository->getSentenceByAttribute('mustache');
+        $sentence = $this->sentenceRepository->getSentenceByAttribute('mustache', true);
 
         $expectedSentence = 'Does the person have a mustache?';
 

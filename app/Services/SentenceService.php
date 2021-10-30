@@ -15,7 +15,7 @@ class SentenceService
     public function __construct(string $chosenAttributeKey)
     {
         $this->sentenceRepository = new SentenceRepository();
-        $this->correctSentence = $this->sentenceRepository->getSentenceByAttribute($chosenAttributeKey);
+        $this->correctSentence = $this->sentenceRepository->getSentenceByAttribute($chosenAttributeKey, true);
         $this->chosenAttributeKey = $chosenAttributeKey;
     }
 

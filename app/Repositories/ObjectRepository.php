@@ -36,15 +36,21 @@ class ObjectRepository
 
     public function getAttributes(array $objects, string $guesser): array
     {
+        $attributes = $this->getAllAttributes($objects);
+
+        return $this->removeAlreadyAsked($attributes, $guesser);
+    }
+
+    public function getAllAttributes(array $objects): array
+    {
         $allAttributes = array_map(function ($value) {
             return $value['attributes'];
         }, $objects);
 
         $allAttributesFlattened = Arr::flatten($allAttributes);
         $uniqueAttributes = array_unique($allAttributesFlattened);
-        $attributes = array_values($uniqueAttributes);
 
-        return $this->removeAlreadyAsked($attributes, $guesser);
+        return array_values($uniqueAttributes);
     }
 
     protected function removeAlreadyAsked(array $attributes, string $guesser): array

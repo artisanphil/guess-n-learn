@@ -46,19 +46,6 @@ class GuessTest extends TestCase
             ]);
     }
 
-    public function testWrongSentenceTest()
-    {
-        $data = [
-            'choice' => 'glasses',
-            'sentence' => 'gibberish'
-        ];
-
-        $response = $this->postJson('api/user-guess', $data)
-            ->assertStatus(422);
-
-        $this->assertEquals('The selected sentence is invalid.', $response->json('errors.sentence.0'));
-    }
-
     public function testComputerFinalGuess()
     {
         $objectRepository = new ObjectRepository();

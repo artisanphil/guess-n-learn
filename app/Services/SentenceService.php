@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Strategies\SentenceStrategy;
 use App\Repositories\SentenceRepository;
+use App\Services\QuestionTypes\GapService;
 
 class SentenceService
 {
@@ -11,17 +12,23 @@ class SentenceService
     protected $correctSentence;
     protected $sentenceRepository;
 
-    public function __construct(string $chosenAttribute)
+    public function __construct(string $chosenAttributeKey)
     {
         $this->sentenceRepository = new SentenceRepository();
-        $this->correctSentence = $this->sentenceRepository->getSentenceByAttribute($chosenAttribute);
-        $this->chosenAttribute = $chosenAttribute;
+        $this->correctSentence = $this->sentenceRepository->getSentenceByAttribute($chosenAttributeKey);
+        $this->chosenAttributeKey = $chosenAttributeKey;
     }
 
-    public function handle(string $questionType): array
+    public function handle(string $questionType, string $attributeValue): array
     {
         $strategy = SentenceStrategy::handle($questionType);
 
-        return $strategy->handle($this->chosenAttribute, $this->correctSentence);
+        $attribute = $this->chosenAttributeKey;
+
+        if (get_class($strategy) === GapService::class) {
+            $attribute = $attributeValue;
+        }
+
+        return $strategy->handle($attribute, $this->correctSentence);
     }
 }

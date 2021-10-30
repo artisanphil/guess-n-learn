@@ -19,7 +19,7 @@ class SentenceServiceTest extends TestCase
 
     public function testMultipleChoiceSentences()
     {
-        $sentences = $this->sentenceService->handle(QuestionType::MCHOICE);
+        $sentences = $this->sentenceService->handle(QuestionType::MCHOICE, 'bald');
 
         $this->assertCount(3, $sentences);
         $expected = [
@@ -37,14 +37,14 @@ class SentenceServiceTest extends TestCase
 
     public function testGapSentences()
     {
-        $sentence = $this->sentenceService->handle(QuestionType::GAP);
+        $sentence = $this->sentenceService->handle(QuestionType::GAP, 'bald');
 
         $this->assertEquals(['Is the person {gap}?'], $sentence);
     }
 
     public function testDragDropSentences()
     {
-        $sentence = $this->sentenceService->handle(QuestionType::DRAGDROP);
+        $sentence = $this->sentenceService->handle(QuestionType::DRAGDROP, 'bald');
 
         $this->assertContains('Is', $sentence);
         $this->assertContains('the', $sentence);

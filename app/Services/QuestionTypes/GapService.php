@@ -14,9 +14,9 @@ class GapService implements SentenceInterface
         $this->sentenceRepository = new SentenceRepository();
     }
 
-    public function handle(string $chosenAttribute, string $correctSentence): array
+    public function handle(string $chosenAttributeValue, string $correctSentence): array
     {
-        $sentence = str_replace($chosenAttribute, "{gap}", $correctSentence);
+        $sentence = str_replace($chosenAttributeValue, "{gap}", $correctSentence);
 
         return [
             $sentence

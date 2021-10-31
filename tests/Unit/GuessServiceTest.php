@@ -102,7 +102,7 @@ class GuessServiceTest extends TestCase
             'black hair',
             'hat',
             'ginger hair',
-            'blonde hair',
+            'blond hair',
             'beard'
         ];
 

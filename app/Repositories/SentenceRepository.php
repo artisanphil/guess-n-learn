@@ -18,7 +18,7 @@ class SentenceRepository
         $this->learnLanguage = Session::get('learn-language', 'en');
     }
 
-    public function getSentenceByAttribute(string $attribute, bool $translate): string
+    public function getSentenceByAttribute(string $attribute): string
     {
         $attribute = strtolower($attribute);
 
@@ -28,11 +28,7 @@ class SentenceRepository
 
         $key = array_search($attribute, array_column($this->sentencesWithKeys, 'attribute'));
 
-        if ($translate) {
-            return __($this->sentencesWithKeys[$key]['sentence'], [], $this->learnLanguage);
-        }
-
-        return $this->sentencesWithKeys[$key]['sentence'];
+        return __($this->sentencesWithKeys[$key]['sentence'], [], $this->learnLanguage);
     }
 
     public function getRandomSentenceWithKeys(array $excludeSentences): array

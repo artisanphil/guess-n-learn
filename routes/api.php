@@ -61,6 +61,10 @@ Route::get('/user-guess', [UserGuessController::class, 'index']);
 
 //User POST guessed attribute
 //returns matching objects
+Route::post('/user-guess/verify-attribute', [UserGuessController::class, 'verifyAttribute']);
+
+//User POST guessed attribute
+//returns matching objects
 Route::post('/user-guess', [UserGuessController::class, 'attribute']);
 
 //User POST guessed object

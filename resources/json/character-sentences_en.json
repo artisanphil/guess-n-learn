@@ -60,8 +60,8 @@
         "sentence": "Does the person wear earrings?"
     },
     {
-        "attribute": "blonde hair;blond hair",
-        "sentence": "Does the person have blonde hair?"
+        "attribute": "blond hair",
+        "sentence": "Does the person have blond hair?"
     },
     {
         "attribute": "glasses",

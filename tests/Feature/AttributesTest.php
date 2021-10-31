@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AttributesTest extends TestCase
 {
-    public function testRemainingAttributes()
+    public function testRemainingAttributes(): void
     {
         $this->getJson('api/remaining-attributes')
             ->assertOk()
@@ -18,5 +18,29 @@ class AttributesTest extends TestCase
                 'key',
                 'value'
             ]]);
+    }
+
+    public function testVerifyAttributeCorrect(): void
+    {
+        $this->postJson('api/user-guess/verify-attribute', [
+            'chosenAttribute' => 'brown hair',
+            'answerAttribute' => 'Brown hair'
+        ])
+            ->assertOk()
+            ->assertExactJson([
+                'correct' => true
+            ]);
+    }
+
+    public function testVerifyAttributeWrong(): void
+    {
+        $this->postJson('api/user-guess/verify-attribute', [
+            'chosenAttribute' => 'brown hair',
+            'answerAttribute' => 'gibberish'
+        ])
+            ->assertOk()
+            ->assertExactJson([
+                'correct' => false
+            ]);
     }
 }

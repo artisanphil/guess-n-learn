@@ -32,7 +32,7 @@ class ComputerGuessController extends BaseController
 
         if (count($attributes) > 1) {
             $chosenAttribute = Arr::random($attributes);
-            $sentence = $this->sentenceRepository->getSentenceByAttribute($chosenAttribute, true);
+            $sentence = $this->sentenceRepository->getSentenceByAttribute($chosenAttribute);
         } else {
             $guesser = UserType::COMPUTER;
             $objects = Session::get("remaining-{$guesser}-objects");

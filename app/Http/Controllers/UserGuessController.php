@@ -9,7 +9,10 @@ use Illuminate\Http\Request;
 use App\Services\GuessService;
 use App\Http\Requests\AttributeGuessRequest;
 use App\Http\Requests\ObjectGuessRequest;
+use App\Http\Requests\VerifyAnswerRequest;
 use App\Services\SentenceService;
+use App\Services\VerifyAnswerService;
+use App\Structs\AttributeAnswerStruct;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -52,6 +55,18 @@ class UserGuessController extends BaseController
 
         return [
             'correct' => $request->name === $computerSelection['name']
+        ];
+    }
+
+    public function verifyAttribute(VerifyAnswerRequest $request): array
+    {
+        $answer = new AttributeAnswerStruct();
+        $answer->chosenAttribute = $request->chosenAttribute;
+        $answer->answerAttribute = $request->answerAttribute;
+
+        return [
+            'correct' => (new VerifyAnswerService())
+                ->handle($answer)
         ];
     }
 }

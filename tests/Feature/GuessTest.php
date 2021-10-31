@@ -56,7 +56,7 @@ class GuessTest extends TestCase
             'male',
             'glasses',
             'brown eyes',
-            'blonde hair',
+            'blond hair',
             'small nose',
             'big mouth',
         ];

@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     curl
 
 # Install extensions for php
+RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install gd
 
 # Install composer (php package manager)

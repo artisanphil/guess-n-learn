@@ -33,6 +33,17 @@ class SentenceAttributesSeeder extends Seeder
                 'attribute_id' => $attribute->id,
                 'sentence_id' => $sentence->id
             ]);
+
+            if (isset($data['female'])) {
+                $femaleAttribute = Attribute::create([
+                    'attribute' => $data['female']
+                ]);
+
+                SentenceAttribute::create([
+                    'attribute_id' => $femaleAttribute->id,
+                    'sentence_id' => $sentence->id
+                ]);
+            }
         }
     }
 }

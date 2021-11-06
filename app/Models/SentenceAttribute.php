@@ -11,4 +11,9 @@ class SentenceAttribute extends Model
         'sentence_id'
     ];
     public $timestamps = false;
+
+    public function attribute()
+    {
+        return $this->belongsTo('App\Models\Attribute');
+    }
 }

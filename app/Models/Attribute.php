@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Attribute extends Model
 {
@@ -10,4 +11,16 @@ class Attribute extends Model
         'attribute'
     ];
     public $timestamps = false;
+
+    public function relatedSentence(): HasOneThrough
+    {
+        return $this->hasOneThrough(
+            Sentence::class,
+            SentenceAttribute::class,
+            'attribute_id',
+            'id',
+            'id',
+            'sentence_id'
+        );
+    }
 }

@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Constants\UserType;
 use Tests\TestCase;
+use App\Constants\UserType;
 use App\Services\GuessService;
 use App\Repositories\ObjectRepository;
 use Illuminate\Support\Facades\Session;
@@ -16,6 +16,10 @@ class GuessServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->artisan('migrate:refresh', [
+            '--seed' => true,
+        ]);
 
         $this->guessService = new GuessService();
         $this->objectRepository = new ObjectRepository();
@@ -30,7 +34,7 @@ class GuessServiceTest extends TestCase
 
         $this->assertEquals(5, $attributesFirstGuess['match-count']);
 
-        $attributesSecondGuess = $this->guessService->handle('blonde hair', UserType::COMPUTER);
+        $attributesSecondGuess = $this->guessService->handle('blond hair', UserType::COMPUTER);
         $this->assertEquals(2, $attributesSecondGuess['match-count']);
 
         $attributesThirdGuess = $this->guessService->handle('male', UserType::COMPUTER);

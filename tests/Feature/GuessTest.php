@@ -6,10 +6,18 @@ use Tests\TestCase;
 use App\Constants\UserType;
 use App\Repositories\ObjectRepository;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class GuessTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('migrate:refresh', [
+            '--seed' => true,
+        ]);
+    }
+
     public function testComputerGuess()
     {
         $this->getJson('api/computer-guess')

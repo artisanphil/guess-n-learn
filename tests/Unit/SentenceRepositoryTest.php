@@ -13,6 +13,10 @@ class SentenceRepositoryTest extends TestCase
     {
         parent::setUp();
 
+        $this->artisan('migrate:refresh', [
+            '--seed' => true,
+        ]);
+
         $this->sentenceRepository = new SentenceRepository();
     }
 

@@ -5,7 +5,8 @@
     },
     {
         "attribute": "mustache",
-        "sentence": "Does the person have a mustache?"
+        "sentence": "Does the person have a mustache?",
+        "accent": "moustache"
     },
     {
         "attribute": "brown eyes",

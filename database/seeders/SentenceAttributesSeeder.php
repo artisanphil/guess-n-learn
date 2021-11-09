@@ -44,6 +44,17 @@ class SentenceAttributesSeeder extends Seeder
                     'sentence_id' => $sentence->id
                 ]);
             }
+
+            if (isset($data['accent'])) {
+                $accentAttribute = Attribute::create([
+                    'attribute' => $data['accent']
+                ]);
+
+                SentenceAttribute::create([
+                    'attribute_id' => $accentAttribute->id,
+                    'sentence_id' => $sentence->id
+                ]);
+            }
         }
     }
 }

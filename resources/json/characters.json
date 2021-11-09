@@ -17,17 +17,17 @@
             "mustache",
             "green eyes",
             "brown hair",
-            "big mouth",
+            "wide mouth",
             "small nose"
         ]
     },
     {
-        "name": "Oliver",
+        "name": "Olivia",
         "attributes": [
-            "male",
+            "female",
             "white hair",
             "big nose",
-            "big mouth",
+            "wide mouth",
             "blue eyes"
         ]
     },
@@ -58,7 +58,7 @@
         "name": "Isabelle",
         "attributes": [
             "female",
-            "blond hair",
+            "black hair",
             "glasses",
             "hat",
             "small mouth",
@@ -67,13 +67,13 @@
         ]
     },
     {
-        "name": "William",
+        "name": "Mariam",
         "attributes": [
-            "male",
+            "female",
             "brown eyes",
             "black hair",
             "small nose",
-            "big mouth"
+            "wide mouth"
         ]
     },
     {
@@ -82,6 +82,7 @@
             "male",
             "green eyes",
             "brown hair",
+            "wide mouth",
             "small nose",
             "hat"
         ]
@@ -134,7 +135,7 @@
         "name": "Alexander",
         "attributes": [
             "male",
-            "brown eyes",
+            "blue eyes",
             "white hair",
             "small nose",
             "small mouth",
@@ -158,7 +159,7 @@
             "brown eyes",
             "brown hair",
             "big nose",
-            "big mouth",
+            "wide mouth",
             "mustache"
         ]
     },
@@ -167,7 +168,7 @@
         "attributes": [
             "male",
             "brown eyes",
-            "brown hair",
+            "black hair",
             "small mouth",
             "small nose",
             "mustache",
@@ -181,17 +182,18 @@
             "blue eyes",
             "brown hair",
             "big nose",
-            "big mouth"
+            "wide mouth"
         ]
     },
     {
         "name": "Charlotte",
         "attributes": [
             "female",
+            "green eyes",
             "brown hair",
             "earrings",
             "small nose",
-            "big mouth"
+            "wide mouth"
         ]
     },
     {
@@ -201,7 +203,7 @@
             "brown eyes",
             "blond hair",
             "small nose",
-            "big mouth",
+            "wide mouth",
             "mustache"
         ]
     },
@@ -212,7 +214,7 @@
             "brown eyes",
             "blond hair",
             "small nose",
-            "big mouth",
+            "wide mouth",
             "beard"
         ]
     },
@@ -229,9 +231,9 @@
         ]
     },
     {
-        "name": "Samuel",
+        "name": "Samanatha",
         "attributes": [
-            "male",
+            "female",
             "brown eyes",
             "blond hair",
             "small nose",
@@ -246,7 +248,7 @@
             "brown eyes",
             "white hair",
             "small nose",
-            "big mouth",
+            "wide mouth",
             "hat"
         ]
     },
@@ -255,9 +257,9 @@
         "attributes": [
             "male",
             "brown eyes",
-            "blond hair",
+            "black hair",
             "small nose",
-            "big mouth",
+            "wide mouth",
             "hat"
         ]
     }

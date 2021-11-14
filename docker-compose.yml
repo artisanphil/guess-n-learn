@@ -20,9 +20,9 @@ services:
       - app-network
 
   #Nginx Service
-  webserver:
+  nginx:
     image: nginx:alpine
-    container_name: webserver
+    container_name: nginx
     restart: unless-stopped
     tty: true
     ports:
@@ -30,7 +30,7 @@ services:
       - "8443:8443"
     volumes:
       - ./:/var/www/html/
-      - ./data/nginx:/etc/nginx
+      - ./data/nginx:/etc/nginx/conf.d
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"

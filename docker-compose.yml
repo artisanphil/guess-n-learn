@@ -30,6 +30,8 @@ services:
     volumes:
       - ./:/var/www/html/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
 
   db:
     image: mysql:5.7.32

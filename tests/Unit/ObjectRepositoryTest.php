@@ -35,9 +35,9 @@ class ObjectRepositoryTest extends TestCase
             'attributes' => [
                 'male',
                 'brown eyes',
-                'blond hair',
+                'black hair',
                 'small nose',
-                'big mouth',
+                'wide mouth',
                 'hat'
             ]
         ];
@@ -119,7 +119,7 @@ class ObjectRepositoryTest extends TestCase
                 'mustache',
                 'green eyes',
                 'brown hair',
-                'big mouth',
+                'wide mouth',
                 'small nose'
             ]
         ];

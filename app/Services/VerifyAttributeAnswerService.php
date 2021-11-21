@@ -3,10 +3,9 @@
 namespace App\Services;
 
 use App\Models\Attribute;
-use App\Models\SentenceAttribute;
 use App\Structs\AttributeAnswerStruct;
 
-class VerifyAnswerService
+class VerifyAttributeAnswerService
 {
     public function handle(AttributeAnswerStruct $answer): bool
     {

@@ -60,11 +60,15 @@ Route::get('/remaining-attributes', [UserAttributesController::class, 'index']);
 Route::get('/user-guess', [UserGuessController::class, 'index']);
 
 //User POST guessed attribute
-//returns matching objects
+//returns "correct": bool
 Route::post('/user-guess/verify-attribute', [UserGuessController::class, 'verifyAttribute']);
 
+//User POST guessed sentence
+//returns "correct": bool
+Route::post('/user-guess/verify-sentence', [UserGuessController::class, 'verifySentence']);
+
 //User POST guessed attribute
-//returns matching objects
+//returns correct or false
 Route::post('/user-guess', [UserGuessController::class, 'attribute']);
 
 //User POST guessed object

@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Constants\QuestionType;
 use App\Constants\UserType;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
-use App\Services\GuessService;
-use App\Http\Requests\AttributeGuessRequest;
-use App\Http\Requests\ObjectGuessRequest;
-use App\Http\Requests\VerifyAnswerRequest;
-use App\Services\SentenceService;
-use App\Services\VerifyAnswerService;
-use App\Structs\AttributeAnswerStruct;
 use Illuminate\Http\Response;
+use App\Services\GuessService;
+use App\Constants\QuestionType;
+use App\Services\SentenceService;
+use App\Structs\SentenceAnswerStruct;
+use App\Structs\AttributeAnswerStruct;
+use App\Http\Requests\ObjectGuessRequest;
+use App\Http\Requests\AttributeGuessRequest;
+use App\Http\Requests\VerifySentenceRequest;
+use App\Http\Requests\VerifyAttributeRequest;
+use App\Services\VerifySentenceAnswerService;
+use App\Services\VerifyAttributeAnswerService;
 use Illuminate\Routing\Controller as BaseController;
 
 class UserGuessController extends BaseController
@@ -58,14 +61,26 @@ class UserGuessController extends BaseController
         ];
     }
 
-    public function verifyAttribute(VerifyAnswerRequest $request): array
+    public function verifyAttribute(VerifyAttributeRequest $request): array
     {
         $answer = new AttributeAnswerStruct();
         $answer->chosenAttribute = $request->chosenAttribute;
         $answer->answerAttribute = $request->answerAttribute;
 
         return [
-            'correct' => (new VerifyAnswerService())
+            'correct' => (new VerifyAttributeAnswerService())
+                ->handle($answer)
+        ];
+    }
+
+    public function verifySentence(VerifySentenceRequest $request): array
+    {
+        $answer = new SentenceAnswerStruct();
+        $answer->chosenAttribute = $request->chosenAttribute;
+        $answer->answerSentence = $request->answerSentence;
+
+        return [
+            'correct' => (new VerifySentenceAnswerService())
                 ->handle($answer)
         ];
     }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class VerifyAnswerRequest extends FormRequest
+class VerifyAttributeRequest extends FormRequest
 {
     public function rules()
     {

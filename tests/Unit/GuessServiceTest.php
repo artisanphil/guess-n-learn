@@ -34,7 +34,7 @@ class GuessServiceTest extends TestCase
 
         $this->assertEquals(5, $attributesFirstGuess['match-count']);
 
-        $attributesSecondGuess = $this->guessService->handle('blond hair', UserType::COMPUTER);
+        $attributesSecondGuess = $this->guessService->handle('black hair', UserType::COMPUTER);
         $this->assertEquals(2, $attributesSecondGuess['match-count']);
 
         $attributesThirdGuess = $this->guessService->handle('male', UserType::COMPUTER);
@@ -100,14 +100,14 @@ class GuessServiceTest extends TestCase
             'mustache',
             'green eyes',
             'brown hair',
-            'big mouth',
-            'big nose',
-            'blue eyes',
-            'black hair',
+            'wide mouth',
             'hat',
+            'blue eyes',
             'ginger hair',
             'blond hair',
-            'beard'
+            'beard',
+            'big nose',
+            'black hair'
         ];
 
         $this->assertEquals($expectedData, $attributes);

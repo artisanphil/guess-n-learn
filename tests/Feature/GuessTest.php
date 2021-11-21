@@ -64,9 +64,9 @@ class GuessTest extends TestCase
             'male',
             'glasses',
             'brown eyes',
-            'blond hair',
+            'black hair',
             'small nose',
-            'big mouth',
+            'wide mouth',
         ];
         Session::put("{$guesser}-guess-history", $guessHistory);
 

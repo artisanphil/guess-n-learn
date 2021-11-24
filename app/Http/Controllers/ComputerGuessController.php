@@ -26,18 +26,19 @@ class ComputerGuessController extends BaseController
 
     public function index(): array
     {
-        $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
         $chosenAttribute = "";
         $sentence = "";
+        $guesser = UserType::COMPUTER;
+        $remainingObjects = Session::get("remaining-{$guesser}-objects");
 
-        if (count($attributes) > 1) {
-            $chosenAttribute = Arr::random($attributes);
-            $sentence = $this->sentenceRepository->getSentenceByAttribute($chosenAttribute);
-        } else {
-            $guesser = UserType::COMPUTER;
+        if (isset($remainingObjects) && count($remainingObjects) == 1) {
             $objects = Session::get("remaining-{$guesser}-objects");
             $name = $objects[0]['name'];
             $sentence = "Your person is {$name}";
+        } else {
+            $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
+            $chosenAttribute = Arr::random($attributes);
+            $sentence = $this->sentenceRepository->getSentenceByAttribute($chosenAttribute);
         }
 
         return [

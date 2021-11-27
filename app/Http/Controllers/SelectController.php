@@ -7,7 +7,6 @@ use App\Repositories\ObjectRepository;
 use App\Http\Requests\SelectionRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Log;
 
 class SelectController extends BaseController
 {

@@ -1,16 +1,16 @@
 version: "2.0"
 services:
   #PHP Service
-  app:
+  backend:
     build:
       context: .
       dockerfile: Dockerfile
     image: cloudsigma.com/php
-    container_name: app
+    container_name: backend
     restart: unless-stopped
     tty: true
     environment:
-      SERVICE_NAME: app
+      SERVICE_NAME: backend
       SERVICE_TAGS: dev
     working_dir: /var/www/html/
     volumes:
@@ -19,17 +19,31 @@ services:
     networks:
       - app-network
 
+  frontend:
+    stdin_open: true
+    container_name: frontend
+    build:
+      context: ../vue-guess-and-learn
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ../vue-guess-and-learn:/var/www/html/
+    networks:
+      - app-network
+
   #Nginx Service
   webserver:
-    image: nginx:alpine
+    depends_on:
+      - backend
+      - frontend
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
     container_name: webserver
     restart: unless-stopped
     tty: true
     ports:
-      - "8880:80"
-    volumes:
-      - ./:/var/www/html/
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - "80:80"
     networks:
       - app-network
 

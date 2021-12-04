@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\LogHelper;
 use App\Constants\UserType;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
@@ -56,6 +57,9 @@ class UserGuessController extends BaseController
         $computer = UserType::COMPUTER;
         $computerSelection = $request->session()->get("{$computer}-selection");
 
+        LogHelper::saveAction(false, 'character-guess', $request->name);
+        LogHelper::saveAction(false, 'wins', $request->name === $computerSelection['name']);
+
         return [
             'correct' => $request->name === $computerSelection['name']
         ];
@@ -66,10 +70,14 @@ class UserGuessController extends BaseController
         $answer = new AttributeAnswerStruct();
         $answer->chosenAttribute = $request->chosenAttribute;
         $answer->answerAttribute = $request->answerAttribute;
+        $correct = (new VerifyAttributeAnswerService())
+            ->handle($answer);
+
+        $questionNr = LogHelper::saveQuestion($request->type, $request->chosenAttribute, $request->answerAttribute, $correct);
+        LogHelper::saveAction(false, 'question', $questionNr);
 
         return [
-            'correct' => (new VerifyAttributeAnswerService())
-                ->handle($answer)
+            'correct' => $correct
         ];
     }
 
@@ -78,10 +86,14 @@ class UserGuessController extends BaseController
         $answer = new SentenceAnswerStruct();
         $answer->chosenAttribute = $request->chosenAttribute;
         $answer->answerSentence = $request->answerSentence;
+        $correct = (new VerifySentenceAnswerService())
+            ->handle($answer);
+
+        $questionNr = LogHelper::saveQuestion('drag-drop', $request->chosenAttribute, $request->answerSentence, $correct);
+        LogHelper::saveAction(false, 'question', $questionNr);
 
         return [
-            'correct' => (new VerifySentenceAnswerService())
-                ->handle($answer)
+            'correct' => $correct
         ];
     }
 }

@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\SelectController;
 use App\Http\Controllers\UserGuessController;
 use App\Http\Controllers\ComputerGuessController;
@@ -26,12 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //set the language the user wants to learn
-Route::get('learn-language/{locale}', function ($locale) {
-    Session::flush();
-    Session::put('learn-language', $locale);
-
-    return response(200);
-});
+Route::get('learn-language/{locale}', [SelectController::class, 'learnlanguage']);
 
 //GET list of objects
 Route::get('/index', [SelectController::class, 'index']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\LogHelper;
 use App\Constants\UserType;
 use Illuminate\Support\Arr;
 use App\Services\GuessService;
@@ -35,11 +36,14 @@ class ComputerGuessController extends BaseController
             $objects = Session::get("remaining-{$guesser}-objects");
             $name = $objects[0]['name'];
             $sentence = "Your person is {$name}";
+            LogHelper::saveAction(true, 'character-guess', $name);
         } else {
             $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
             $chosenAttribute = Arr::random($attributes);
             $sentence = $this->sentenceRepository->getSentenceByAttribute($chosenAttribute);
         }
+
+        LogHelper::saveAction(true, 'choice', $chosenAttribute);
 
         return [
             'sentence' => $sentence,

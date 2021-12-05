@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Constants\QuestionType;
 use Tests\TestCase;
 
 class AttributesTest extends TestCase
@@ -19,6 +20,7 @@ class AttributesTest extends TestCase
     public function testVerifyAttributeCorrect(): void
     {
         $this->postJson('api/user-guess/verify-attribute', [
+            'type' => QuestionType::GAP,
             'chosenAttribute' => 'brown hair',
             'answerAttribute' => 'Brown hair'
         ])
@@ -31,6 +33,7 @@ class AttributesTest extends TestCase
     public function testSimilarAttributeCorrect(): void
     {
         $this->postJson('api/user-guess/verify-attribute', [
+            'type' => QuestionType::GAP,
             'chosenAttribute' => 'blond hair',
             'answerAttribute' => 'blonde hair'
         ])
@@ -43,6 +46,7 @@ class AttributesTest extends TestCase
     public function testVerifyAttributeWrong(): void
     {
         $this->postJson('api/user-guess/verify-attribute', [
+            'type' => QuestionType::GAP,
             'chosenAttribute' => 'brown hair',
             'answerAttribute' => 'black hair'
         ])

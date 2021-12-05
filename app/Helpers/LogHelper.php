@@ -4,13 +4,14 @@ namespace App\Helpers;
 
 use App\Models\LogAction;
 use App\Models\LogAnswer;
+use Illuminate\Support\Facades\Request;
 
 class LogHelper
 {
     public static function saveAction(bool $computer, string $action, string $value): void
     {
         LogAction::create([
-            'IP' => $_SERVER['REMOTE_ADDR'],
+            'IP' => Request::ip(),
             'user' => $computer ? 'computer' : 'user',
             'action' => $action,
             'value' => $value,

@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Attribute;
 use Illuminate\Support\Facades\Session;
+use App\Models\Sentence;
 
 class SentenceRepository
 {
@@ -23,14 +24,7 @@ class SentenceRepository
             ->relatedSentence()
             ->first();
 
-        $sentenceValue = $sentence->value;
-
-        if (substr($this->learnLanguage, 0, 2) !== 'en') {
-            $sentenceValue = $sentence->translations()
-                ->byLanguage($this->learnLanguage)
-                ->first()
-                ->value;
-        }
+        $sentenceValue = $this->getSentenceValue($sentence);
 
         return __($sentenceValue, [], $this->learnLanguage);
     }
@@ -44,12 +38,25 @@ class SentenceRepository
             ->first();
 
         $sentence = $attributeData->relatedSentence()
-            ->first()
-            ->sentence;
+            ->first();
+
+        $sentenceValue = $this->getSentenceValue($sentence);
 
         return [
-            'sentence' => __($sentence, [], $this->learnLanguage),
+            'sentence' => __($sentenceValue, [], $this->learnLanguage),
             'attribute' => $attributeData->attribute,
         ];
+    }
+
+    protected function getSentenceValue(Sentence $sentence): string
+    {
+        if (substr($this->learnLanguage, 0, 2) === 'en') {
+            return $sentence->value;
+        }
+
+        return $sentence->translations()
+            ->byLanguage($this->learnLanguage)
+            ->first()
+            ->value;
     }
 }

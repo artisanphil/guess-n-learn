@@ -21,10 +21,18 @@ class SentenceRepository
         $sentence = Attribute::where('attribute', $attribute)
             ->first()
             ->relatedSentence()
-            ->first()
-            ->sentence;
+            ->first();
 
-        return __($sentence, [], $this->learnLanguage);
+        $sentenceValue = $sentence->value;
+
+        if (substr($this->learnLanguage, 0, 2) !== 'en') {
+            $sentenceValue = $sentence->translations()
+                ->byLanguage($this->learnLanguage)
+                ->first()
+                ->value;
+        }
+
+        return __($sentenceValue, [], $this->learnLanguage);
     }
 
     public function getRandomSentenceWithKeys(array $excludeSentences): array

@@ -1,0 +1,64 @@
+//// from https://dbdiagram.io
+//// -- Tables and References
+
+// Creating tables
+Table objects {
+  id int [pk, increment] // auto-increment
+  name varchar
+}
+
+Table object_attributes {
+  id int [pk, increment]
+  object_id int
+  attribute_id int
+}
+
+Table attributes {
+  id int [pk, increment]
+  value varchar
+ }
+
+// Creating references
+// You can also define relaionship separately
+// > many-to-one; < one-to-many; - one-to-one
+Ref: objects.id < object_attributes.object_id
+Ref: attributes.id < object_attributes.attribute_id
+
+
+Table attribute_translations {
+  id int [pk, increment]
+  attribute_id int
+  translation_id int
+}
+
+Table translations {
+  id int [pk, increment]
+  value varchar
+  language varchar
+}
+
+Ref: attributes.id < attribute_translations.attribute_id
+Ref: translations.id < attribute_translations.translation_id
+
+Table sentence_attributes {
+  id int [pk, increment]
+  attribute_id int
+  sentence_id int
+}
+
+Table sentences {
+  id int [pk, increment]
+  value varchar
+}
+
+Ref: attributes.id < sentence_attributes.attribute_id
+Ref: sentences.id < sentence_attributes.sentence_id
+
+Table sentence_translations {
+  id int [pk, increment]
+  sentence_id int
+  translation_id int
+}
+
+Ref: sentences.id < sentence_translations.sentence_id
+Ref: translations.id < sentence_translations.translation_id

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSentencesTable extends Migration
+class CreateSentenceTranslationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateSentencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sentences', function (Blueprint $table) {
+        Schema::create('sentence_translations', function (Blueprint $table) {
             $table->id();
-            $table->string('value', 100);
+            $table->unsignedInteger('sentence_id');
+            $table->unsignedInteger('translation_id');
         });
     }
 
@@ -26,6 +27,6 @@ class CreateSentencesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sentences');
+        Schema::dropIfExists('sentence_translations');
     }
 }

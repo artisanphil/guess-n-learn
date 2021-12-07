@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Sentence;
 use App\Models\Attribute;
-use App\Models\SentenceAttribute;
+use App\Models\Translation;
 use Illuminate\Database\Seeder;
+use App\Models\SentenceAttribute;
+use App\Models\SentenceTranslation;
 
 class SentenceAttributesSeeder extends Seeder
 {
@@ -16,14 +18,20 @@ class SentenceAttributesSeeder extends Seeder
      */
     public function run()
     {
-        $sentencesJson = file_get_contents(base_path('resources/json/character-sentences_en.json'));
+        $sentencesJson = file_get_contents(base_path('resources/json/character-sentences.json'));
 
         $sentencesWithAttributes = json_decode($sentencesJson, true);
 
+        $languages = ['es'];
+
         foreach ($sentencesWithAttributes as $data) {
             $sentence = Sentence::create([
-                'sentence' => $data['sentence']
+                'value' => $data['sentence']
             ]);
+
+            foreach ($languages as $language) {
+                $this->addSentenceTranslation($sentence, $data, $language);
+            }
 
             $attribute = Attribute::create([
                 'attribute' => $data['attribute']
@@ -34,27 +42,36 @@ class SentenceAttributesSeeder extends Seeder
                 'sentence_id' => $sentence->id
             ]);
 
-            if (isset($data['female'])) {
-                $femaleAttribute = Attribute::create([
-                    'attribute' => $data['female']
-                ]);
+            if (isset($data['alternatives'])) {
+                foreach ($data['alternatives'] as $alternative) {
+                    $alternativeAttribute = Attribute::create([
+                        'attribute' => $alternative
+                    ]);
 
-                SentenceAttribute::create([
-                    'attribute_id' => $femaleAttribute->id,
-                    'sentence_id' => $sentence->id
-                ]);
-            }
-
-            if (isset($data['accent'])) {
-                $accentAttribute = Attribute::create([
-                    'attribute' => $data['accent']
-                ]);
-
-                SentenceAttribute::create([
-                    'attribute_id' => $accentAttribute->id,
-                    'sentence_id' => $sentence->id
-                ]);
+                    SentenceAttribute::create([
+                        'attribute_id' => $alternativeAttribute->id,
+                        'sentence_id' => $sentence->id
+                    ]);
+                }
             }
         }
+    }
+
+    protected function addSentenceTranslation(Sentence $sentence, array $data, string $language)
+    {
+        if (!isset($data['sentence_' . $language])) {
+            return;
+        }
+
+        $value = $data['sentence_' . $language];
+        $translation = Translation::create([
+            'language' => $language,
+            'value' => $value
+        ]);
+
+        SentenceTranslation::create([
+            'sentence_id' => $sentence->id,
+            'translation_id' => $translation->id
+        ]);
     }
 }

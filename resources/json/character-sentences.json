@@ -1,0 +1,139 @@
+[
+    {
+        "attribute": "male",
+        "attribute_es": "hombre",
+        "sentence": "Is the person male?",
+        "sentence_es": "¿Es la persona un hombre?"
+    },
+    {
+        "attribute": "mustache",
+        "attribute_es": "bigote",
+        "sentence": "Does the person have a mustache?",
+        "sentence_es": "¿Tiene la persona un bigote?",
+        "alternatives": ["moustache"]
+    },
+    {
+        "attribute": "brown eyes",
+        "attribute_es": "ojos marrones",
+        "sentence": "Does the person have brown eyes?",
+        "sentence_es": "¿Tiene la persona ojos marrones?",
+        "alternatives_es": ["ojos castaños", "ojos cafés"]
+    },
+    {
+        "attribute": "brown hair",
+        "attribute_es": "cabello castaño",
+        "sentence": "Does the person have brown hair?",
+        "sentence_es": "¿Tiene la persona cabello castaño?",
+        "alternatives_es": ["pelo castaño", "cabello moreno", "pelo moreno"]
+    },
+    {
+        "attribute": "wide mouth",
+        "attribute_es": "boca ancha",
+        "sentence": "Does the person have a wide mouth?",
+        "sentence_es": "¿Tiene la persona una boca ancha?"
+    },
+    {
+        "attribute": "small nose",
+        "attribute_es": "nariz pequeña",
+        "sentence": "Does the person have a small nose?",
+        "sentence_es": "¿Tiene la persona una nariz pequeña?"
+    },
+    {
+        "attribute": "white hair",
+        "attribute_es": "cabello blanco",
+        "sentence": "Does the person have white hair?",
+        "sentence_es": "¿Tiene la persona cabello blanco?",
+        "alternatives_es": ["pelo blanco"]
+    },
+    {
+        "attribute": "big nose",
+        "attribute_es": "nariz grande",
+        "sentence": "Does the person have a big nose?",
+        "sentence_es": "¿Tiene la persona una nariz grande?"
+    },
+    {
+        "attribute": "blue eyes",
+        "attribute_es": "ojos azules",
+        "sentence": "Does the person have blue eyes?",
+        "sentence_es": "¿Tiene la persona ojos azules?"
+    },
+    {
+        "attribute": "female",
+        "attribute_es": "mujer",
+        "sentence": "Is the person female?",
+        "sentence_es": "¿Es la persona una mujer?"
+    },
+    {
+        "attribute": "hat",
+        "attribute_es": "sombrero",
+        "sentence": "Does the person wear a hat?",
+        "sentence_es": "¿Lleva la persona un sombrero?"
+    },
+    {
+        "attribute": "small mouth",
+        "attribute_es": "boca pequeña",
+        "sentence": "Does the person have a small mouth?",
+        "sentence_es": "¿Tiene la persona una boca pequeña?"
+    },
+    {
+        "attribute": "long hair",
+        "attribute_es": "cabello largo",
+        "sentence": "Does the person have long hair?",
+        "sentence_es": "¿Tiene la persona el cabello largo?",
+        "alternatives_es": ["pelo largo"]
+    },
+    {
+        "attribute": "black hair",
+        "attribute_es": "cabello negro",
+        "sentence": "Does the person have black hair?",
+        "sentence_es": "¿Tiene la persona cabello negro?",
+        "alternatives_es": ["pelo negro"]
+    },
+    {
+        "attribute": "earrings",
+        "attribute_es": "pendientes",
+        "sentence": "Does the person wear earrings?",
+        "sentence_es": "¿Lleva la persona pendientes?",
+        "alternatives_es": ["aretes"]
+    },
+    {
+        "attribute": "blond hair",
+        "attribute_es": "cabello rubio",
+        "alternatives": ["blonde hair"],
+        "sentence": "Does the person have blond hair?",
+        "sentence_es": "¿Tiene la persona cabello rubio?",
+        "alternatives_es": ["pelo rubio"]
+    },
+    {
+        "attribute": "glasses",
+        "attribute_es": "gafas",
+        "sentence": "Does the person wear glasses?",
+        "sentence_es": "¿Lleva la persona gafas?",
+        "alternatives_es": ["lentes"]
+    },
+    {
+        "attribute": "ginger hair",
+        "attribute_es": "cabello pelirrojo",
+        "sentence": "Does the person have ginger hair?",
+        "sentence_es": "¿Tiene la persona cabello pelirrojo?",
+        "alternatives_es": ["pelo pelirrojo"]
+    },
+    {
+        "attribute": "beard",
+        "attribute_es": "barba",
+        "sentence": "Does the person have a beard?",
+        "sentence_es": "¿Tiene la persona barba?"
+    },
+    {
+        "attribute": "bald",
+        "attribute_es": "calva",
+        "sentence": "Is the person bald?",
+        "sentence_es": "¿Es la persona calva?"
+    },
+    {
+        "attribute": "green eyes",
+        "attribute_es": "ojos verdes",
+        "sentence": "Does the person have green eyes?",
+        "sentence_es": "¿Tiene la persona ojos verdes?"
+    }
+]

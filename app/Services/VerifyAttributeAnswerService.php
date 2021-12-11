@@ -9,7 +9,7 @@ class VerifyAttributeAnswerService
 {
     public function handle(AttributeAnswerStruct $answer): bool
     {
-        $answerAttribute = Attribute::where('attribute', $answer->chosenAttribute)
+        $answerAttribute = Attribute::where('value', $answer->chosenAttribute)
             ->first();
 
         if (!$answerAttribute) {
@@ -17,7 +17,7 @@ class VerifyAttributeAnswerService
         }
 
 
-        $relatedSentence = Attribute::where('attribute', strtolower($answer->answerAttribute))
+        $relatedSentence = Attribute::where('value', strtolower($answer->answerAttribute))
             ->first();
 
         if (!$relatedSentence) {

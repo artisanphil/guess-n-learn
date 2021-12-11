@@ -19,7 +19,7 @@ class SentenceRepository
     {
         $attribute = strtolower($attribute);
 
-        $sentence = Attribute::where('attribute', $attribute)
+        $sentence = Attribute::where('value', $attribute)
             ->first()
             ->relatedSentence()
             ->first();
@@ -33,7 +33,7 @@ class SentenceRepository
     {
         $excludeAttributes = array_column($excludeSentences, 'attribute');
 
-        $attributeData = Attribute::whereNotIn('attribute', $excludeAttributes)
+        $attributeData = Attribute::whereNotIn('value', $excludeAttributes)
             ->inRandomOrder()
             ->first();
 
@@ -44,7 +44,7 @@ class SentenceRepository
 
         return [
             'sentence' => __($sentenceValue, [], $this->learnLanguage),
-            'attribute' => $attributeData->attribute,
+            'attribute' => $attributeData->value,
         ];
     }
 

@@ -3,8 +3,10 @@
 namespace Tests\Unit;
 
 use App\Constants\UserType;
+use App\Models\ObjectModel;
 use Tests\TestCase;
 use App\Repositories\ObjectRepository;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Session;
 
 class ObjectRepositoryTest extends TestCase
@@ -29,25 +31,18 @@ class ObjectRepositoryTest extends TestCase
     public function testGetObjectByName()
     {
         $object = $this->objectRepository->getObjectByName('David');
+        $actualData = Arr::only($object, ['name']);
 
         $expectedData = [
             'name' => 'David',
-            'attributes' => [
-                'male',
-                'brown eyes',
-                'black hair',
-                'small nose',
-                'wide mouth',
-                'hat'
-            ]
         ];
 
-        $this->assertEquals($expectedData, $object);
+        $this->assertEquals($expectedData, $actualData);
     }
 
     public function testGetAttributes()
     {
-        $objects = $this->objectRepository->getObjects();
+        $objects = ObjectModel::all()->toArray();
         $attributes = $this->objectRepository->getAttributes($objects, UserType::COMPUTER);
 
         $this->assertContains('mustache', $attributes);
@@ -56,7 +51,7 @@ class ObjectRepositoryTest extends TestCase
 
     public function testGetComputerSelection()
     {
-        $objects = $this->objectRepository->getObjects();
+        $objects = ObjectModel::all()->toArray();
         $selection = $this->objectRepository->getComputerSelection();
 
         $this->assertContains($selection, $objects);
@@ -74,34 +69,13 @@ class ObjectRepositoryTest extends TestCase
 
     public function testHasMatchingObjects()
     {
-        $objects = $this->objectRepository->getObjects();
+        $objects = ObjectModel::all()->toArray();
         $matchingObjects = $this->objectRepository->getMatchingObjects($objects, 'bald', true);
 
-        $expectedData = [
-            'name' => 'Liam',
-            'attributes' => [
-                'male',
-                'glasses',
-                'brown eyes',
-                'bald',
-                'white hair',
-                'small mouth',
-                'small nose',
-            ]
-        ];
+        $expectedData = 'Liam';
+        $notExpected = 'Noah';
 
-        $notExpected = [
-            'name' => 'Noah',
-            'attributes' => [
-                'male',
-                'mustache',
-                'brown eyes',
-                'brown hair',
-                'big mouth',
-                'small nose'
-            ]
-        ];
-
+        $matchingObjects = array_column($matchingObjects, 'name');
         $this->assertCount(4, $matchingObjects);
         $this->assertContains($expectedData, $matchingObjects);
         $this->assertNotContains($notExpected, $matchingObjects);
@@ -109,34 +83,13 @@ class ObjectRepositoryTest extends TestCase
 
     public function testNotHasMatchingObjects()
     {
-        $objects = $this->objectRepository->getObjects();
+        $objects = ObjectModel::all()->toArray();
         $matchingObjects = $this->objectRepository->getMatchingObjects($objects, 'bald', false);
 
-        $expectedData = [
-            'name' => 'Noah',
-            'attributes' => [
-                'male',
-                'mustache',
-                'green eyes',
-                'brown hair',
-                'wide mouth',
-                'small nose'
-            ]
-        ];
+        $expectedData = 'Noah';
+        $notExpected = 'Liam';
 
-        $notExpected = [
-            'name' => 'Liam',
-            'attributes' => [
-                'male',
-                'glasses',
-                'brown eyes',
-                'bald',
-                'white hair',
-                'small mouth',
-                'small nose',
-            ]
-        ];
-
+        $matchingObjects = array_column($matchingObjects, 'name');
         $this->assertCount(20, $matchingObjects);
         $this->assertContains($expectedData, $matchingObjects);
         $this->assertNotContains($notExpected, $matchingObjects);
@@ -148,7 +101,7 @@ class ObjectRepositoryTest extends TestCase
 
         $this->assertCount(21, $attributes);
 
-        $objects = $this->objectRepository->getObjects();
+        $objects = ObjectModel::all()->toArray();
         $remainingObjects = $this->objectRepository->getMatchingObjects($objects, 'bald', true);
         $person = UserType::PERSON;
         Session::put("remaining-{$person}-objects", $remainingObjects);
@@ -157,18 +110,19 @@ class ObjectRepositoryTest extends TestCase
 
         $expectedData = [
             'male',
-            'glasses',
             'brown eyes',
-            'bald',
-            'white hair',
-            'small mouth',
+            'brown hair',
             'small nose',
-            'blue eyes',
-            'blond hair',
-            'beard',
-            'green eyes',
+            'white hair',
             'big nose',
-            'brown hair'
+            'blue eyes',
+            'small mouth',
+            'blond hair',
+            'glasses',
+            'beard',
+            'bald',
+            'green eyes',
+
         ];
 
         $this->assertCount(13, $attributes);

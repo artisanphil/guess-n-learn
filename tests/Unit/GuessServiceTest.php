@@ -17,7 +17,7 @@ class GuessServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->artisan('migrate:refresh', [
+        $this->artisan('migrate:fresh', [
             '--seed' => true,
         ]);
 
@@ -55,23 +55,11 @@ class GuessServiceTest extends TestCase
             'choice' => 'ginger hair',
             'correct' => true,
             'matching' =>  [[
+                'id' => 9,
                 'name' => 'Benjamin',
-                'attributes' => [
-                    'male',
-                    'blue eyes',
-                    'ginger hair',
-                    'small nose',
-                    'small mouth',
-                ],
             ], [
+                'id' => 14,
                 'name' => 'Henry',
-                'attributes' => [
-                    'male',
-                    'brown eyes',
-                    'ginger hair',
-                    'small nose',
-                    'small mouth',
-                ]
             ]]
         ];
 
@@ -91,23 +79,23 @@ class GuessServiceTest extends TestCase
         $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
 
         $expectedData = [
-            'glasses',
-            'brown eyes',
-            'bald',
-            'white hair',
-            'small mouth',
-            'small nose',
             'mustache',
-            'green eyes',
+            'brown eyes',
             'brown hair',
             'wide mouth',
-            'hat',
-            'blue eyes',
-            'ginger hair',
-            'blond hair',
-            'beard',
+            'small nose',
+            'white hair',
             'big nose',
-            'black hair'
+            'blue eyes',
+            'hat',
+            'small mouth',
+            'black hair',
+            'blond hair',
+            'glasses',
+            'ginger hair',
+            'beard',
+            'bald',
+            'green eyes',
         ];
 
         $this->assertEquals($expectedData, $attributes);

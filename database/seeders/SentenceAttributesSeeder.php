@@ -34,7 +34,7 @@ class SentenceAttributesSeeder extends Seeder
             }
 
             $attribute = Attribute::create([
-                'attribute' => $data['attribute']
+                'value' => $data['attribute']
             ]);
 
             SentenceAttribute::create([
@@ -45,7 +45,7 @@ class SentenceAttributesSeeder extends Seeder
             if (isset($data['alternatives'])) {
                 foreach ($data['alternatives'] as $alternative) {
                     $alternativeAttribute = Attribute::create([
-                        'attribute' => $alternative
+                        'value' => $alternative
                     ]);
 
                     SentenceAttribute::create([

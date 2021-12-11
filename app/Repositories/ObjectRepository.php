@@ -2,36 +2,35 @@
 
 namespace App\Repositories;
 
-use App\Constants\UserType;
+use App\Models\Attribute;
+use App\Models\ObjectModel;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
+use App\Models\ObjectAttribute;
 use Illuminate\Support\Facades\Session;
 
 class ObjectRepository
 {
-    public function getObjects(): array
+    public function getObjectAttributes(int $objectId): array
     {
-        $objects = file_get_contents(base_path('resources/json/characters.json'));
-
-        return json_decode($objects, true);
+        return ObjectModel::where('id', $objectId)
+            ->first()
+            ->attributes()
+            ->pluck('value')
+            ->toArray();
     }
 
     public function getObjectNames(): array
     {
-        $objects = $this->getObjects();
-
-        return array_map(function ($value) {
-            return $value['name'];
-        }, $objects);
+        return ObjectModel::all()
+            ->pluck('name')
+            ->toArray();
     }
 
     public function getObjectByName(string $name): array
     {
-        $objects = $this->getObjects();
-
-        return current(array_filter($objects, function ($value) use ($name) {
-            return $value['name'] === $name;
-        }));
+        return ObjectModel::where('name', $name)
+            ->first()
+            ->toArray();
     }
 
     public function getAttributes(array $objects, string $guesser): array
@@ -43,14 +42,15 @@ class ObjectRepository
 
     public function getAllAttributes(array $objects): array
     {
-        $allAttributes = array_map(function ($value) {
-            return $value['attributes'];
-        }, $objects);
+        $objectIds = Arr::pluck($objects, 'id');
+        $objectsAttributes = ObjectAttribute::whereIn('object_id', $objectIds)
+            ->get()
+            ->pluck('attribute_id');
 
-        $allAttributesFlattened = Arr::flatten($allAttributes);
-        $uniqueAttributes = array_unique($allAttributesFlattened);
-
-        return array_values($uniqueAttributes);
+        return Attribute::whereIn('id', $objectsAttributes)
+            ->get()
+            ->pluck('value')
+            ->toArray();
     }
 
     protected function removeAlreadyAsked(array $attributes, string $guesser): array
@@ -93,14 +93,16 @@ class ObjectRepository
 
     public function getComputerSelection(): array
     {
-        $objects = $this->getObjects();
-
-        return Arr::random($objects);
+        return ObjectModel::inRandomOrder()
+            ->first()
+            ->toArray();
     }
 
     public function hasAttribute(string $chosenAttribute, array $selection)
     {
-        return in_array($chosenAttribute, $selection['attributes']);
+        $selectionAttributes = $this->getObjectAttributes($selection['id']);
+
+        return in_array($chosenAttribute, $selectionAttributes);
     }
 
     public function getMatchingObjects(array $objects, string $chosenAttribute, bool $hasAttribute): array
@@ -108,8 +110,9 @@ class ObjectRepository
         $matchingObjects = [];
 
         foreach ($objects as $object) {
+            $attributes = $this->getObjectAttributes($object['id']);
             $hasMatch = false;
-            foreach ($object['attributes'] as $attribute) {
+            foreach ($attributes as $attribute) {
                 if ($attribute === $chosenAttribute) {
                     $hasMatch = true;
                 }
@@ -131,7 +134,7 @@ class ObjectRepository
         if (Session::get("remaining-{$guesser}-objects")) {
             $objects = Session::get("remaining-{$guesser}-objects");
         } else {
-            $objects = $this->getObjects();
+            $objects = ObjectModel::all()->toArray();
         }
 
         return $this->getAttributes($objects, $guesser);

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Repositories\ObjectRepository;
 use App\Http\Requests\SelectionRequest;
+use App\Models\ObjectModel;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -22,7 +23,7 @@ class SelectController extends BaseController
 
     public function index()
     {
-        return $this->objectRepository->getObjects();
+        return ObjectModel::all();
     }
 
     public function show(): array

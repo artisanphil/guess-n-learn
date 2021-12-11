@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Constants\UserType;
+use App\Models\ObjectModel;
 use App\Repositories\ObjectRepository;
 use Illuminate\Support\Facades\Session;
 
@@ -49,7 +50,7 @@ class GuessService
         if (Session::get("remaining-{$guesser}-objects")) {
             $objects = Session::get("remaining-{$guesser}-objects");
         } else {
-            $objects = $this->objectRepository->getObjects();
+            $objects = ObjectModel::all()->toArray();
         }
 
         $remainingObjects = $this->objectRepository->getMatchingObjects($objects, $chosenAttribute, $hasAttribute);

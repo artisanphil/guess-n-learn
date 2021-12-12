@@ -71,7 +71,7 @@ class UserGuessController extends BaseController
         $answer->chosenAttribute = $request->chosenAttribute;
         $answer->answerAttribute = $request->answerAttribute;
         $correct = (new VerifyAttributeAnswerService())
-            ->handle($answer);
+            ->handle($answer, $request->type);
 
         $questionNr = LogHelper::saveQuestion($request->type, $request->chosenAttribute, $request->answerAttribute, $correct);
         LogHelper::saveAction(false, 'question', $questionNr);

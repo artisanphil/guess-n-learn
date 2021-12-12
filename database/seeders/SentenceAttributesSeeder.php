@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Sentence;
 use App\Models\Attribute;
+use App\Models\AttributeTranslation;
 use App\Models\Translation;
 use Illuminate\Database\Seeder;
 use App\Models\SentenceAttribute;
@@ -37,6 +38,10 @@ class SentenceAttributesSeeder extends Seeder
                 'value' => $data['attribute']
             ]);
 
+            foreach ($languages as $language) {
+                $this->addAttributeTranslation($attribute, $data, $language);
+            }
+
             SentenceAttribute::create([
                 'attribute_id' => $attribute->id,
                 'sentence_id' => $sentence->id
@@ -57,7 +62,7 @@ class SentenceAttributesSeeder extends Seeder
         }
     }
 
-    protected function addSentenceTranslation(Sentence $sentence, array $data, string $language)
+    protected function addSentenceTranslation(Sentence $sentence, array $data, string $language): void
     {
         if (!isset($data['sentence_' . $language])) {
             return;
@@ -71,6 +76,24 @@ class SentenceAttributesSeeder extends Seeder
 
         SentenceTranslation::create([
             'sentence_id' => $sentence->id,
+            'translation_id' => $translation->id
+        ]);
+    }
+
+    protected function addAttributeTranslation(Attribute $attribute, array $data, string $language): void
+    {
+        if (!isset($data['attribute_' . $language])) {
+            return;
+        }
+
+        $value = $data['attribute_' . $language];
+        $translation = Translation::create([
+            'language' => $language,
+            'value' => $value
+        ]);
+
+        AttributeTranslation::create([
+            'attribute_id' => $attribute->id,
             'translation_id' => $translation->id
         ]);
     }

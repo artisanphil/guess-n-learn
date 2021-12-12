@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Translation extends Model
 {
@@ -18,5 +19,17 @@ class Translation extends Model
         $languageShort = substr($language, 0, 2);
 
         return $query->where('language', $languageShort);
+    }
+
+    public function relatedAttribute(): HasOneThrough
+    {
+        return $this->hasOneThrough(
+            Attribute::class,
+            AttributeTranslation::class,
+            'translation_id',
+            'id',
+            'id',
+            'attribute_id'
+        );
     }
 }

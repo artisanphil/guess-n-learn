@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Session;
 
 class ObjectRepository
 {
+    protected $attributeRepository;
+
+    public function __construct()
+    {
+        $this->attributeRepository = new AttributeRepository();
+    }
+
     public function getObjectAttributes(int $objectId): array
     {
         return ObjectModel::where('id', $objectId)
@@ -147,8 +154,9 @@ class ObjectRepository
         $learnLanguage = Session::get('learn-language', 'en');
 
         $i = 0;
-        foreach ($remainingAttributes as $value) {
-            $remainingAttributesTranslated[$i]['key'] = $value;
+        foreach ($remainingAttributes as $key) {
+            $remainingAttributesTranslated[$i]['key'] = $key;
+            $value = $this->attributeRepository->getTranslatedAttribute($key, $learnLanguage);
             $remainingAttributesTranslated[$i]['value'] = __($value, [], $learnLanguage);
             $i++;
         }

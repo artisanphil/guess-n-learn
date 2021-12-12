@@ -23,4 +23,16 @@ class Attribute extends Model
             'sentence_id'
         );
     }
+
+    public function relatedTranslation(): HasOneThrough
+    {
+        return $this->hasOneThrough(
+            Translation::class,
+            AttributeTranslation::class,
+            'attribute_id',
+            'id',
+            'id',
+            'translation_id'
+        );
+    }
 }

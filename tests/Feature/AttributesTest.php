@@ -2,8 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Constants\QuestionType;
 use Tests\TestCase;
+use App\Constants\QuestionType;
+use Illuminate\Support\Facades\Session;
 
 class AttributesTest extends TestCase
 {
@@ -17,12 +18,42 @@ class AttributesTest extends TestCase
             ]]);
     }
 
+    public function testTranslatedAttributes(): void
+    {
+        Session::put('learn-language', 'es-es');
+
+        $response = $this->getJson('api/remaining-attributes')
+            ->assertOk();
+
+        $expectedData = [
+            'key' => 'bald',
+            'value' => 'calva'
+        ];
+
+        $this->assertContains($expectedData, $response->json());
+    }
+
     public function testVerifyAttributeCorrect(): void
     {
         $this->postJson('api/user-guess/verify-attribute', [
             'type' => QuestionType::GAP,
             'chosenAttribute' => 'brown hair',
             'answerAttribute' => 'Brown hair'
+        ])
+            ->assertOk()
+            ->assertExactJson([
+                'correct' => true
+            ]);
+    }
+
+    public function testVerifyAttributeTranslationCorrect(): void
+    {
+        Session::put('learn-language', 'es-es');
+
+        $this->postJson('api/user-guess/verify-attribute', [
+            'type' => QuestionType::GAP,
+            'chosenAttribute' => 'hat',
+            'answerAttribute' => 'sombrero'
         ])
             ->assertOk()
             ->assertExactJson([

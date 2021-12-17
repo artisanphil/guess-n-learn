@@ -24,11 +24,16 @@ class AttributeRepository
 
     public function getAttributeValueFromTranslation(string $value, string $language): string
     {
-        return Translation::where('value', strtolower($value))
+        $translation = Translation::where('value', strtolower($value))
             ->byLanguage($language)
-            ->first()
-            ->relatedAttribute()
-            ->first()
-            ->value;
+            ->first();
+
+        if (isset($translation)) {
+            return $translation->relatedAttribute()
+                ->first()
+                ->value;
+        }
+
+        return $value;
     }
 }

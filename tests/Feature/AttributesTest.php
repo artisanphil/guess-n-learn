@@ -74,6 +74,21 @@ class AttributesTest extends TestCase
             ]);
     }
 
+    public function testSimilarTranslatedAttributeCorrect(): void
+    {
+        Session::put('learn-language', 'es-es');
+
+        $this->postJson('api/user-guess/verify-attribute', [
+            'type' => QuestionType::GAP,
+            'chosenAttribute' => 'white hair',
+            'answerAttribute' => 'pelo blanco'
+        ])
+            ->assertOk()
+            ->assertExactJson([
+                'correct' => true
+            ]);
+    }
+
     public function testVerifyAttributeWrong(): void
     {
         $this->postJson('api/user-guess/verify-attribute', [

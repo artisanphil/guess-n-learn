@@ -6,6 +6,7 @@ use App\Constants\QuestionType;
 use App\Models\Attribute;
 use App\Repositories\AttributeRepository;
 use App\Structs\AttributeAnswerStruct;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class VerifyAttributeAnswerService
@@ -29,8 +30,13 @@ class VerifyAttributeAnswerService
             $value = $attributeRepository->getAttributeValueFromTranslation($value, $learnLanguage);
         }
 
-        $relatedSentence = Attribute::where('value', strtolower($value))
-            ->first();
+        $relatedSentenceQuery = Attribute::where('value', strtolower($value))
+            ->orWhereHas('relatedAttributeAlternatives', function ($query) use ($value, $languageShort) {
+                $query->where('value', strtolower($value))
+                    ->where('language', $languageShort);
+            });
+
+        $relatedSentence = $relatedSentenceQuery->first();
 
         if (!$relatedSentence) {
             return false;
@@ -43,6 +49,8 @@ class VerifyAttributeAnswerService
         $relatedSentenceId = $relatedSentence->relatedSentence()
             ->first()
             ->id;
+
+        Log::error($relatedSentenceId);
 
         return $answerSentenceId === $relatedSentenceId;
     }

@@ -62,3 +62,12 @@ Table sentence_translations {
 
 Ref: sentences.id < sentence_translations.sentence_id
 Ref: translations.id < sentence_translations.translation_id
+
+Table attribute_alternatives {
+  id int [pk, increment]
+  attribute_id int
+  value varchar
+  language varchar
+}
+
+Ref: attribute_alternatives.attribute_id > attributes.id

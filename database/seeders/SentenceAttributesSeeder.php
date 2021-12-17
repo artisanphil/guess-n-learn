@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Sentence;
 use App\Models\Attribute;
+use App\Models\AttributeAlternative;
 use App\Models\AttributeTranslation;
 use App\Models\Translation;
 use Illuminate\Database\Seeder;
@@ -23,7 +24,7 @@ class SentenceAttributesSeeder extends Seeder
 
         $sentencesWithAttributes = json_decode($sentencesJson, true);
 
-        $languages = ['es'];
+        $languages = ['en', 'es'];
 
         foreach ($sentencesWithAttributes as $data) {
             $sentence = Sentence::create([
@@ -47,17 +48,8 @@ class SentenceAttributesSeeder extends Seeder
                 'sentence_id' => $sentence->id
             ]);
 
-            if (isset($data['alternatives'])) {
-                foreach ($data['alternatives'] as $alternative) {
-                    $alternativeAttribute = Attribute::create([
-                        'value' => $alternative
-                    ]);
-
-                    SentenceAttribute::create([
-                        'attribute_id' => $alternativeAttribute->id,
-                        'sentence_id' => $sentence->id
-                    ]);
-                }
+            foreach ($languages as $language) {
+                $this->addAlternativeAttribute($attribute, $data, $language);
             }
         }
     }
@@ -96,5 +88,22 @@ class SentenceAttributesSeeder extends Seeder
             'attribute_id' => $attribute->id,
             'translation_id' => $translation->id
         ]);
+    }
+
+    protected function addAlternativeAttribute(Attribute $attribute, array $data, string $language): void
+    {
+        if (!isset($data['alternatives_' . $language])) {
+            return;
+        }
+
+        $alternatives = $data['alternatives_' . $language];
+
+        foreach ($alternatives as $alternative) {
+            AttributeAlternative::create([
+                'attribute_id' => $attribute->id,
+                'value' => $alternative,
+                'language' => $language,
+            ]);
+        }
     }
 }

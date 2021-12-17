@@ -10,7 +10,7 @@
         "attribute_es": "bigote",
         "sentence": "Does the person have a mustache?",
         "sentence_es": "¿Tiene la persona un bigote?",
-        "alternatives": ["moustache"]
+        "alternatives_en": ["moustache"]
     },
     {
         "attribute": "brown eyes",
@@ -99,7 +99,7 @@
     {
         "attribute": "blond hair",
         "attribute_es": "cabello rubio",
-        "alternatives": ["blonde hair"],
+        "alternatives_en": ["blonde hair"],
         "sentence": "Does the person have blond hair?",
         "sentence_es": "¿Tiene la persona cabello rubio?",
         "alternatives_es": ["pelo rubio"]

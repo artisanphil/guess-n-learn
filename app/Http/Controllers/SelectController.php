@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Constants\UserType;
 use App\Helpers\LogHelper;
+use App\Constants\UserType;
+use App\Models\ObjectModel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use App\Repositories\ObjectRepository;
 use App\Http\Requests\SelectionRequest;
-use App\Models\ObjectModel;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -30,10 +31,17 @@ class SelectController extends BaseController
     {
         $person = UserType::PERSON;
 
-        return Session::get("{$person}-selection");
+        return Session::get("{$person}-selection") ?? [];
     }
 
-    public function learnlanguage(Request $request): Response
+    public function getLearnLanguage(): array
+    {
+        return [
+            'learn-language' => Session::get('learn-language') ?? ''
+        ];
+    }
+
+    public function storeLearnlanguage(Request $request): Response
     {
         Session::flush();
         Session::put('learn-language', $request->route('locale'));

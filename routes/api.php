@@ -24,7 +24,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //set the language the user wants to learn
-Route::get('learn-language/{locale}', [SelectController::class, 'learnlanguage']);
+Route::get('/learn-language', [SelectController::class, 'getLearnlanguage']);
+Route::get('/learn-language/{locale}', [SelectController::class, 'storeLearnlanguage']);
 
 //GET list of objects
 Route::get('/index', [SelectController::class, 'index']);

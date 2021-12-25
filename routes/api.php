@@ -62,6 +62,10 @@ Route::post('/user-guess/verify-attribute', [UserGuessController::class, 'verify
 Route::post('/user-guess/verify-sentence', [UserGuessController::class, 'verifySentence']);
 
 //User POST guessed attribute
+//returns correct sentence
+Route::get('/user-guess/correct-sentence', [UserGuessController::class, 'correctSentence']);
+
+//User POST guessed attribute
 //returns correct or false
 Route::post('/user-guess', [UserGuessController::class, 'attribute']);
 

@@ -12,12 +12,15 @@ use App\Constants\QuestionType;
 use App\Services\SentenceService;
 use App\Structs\SentenceAnswerStruct;
 use App\Structs\AttributeAnswerStruct;
+use Illuminate\Support\Facades\Session;
+use App\Repositories\SentenceRepository;
 use App\Http\Requests\ObjectGuessRequest;
 use App\Http\Requests\AttributeGuessRequest;
 use App\Http\Requests\VerifySentenceRequest;
 use App\Http\Requests\VerifyAttributeRequest;
 use App\Services\VerifySentenceAnswerService;
 use App\Services\VerifyAttributeAnswerService;
+use App\Http\Requests\GetCorrectSentenceRequest;
 use Illuminate\Routing\Controller as BaseController;
 
 class UserGuessController extends BaseController
@@ -94,6 +97,18 @@ class UserGuessController extends BaseController
 
         return [
             'correct' => $correct
+        ];
+    }
+
+    public function correctSentence(GetCorrectSentenceRequest $request): array
+    {
+        $learnLanguage = Session::get('learn-language', 'en');
+
+        $sentenceRepository = new SentenceRepository();
+        $correctSentence = $sentenceRepository->getSentenceByAttribute($request->chosenAttribute);
+
+        return [
+            'sentence' => __($correctSentence, [], $learnLanguage)
         ];
     }
 }

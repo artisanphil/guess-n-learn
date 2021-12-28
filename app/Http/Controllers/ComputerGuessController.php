@@ -17,12 +17,14 @@ class ComputerGuessController extends BaseController
     protected $guessService;
     protected $objectRepository;
     protected $sentenceRepository;
+    protected $learnLanguage;
 
     public function __construct()
     {
         $this->guessService = new GuessService();
         $this->objectRepository = new ObjectRepository();
         $this->sentenceRepository = new SentenceRepository();
+        $this->learnLanguage = Session::get('learn-language', 'en');
     }
 
     public function index(): array
@@ -47,7 +49,9 @@ class ComputerGuessController extends BaseController
 
         return [
             'sentence' => $sentence,
-            'choice' => $chosenAttribute
+            'choice' => $chosenAttribute,
+            'No' => __('No', [], $this->learnLanguage),
+            'Yes' => __('Yes', [], $this->learnLanguage),
         ];
     }
 

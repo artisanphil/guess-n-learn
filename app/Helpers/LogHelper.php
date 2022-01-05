@@ -11,7 +11,7 @@ class LogHelper
     public static function saveAction(bool $computer, string $action, string $value): void
     {
         LogAction::create([
-            'IP' => Request::ip(),
+            'IP' => $_SERVER['HTTP_CF_CONNECTING_IP'],
             'user' => $computer ? 'computer' : 'user',
             'action' => $action,
             'value' => $value,

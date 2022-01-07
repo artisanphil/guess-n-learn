@@ -15,7 +15,7 @@ class CreateLogActionsTable extends Migration
     {
         Schema::create('log_actions', function (Blueprint $table) {
             $table->id();
-            $table->string('IP', 32);
+            $table->string('IP', 64);
             $table->string('user', 50);
             $table->string('action', 50);
             $table->string('value', 50);

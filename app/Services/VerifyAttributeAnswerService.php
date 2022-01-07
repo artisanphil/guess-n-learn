@@ -50,8 +50,6 @@ class VerifyAttributeAnswerService
             ->first()
             ->id;
 
-        Log::error($relatedSentenceId);
-
         return $answerSentenceId === $relatedSentenceId;
     }
 }

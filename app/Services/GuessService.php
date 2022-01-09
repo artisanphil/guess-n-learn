@@ -19,8 +19,13 @@ class GuessService
     }
 
     public function handle(string $chosenAttribute, string $guesser = UserType::COMPUTER): array
-    {
+    {        
         $userType = $guesser == UserType::COMPUTER ? UserType::PERSON : UserType::COMPUTER;
+
+        if(!Session::get("{$userType}-selection")) {
+            return [];
+        }
+
         $hasAttribute = $this->objectRepository->hasAttribute($chosenAttribute, Session::get("{$userType}-selection"));
 
         $guessHistory = Session::get("{$guesser}-guess-history") ?: [];

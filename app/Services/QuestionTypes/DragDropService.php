@@ -27,6 +27,8 @@ class DragDropService implements SentenceInterface
 
         shuffle($gaps);
 
+        array_push($gaps, '?');
+
         return array_values($gaps);
     }
 }

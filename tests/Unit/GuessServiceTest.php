@@ -60,7 +60,9 @@ class GuessServiceTest extends TestCase
             ], [
                 'id' => 14,
                 'name' => 'Henry',
-            ]]
+            ]],
+            'No' => 'No',
+            'Yes' => 'Yes',
         ];
 
         $this->assertEquals($expectedData, $attributesFirstGuess);

@@ -74,7 +74,9 @@ class GuessTest extends TestCase
 
         $expectedData = [
             'sentence' => 'Your person is David',
-            'choice' => ''
+            'choice' => '',
+            'No' => 'No',
+            'Yes' => 'Yes'
         ];
 
         $this->assertEquals($expectedData, $response->json());

@@ -6,6 +6,7 @@ use App\Http\Controllers\SelectController;
 use App\Http\Controllers\UserGuessController;
 use App\Http\Controllers\ComputerGuessController;
 use App\Http\Controllers\ComputerSelectController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\UserAttributesController;
 
 /*
@@ -50,6 +51,9 @@ Route::post('/computer-guess', [ComputerGuessController::class, 'store']);
 //GET all available attributes user can choose from
 Route::get('/remaining-attributes', [UserAttributesController::class, 'index']);
 
+//GET all remaining objects as array of names
+Route::get('/remaining-objects', [UserGuessController::class, 'remainingObjects']);
+
 //GET sentence(s) using a random question type and guessed attribute
 Route::get('/user-guess', [UserGuessController::class, 'index']);
 
@@ -72,3 +76,5 @@ Route::post('/user-guess', [UserGuessController::class, 'attribute']);
 //User POST guessed object
 //returns boolean
 Route::post('/user-guess/object', [UserGuessController::class, 'object']);
+
+Route::get('/stats/visitsday', [StatisticsController::class, 'visitsday']);

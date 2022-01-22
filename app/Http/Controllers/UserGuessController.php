@@ -22,6 +22,7 @@ use App\Services\VerifySentenceAnswerService;
 use App\Services\VerifyAttributeAnswerService;
 use App\Http\Requests\GetCorrectSentenceRequest;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Log;
 
 class UserGuessController extends BaseController
 {
@@ -66,6 +67,15 @@ class UserGuessController extends BaseController
         return [
             'correct' => $request->name === $computerSelection['name']
         ];
+    }
+
+    public function remainingObjects(): array
+    {
+        if (!Session::get("remaining-person-objects")) {
+            return [];
+        }
+
+        return Arr::pluck(Session::get("remaining-person-objects"), 'name');
     }
 
     public function verifyAttribute(VerifyAttributeRequest $request): array

@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Constants\UserType;
+use App\Models\ObjectModel;
 use App\Repositories\ObjectRepository;
 use Illuminate\Support\Facades\Session;
 
@@ -78,6 +79,20 @@ class GuessTest extends TestCase
             'No' => 'No',
             'Yes' => 'Yes'
         ];
+
+        $this->assertEquals($expectedData, $response->json());
+    }
+
+    public function testRemainingObjectsEndpoint()
+    {
+        $objects = ObjectModel::all()->toArray();
+        $objectRepository = new ObjectRepository();
+        $remainingObjects = $objectRepository->getMatchingObjects($objects, 'bald', true);
+        $person = UserType::PERSON;
+        Session::put("remaining-{$person}-objects", $remainingObjects);
+
+        $response = $this->get('api/remaining-objects');
+        $expectedData = ['Liam', 'Lucas', 'Ethan', 'Jack'];
 
         $this->assertEquals($expectedData, $response->json());
     }

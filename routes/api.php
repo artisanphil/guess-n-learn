@@ -6,6 +6,7 @@ use App\Http\Controllers\SelectController;
 use App\Http\Controllers\UserGuessController;
 use App\Http\Controllers\ComputerGuessController;
 use App\Http\Controllers\ComputerSelectController;
+use App\Http\Controllers\ObjectController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\UserAttributesController;
 
@@ -30,6 +31,7 @@ Route::get('/learn-language/{locale}', [SelectController::class, 'storeLearnlang
 
 //GET list of objects
 Route::get('/index', [SelectController::class, 'index']);
+Route::get('/objects', [ObjectController::class, 'index']);
 
 //POST object chosen
 //computer also randomly choses object

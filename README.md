@@ -40,8 +40,8 @@ Start Docker and run `docker-compose up -d` then go to http://localhost:8000/
 Set the language the user wants to learn, for example en_uk
 [GET] api/learn-language/{locale}
 
-Display all available objects:
-[GET] api/index
+Return all available objects and if they are still available (active true/false)
+[GET] api/objects
 
 User selects an object:
 [POST] api/select?selection={objectname}

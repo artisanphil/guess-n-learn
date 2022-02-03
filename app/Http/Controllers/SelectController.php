@@ -22,11 +22,6 @@ class SelectController extends BaseController
         $this->objectRepository = new ObjectRepository();
     }
 
-    public function index()
-    {
-        return ObjectModel::all();
-    }
-
     public function show(): array
     {
         $person = UserType::PERSON;

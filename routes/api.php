@@ -30,7 +30,6 @@ Route::get('/learn-language', [SelectController::class, 'getLearnlanguage']);
 Route::get('/learn-language/{locale}', [SelectController::class, 'storeLearnlanguage']);
 
 //GET list of objects
-Route::get('/index', [SelectController::class, 'index']);
 Route::get('/objects', [ObjectController::class, 'index']);
 
 //POST object chosen

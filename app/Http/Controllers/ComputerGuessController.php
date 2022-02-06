@@ -56,7 +56,12 @@ class ComputerGuessController extends BaseController
     }
 
     public function store(ComputerGuessRequest $request): array
-    {
-        return $this->guessService->handle($request->choice);
+    {        
+        $response = $this->guessService->handle($request->choice);
+
+        $mistake = $request->correct == $response['correct'] ? 0 : 1;
+        LogHelper::saveAction(false, 'answer-sentence', $request->choice, $mistake);
+
+        return $response;
     }
 }

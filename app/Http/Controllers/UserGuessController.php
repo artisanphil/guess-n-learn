@@ -87,7 +87,8 @@ class UserGuessController extends BaseController
             ->handle($answer, $request->type);
 
         $questionNr = LogHelper::saveQuestion($request->type, $request->chosenAttribute, $request->answerAttribute, $correct);
-        LogHelper::saveAction(false, 'question', $questionNr);
+        $mistake = $correct ? 0 : 1;
+        LogHelper::saveAction(false, 'question', $questionNr, $mistake);
 
         return [
             'correct' => $correct
@@ -103,7 +104,8 @@ class UserGuessController extends BaseController
             ->handle($answer);
 
         $questionNr = LogHelper::saveQuestion('drag-drop', $request->chosenAttribute, $request->answerSentence, $correct);
-        LogHelper::saveAction(false, 'question', $questionNr);
+        $mistake = $correct ? 0 : 1;
+        LogHelper::saveAction(false, 'question', $questionNr, $mistake);
 
         return [
             'correct' => $correct

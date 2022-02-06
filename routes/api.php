@@ -79,3 +79,4 @@ Route::post('/user-guess', [UserGuessController::class, 'attribute']);
 Route::post('/user-guess/object', [UserGuessController::class, 'object']);
 
 Route::get('/stats/visitsday', [StatisticsController::class, 'visitsday']);
+Route::get('/stats/leaderboard', [StatisticsController::class, 'leaderboard']);

@@ -22,7 +22,7 @@ class StatisticsController extends BaseController
 
     public function leaderboard()
     {
-        $turns = LogAction::where('created_at', '>=', Carbon::now()->subDay()->toDateTimeString())
+        $turns = LogAction::where('created_at', '>=', Carbon::now()->subDays(2)->toDateTimeString())
             ->where('action', 'wins')
             ->where('value', 1)
             ->groupBy('session_id')
@@ -33,7 +33,9 @@ class StatisticsController extends BaseController
         $leaderboard = [];
         $i = 0;
         foreach($turns as $turn) {
+            $lastRound = LogAction::where('session_id', $turn->session_id)->max('round');
             $mistakes = LogAction::where('session_id', $turn->session_id)
+                ->where('round', $lastRound)
                 ->selectRaw('sum(mistakes) as mistakes')
                 ->first()
                 ->mistakes;

@@ -2,10 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Constants\UserType;
 use App\Models\Attribute;
 use App\Models\ObjectModel;
 use Illuminate\Support\Arr;
 use App\Models\ObjectAttribute;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class ObjectRepository
@@ -85,6 +87,10 @@ class ObjectRepository
         $opposites = [
             'female' => 'male',
             'male' => 'female',
+            'big nose' => 'small nose',
+            'small nose' => 'big nose',
+            'wide mouth' => 'small mouth',
+            'small mouth' => 'wide mouth'
         ];
 
         foreach ($opposites as $key => $value) {
@@ -145,6 +151,32 @@ class ObjectRepository
         }
 
         return $this->getAttributes($objects, $guesser);
+    }
+
+    public function getMostRemainingAttributes(array $objects): array
+    {
+        $objectsWithAttributes = ObjectModel::whereIn('id', Arr::pluck($objects, 'id'))
+            ->with('attributes')
+            ->get()
+            ->pluck('attributes');
+
+        $attributes = [];
+        
+        foreach($objectsWithAttributes as $objectsWithAttribute) {
+            foreach($objectsWithAttribute as $objectAttribute) {
+                $attributes[] = $objectAttribute->value;
+            }            
+        }
+
+        $attributesFlattened = Arr::flatten($attributes);
+
+        $uniqueAttributes = array_unique($attributesFlattened);
+        $remainingAttributes = $this->removeAlreadyAsked($uniqueAttributes, UserType::COMPUTER);
+        $intersectingAttributes = array_intersect($attributesFlattened, $remainingAttributes);
+        $attributesCount = array_count_values($intersectingAttributes);
+        arsort($attributesCount, SORT_NUMERIC);    
+
+        return array_slice(array_keys($attributesCount), 0, 3);
     }
 
     public function getRemainingAttributesWithTranslations(string $guesser): array

@@ -10,7 +10,9 @@ use App\Repositories\ObjectRepository;
 use Illuminate\Support\Facades\Session;
 use App\Repositories\SentenceRepository;
 use App\Http\Requests\ComputerGuessRequest;
+use App\Models\ObjectModel;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Log;
 
 class ComputerGuessController extends BaseController
 {
@@ -40,7 +42,11 @@ class ComputerGuessController extends BaseController
             $sentence = "Your person is {$name}";
             LogHelper::saveAction(true, 'character-guess', $name);
         } else {
-            $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
+            if (empty($remainingObjects)) {
+                $remainingObjects = ObjectModel::all()->toArray();
+            }
+
+            $attributes = $this->objectRepository->getMostRemainingAttributes($remainingObjects);
             $chosenAttribute = Arr::random($attributes);
             $sentence = $this->sentenceRepository->getSentenceByAttribute($chosenAttribute);
         }

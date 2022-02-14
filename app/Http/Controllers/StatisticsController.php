@@ -6,6 +6,7 @@ use App\Models\LogAction;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class StatisticsController extends BaseController
 {
@@ -25,9 +26,9 @@ class StatisticsController extends BaseController
         $turns = LogAction::where('created_at', '>=', Carbon::now()->subDays(2)->toDateTimeString())
             ->where('action', 'wins')
             ->where('value', 1)
-            ->groupBy('session_id')
+            ->groupBy(['session_id', 'name'])
             ->orderBy(DB::raw('count(session_id)', 'DESC'))
-            ->selectRaw('session_id, count(session_id) as turnsCount')
+            ->selectRaw('session_id, name, count(session_id) as turnsCount')
             ->get();
 
         $leaderboard = [];
@@ -41,14 +42,16 @@ class StatisticsController extends BaseController
                 ->mistakes;
 
             $leaderboard[$i]['turns'] = $turn->turnsCount;     
-            $leaderboard[$i]['session_id'] = $turn->session_id;     
+            $leaderboard[$i]['name'] = $turn->name;     
             $leaderboard[$i]['mistakes'] = $mistakes;     
+            $leaderboard[$i]['active'] = $turn->session_id === Session::getId() && $turn->name === Session::get("your-name");
             $i++;
         }
 
         $leaderBoardSorted = collect($leaderboard)
             ->sortBy('mistakes')
-            ->sortByDesc('turns');
+            ->sortByDesc('turns')
+            ->values();
             
         return $leaderBoardSorted;
     }

@@ -19,6 +19,7 @@ class LogHelper
         }
 
         LogAction::create([
+            'name' => Session::get("your-name"),
             'round' => $round,
             'IP' => $_SERVER['HTTP_CF_CONNECTING_IP'] ?? 'unknown',
             'session_id' => Session::getId(),

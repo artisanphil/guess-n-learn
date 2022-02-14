@@ -50,6 +50,7 @@ class SelectController extends BaseController
         $userSelection = $this->objectRepository->getObjectByName($request->selection);
         $person = UserType::PERSON;
         Session::put("{$person}-selection", $userSelection);
+        Session::put("your-name", $request->yourName);
         LogHelper::saveAction(false, 'user-selection', $request->selection);
 
         $computerSelection = $this->objectRepository->getComputerSelection();

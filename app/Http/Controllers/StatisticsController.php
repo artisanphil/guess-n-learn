@@ -34,9 +34,12 @@ class StatisticsController extends BaseController
         $leaderboard = [];
         $i = 0;
         foreach($turns as $turn) {
-            $lastRound = LogAction::where('session_id', $turn->session_id)->max('round');
+            $lastRound = LogAction::where('session_id', $turn->session_id)
+                ->where('name', $turn->name)
+                ->max('round');
             $mistakes = LogAction::where('session_id', $turn->session_id)
                 ->where('round', $lastRound)
+                ->where('name', $turn->name)
                 ->selectRaw('sum(mistakes) as mistakes')
                 ->first()
                 ->mistakes;

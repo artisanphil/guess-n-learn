@@ -39,7 +39,7 @@ class ComputerGuessController extends BaseController
         if (isset($remainingObjects) && count($remainingObjects) == 1) {
             $objects = Session::get("remaining-{$guesser}-objects");
             $name = $objects[0]['name'];
-            $sentence = "Your person is {$name}";
+            $sentence = __('Your person is :name', ['name' => $name], $this->learnLanguage);
             LogHelper::saveAction(true, 'character-guess', $name);
         } else {
             if (empty($remainingObjects)) {

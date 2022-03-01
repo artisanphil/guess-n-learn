@@ -23,7 +23,7 @@ class StatisticsController extends BaseController
 
     public function leaderboard()
     {
-        $turns = LogAction::where('created_at', '>=', Carbon::now()->subDays(2)->toDateTimeString())
+        $turns = LogAction::where('created_at', '>=', Carbon::now()->subDays(1)->toDateTimeString())
             ->where('action', 'wins')
             ->where('value', 1)
             ->groupBy(['session_id', 'name'])

@@ -76,7 +76,8 @@ Route::post('/user-guess', [UserGuessController::class, 'attribute']);
 
 //User POST guessed object
 //returns boolean
-Route::post('/user-guess/object', [UserGuessController::class, 'object']);
+Route::post('/user-guess/object', [UserGuessController::class, 'object'])
+    ->middleware('customthrottle:rate_limit,1');
 
 Route::get('/stats/visitsday', [StatisticsController::class, 'visitsday']);
 Route::get('/stats/leaderboard', [StatisticsController::class, 'leaderboard']);

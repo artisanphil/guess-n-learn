@@ -15,7 +15,7 @@ class SentenceRepository
         $this->learnLanguage = Session::get('learn-language', 'en');
     }
 
-    public function getSentenceByAttribute(string $attribute): string
+    public function getSentenceByAttribute(string $attribute, bool $removeGap = true): string
     {
         $attribute = strtolower($attribute);
 
@@ -24,7 +24,7 @@ class SentenceRepository
             ->relatedSentence()
             ->first();
 
-        $sentenceValue = $this->getSentenceValue($sentence);
+        $sentenceValue = $this->getSentenceValue($sentence, $removeGap);
 
         return __($sentenceValue, [], $this->learnLanguage);
     }
@@ -40,7 +40,7 @@ class SentenceRepository
         $sentence = $attributeData->relatedSentence()
             ->first();
 
-        $sentenceValue = $this->getSentenceValue($sentence);
+        $sentenceValue = $this->getSentenceValue($sentence, true);        
 
         return [
             'sentence' => __($sentenceValue, [], $this->learnLanguage),
@@ -48,15 +48,21 @@ class SentenceRepository
         ];
     }
 
-    protected function getSentenceValue(Sentence $sentence): string
+    protected function getSentenceValue(Sentence $sentence, bool $removeGap): string
     {
         if (substr($this->learnLanguage, 0, 2) === 'en') {
-            return $sentence->value;
-        }
-
-        return $sentence->translations()
+            $sentenceValue = $sentence->value;
+        } else {
+            $sentenceValue = $sentence->translations()
             ->byLanguage($this->learnLanguage)
             ->first()
             ->value;
+        }
+
+        if ($removeGap) {
+            return str_replace(array('{', '}'), '', $sentenceValue);
+        }
+
+        return $sentenceValue;
     }
 }

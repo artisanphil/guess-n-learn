@@ -16,7 +16,7 @@ class GapService implements SentenceInterface
 
     public function handle(string $chosenAttributeValue, string $correctSentence): array
     {
-        $sentence = str_replace($chosenAttributeValue, "{gap}", $correctSentence);
+        $sentence = preg_replace('/{(.*?)}/', '{gap}', $correctSentence);
 
         return [
             $sentence

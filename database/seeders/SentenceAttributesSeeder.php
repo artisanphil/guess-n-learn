@@ -24,7 +24,7 @@ class SentenceAttributesSeeder extends Seeder
 
         $sentencesWithAttributes = json_decode($sentencesJson, true);
 
-        $languages = ['en', 'es'];
+        $languages = ['en', 'es', 'kr'];
 
         foreach ($sentencesWithAttributes as $data) {
             $sentence = Sentence::create([

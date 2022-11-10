@@ -15,7 +15,7 @@ class CreateSentencesTable extends Migration
     {
         Schema::create('sentences', function (Blueprint $table) {
             $table->id();
-            $table->string('sentence', 100);
+            $table->string('value', 100);
         });
     }
 

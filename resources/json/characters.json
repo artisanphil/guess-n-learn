@@ -63,7 +63,8 @@
             "hat",
             "small mouth",
             "small nose",
-            "brown eyes"
+            "brown eyes",
+            "long hair"
         ]
     },
     {
@@ -106,7 +107,8 @@
             "small nose",
             "small mouth",
             "bald",
-            "beard"
+            "beard",
+            "glasses"
         ]
     },
     {
@@ -169,20 +171,22 @@
             "male",
             "brown eyes",
             "black hair",
-            "small mouth",
-            "small nose",
+            "wide mouth",
+            "big nose",
             "mustache",
             "beard"
         ]
     },
     {
-        "name": "Robert",
+        "name": "Anna",
         "attributes": [
-            "male",
-            "blue eyes",
-            "brown hair",
+            "female",
+            "brown eyes",
+            "white hair",
+	        "earrings",
             "big nose",
-            "wide mouth"
+            "wide mouth",
+	        "long hair"
         ]
     },
     {
@@ -201,7 +205,7 @@
         "attributes": [
             "male",
             "brown eyes",
-            "blond hair",
+            "black hair",
             "small nose",
             "wide mouth",
             "mustache"
@@ -231,7 +235,7 @@
         ]
     },
     {
-        "name": "Samanatha",
+        "name": "Samantha",
         "attributes": [
             "female",
             "brown eyes",

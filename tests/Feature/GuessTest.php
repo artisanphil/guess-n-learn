@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Constants\UserType;
+use App\Models\ObjectModel;
 use App\Repositories\ObjectRepository;
 use Illuminate\Support\Facades\Session;
 
@@ -13,7 +14,7 @@ class GuessTest extends TestCase
     {
         parent::setUp();
 
-        $this->artisan('migrate:refresh', [
+        $this->artisan('migrate:fresh', [
             '--seed' => true,
         ]);
     }
@@ -64,9 +65,9 @@ class GuessTest extends TestCase
             'male',
             'glasses',
             'brown eyes',
-            'blond hair',
+            'black hair',
             'small nose',
-            'big mouth',
+            'wide mouth',
         ];
         Session::put("{$guesser}-guess-history", $guessHistory);
 
@@ -74,8 +75,24 @@ class GuessTest extends TestCase
 
         $expectedData = [
             'sentence' => 'Your person is David',
-            'choice' => ''
+            'choice' => '',
+            'No' => 'No',
+            'Yes' => 'Yes'
         ];
+
+        $this->assertEquals($expectedData, $response->json());
+    }
+
+    public function testRemainingObjectsEndpoint()
+    {
+        $objects = ObjectModel::all()->toArray();
+        $objectRepository = new ObjectRepository();
+        $remainingObjects = $objectRepository->getMatchingObjects($objects, 'bald', true);
+        $person = UserType::PERSON;
+        Session::put("remaining-{$person}-objects", $remainingObjects);
+
+        $response = $this->get('api/remaining-objects');
+        $expectedData = ['Liam', 'Lucas', 'Ethan', 'Jack'];
 
         $this->assertEquals($expectedData, $response->json());
     }

@@ -17,7 +17,7 @@ class GuessServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->artisan('migrate:refresh', [
+        $this->artisan('migrate:fresh', [
             '--seed' => true,
         ]);
 
@@ -34,7 +34,7 @@ class GuessServiceTest extends TestCase
 
         $this->assertEquals(5, $attributesFirstGuess['match-count']);
 
-        $attributesSecondGuess = $this->guessService->handle('blond hair', UserType::COMPUTER);
+        $attributesSecondGuess = $this->guessService->handle('black hair', UserType::COMPUTER);
         $this->assertEquals(2, $attributesSecondGuess['match-count']);
 
         $attributesThirdGuess = $this->guessService->handle('male', UserType::COMPUTER);
@@ -55,24 +55,14 @@ class GuessServiceTest extends TestCase
             'choice' => 'ginger hair',
             'correct' => true,
             'matching' =>  [[
+                'id' => 9,
                 'name' => 'Benjamin',
-                'attributes' => [
-                    'male',
-                    'blue eyes',
-                    'ginger hair',
-                    'small nose',
-                    'small mouth',
-                ],
             ], [
+                'id' => 14,
                 'name' => 'Henry',
-                'attributes' => [
-                    'male',
-                    'brown eyes',
-                    'ginger hair',
-                    'small nose',
-                    'small mouth',
-                ]
-            ]]
+            ]],
+            'No' => 'No',
+            'Yes' => 'Yes',
         ];
 
         $this->assertEquals($expectedData, $attributesFirstGuess);
@@ -91,23 +81,23 @@ class GuessServiceTest extends TestCase
         $attributes = $this->objectRepository->getRemainingAttributes(UserType::COMPUTER);
 
         $expectedData = [
-            'glasses',
-            'brown eyes',
-            'bald',
-            'white hair',
-            'small mouth',
-            'small nose',
             'mustache',
-            'green eyes',
+            'brown eyes',
             'brown hair',
-            'big mouth',
+            'wide mouth',
+            'small nose',
+            'white hair',
             'big nose',
             'blue eyes',
-            'black hair',
             'hat',
-            'ginger hair',
+            'small mouth',
+            'black hair',
             'blond hair',
-            'beard'
+            'glasses',
+            'ginger hair',
+            'beard',
+            'bald',
+            'green eyes',
         ];
 
         $this->assertEquals($expectedData, $attributes);

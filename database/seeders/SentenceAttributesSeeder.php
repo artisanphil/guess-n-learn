@@ -4,8 +4,12 @@ namespace Database\Seeders;
 
 use App\Models\Sentence;
 use App\Models\Attribute;
-use App\Models\SentenceAttribute;
+use App\Models\AttributeAlternative;
+use App\Models\AttributeTranslation;
+use App\Models\Translation;
 use Illuminate\Database\Seeder;
+use App\Models\SentenceAttribute;
+use App\Models\SentenceTranslation;
 
 class SentenceAttributesSeeder extends Seeder
 {
@@ -16,45 +20,90 @@ class SentenceAttributesSeeder extends Seeder
      */
     public function run()
     {
-        $sentencesJson = file_get_contents(base_path('resources/json/character-sentences_en.json'));
+        $sentencesJson = file_get_contents(base_path('resources/json/character-sentences.json'));
 
         $sentencesWithAttributes = json_decode($sentencesJson, true);
 
+        $languages = ['en', 'es', 'kr'];
+
         foreach ($sentencesWithAttributes as $data) {
             $sentence = Sentence::create([
-                'sentence' => $data['sentence']
+                'value' => $data['sentence']
             ]);
 
+            foreach ($languages as $language) {
+                $this->addSentenceTranslation($sentence, $data, $language);
+            }
+
             $attribute = Attribute::create([
-                'attribute' => $data['attribute']
+                'value' => $data['attribute']
             ]);
+
+            foreach ($languages as $language) {
+                $this->addAttributeTranslation($attribute, $data, $language);
+            }
 
             SentenceAttribute::create([
                 'attribute_id' => $attribute->id,
                 'sentence_id' => $sentence->id
             ]);
 
-            if (isset($data['female'])) {
-                $femaleAttribute = Attribute::create([
-                    'attribute' => $data['female']
-                ]);
-
-                SentenceAttribute::create([
-                    'attribute_id' => $femaleAttribute->id,
-                    'sentence_id' => $sentence->id
-                ]);
+            foreach ($languages as $language) {
+                $this->addAlternativeAttribute($attribute, $data, $language);
             }
+        }
+    }
 
-            if (isset($data['accent'])) {
-                $accentAttribute = Attribute::create([
-                    'attribute' => $data['accent']
-                ]);
+    protected function addSentenceTranslation(Sentence $sentence, array $data, string $language): void
+    {
+        if (!isset($data['sentence_' . $language])) {
+            return;
+        }
 
-                SentenceAttribute::create([
-                    'attribute_id' => $accentAttribute->id,
-                    'sentence_id' => $sentence->id
-                ]);
-            }
+        $value = $data['sentence_' . $language];
+        $translation = Translation::create([
+            'language' => $language,
+            'value' => $value
+        ]);
+
+        SentenceTranslation::create([
+            'sentence_id' => $sentence->id,
+            'translation_id' => $translation->id
+        ]);
+    }
+
+    protected function addAttributeTranslation(Attribute $attribute, array $data, string $language): void
+    {
+        if (!isset($data['attribute_' . $language])) {
+            return;
+        }
+
+        $value = $data['attribute_' . $language];
+        $translation = Translation::create([
+            'language' => $language,
+            'value' => $value
+        ]);
+
+        AttributeTranslation::create([
+            'attribute_id' => $attribute->id,
+            'translation_id' => $translation->id
+        ]);
+    }
+
+    protected function addAlternativeAttribute(Attribute $attribute, array $data, string $language): void
+    {
+        if (!isset($data['alternatives_' . $language])) {
+            return;
+        }
+
+        $alternatives = $data['alternatives_' . $language];
+
+        foreach ($alternatives as $alternative) {
+            AttributeAlternative::create([
+                'attribute_id' => $attribute->id,
+                'value' => $alternative,
+                'language' => $language,
+            ]);
         }
     }
 }

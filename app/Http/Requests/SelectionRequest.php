@@ -18,6 +18,9 @@ class SelectionRequest extends FormRequest
                 'required',
                 Rule::in($objectNames),
             ],
+            'yourName' => [
+                'string'
+            ]
         ];
     }
 }

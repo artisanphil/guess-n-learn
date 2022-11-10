@@ -3,21 +3,29 @@
 namespace App\Services;
 
 use App\Constants\UserType;
+use App\Models\ObjectModel;
 use App\Repositories\ObjectRepository;
 use Illuminate\Support\Facades\Session;
 
 class GuessService
 {
     protected $objectRepository;
+    protected $learnLanguage;
 
     public function __construct()
     {
         $this->objectRepository = new ObjectRepository();
+        $this->learnLanguage = Session::get('learn-language', 'en');
     }
 
     public function handle(string $chosenAttribute, string $guesser = UserType::COMPUTER): array
-    {
+    {        
         $userType = $guesser == UserType::COMPUTER ? UserType::PERSON : UserType::COMPUTER;
+
+        if(!Session::get("{$userType}-selection")) {
+            return [];
+        }
+
         $hasAttribute = $this->objectRepository->hasAttribute($chosenAttribute, Session::get("{$userType}-selection"));
 
         $guessHistory = Session::get("{$guesser}-guess-history") ?: [];
@@ -41,7 +49,11 @@ class GuessService
         return [
             'choice' => $chosenAttribute,
             'correct' => $hasAttribute,
-        ] + $matchingAttribute;
+        ] + $matchingAttribute
+            + [
+                'No' => __('No', [], $this->learnLanguage),
+                'Yes' => __('Yes', [], $this->learnLanguage),
+            ];
     }
 
     protected function setAndGetRemainingMatchingObjects(string $chosenAttribute, bool $hasAttribute, string $guesser): array
@@ -49,7 +61,7 @@ class GuessService
         if (Session::get("remaining-{$guesser}-objects")) {
             $objects = Session::get("remaining-{$guesser}-objects");
         } else {
-            $objects = $this->objectRepository->getObjects();
+            $objects = ObjectModel::all()->toArray();
         }
 
         $remainingObjects = $this->objectRepository->getMatchingObjects($objects, $chosenAttribute, $hasAttribute);

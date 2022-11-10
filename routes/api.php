@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\SelectController;
 use App\Http\Controllers\UserGuessController;
 use App\Http\Controllers\ComputerGuessController;
 use App\Http\Controllers\ComputerSelectController;
+use App\Http\Controllers\ObjectController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\UserAttributesController;
 
 /*
@@ -26,15 +26,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //set the language the user wants to learn
-Route::get('learn-language/{locale}', function ($locale) {
-    Session::flush();
-    Session::put('learn-language', $locale);
-
-    return response(200);
-});
+Route::get('/learn-language', [SelectController::class, 'getLearnlanguage']);
+Route::get('/learn-language/{locale}', [SelectController::class, 'storeLearnlanguage']);
 
 //GET list of objects
-Route::get('/index', [SelectController::class, 'index']);
+Route::get('/objects', [ObjectController::class, 'index']);
 
 //POST object chosen
 //computer also randomly choses object
@@ -56,17 +52,32 @@ Route::post('/computer-guess', [ComputerGuessController::class, 'store']);
 //GET all available attributes user can choose from
 Route::get('/remaining-attributes', [UserAttributesController::class, 'index']);
 
+//GET all remaining objects as array of names
+Route::get('/remaining-objects', [UserGuessController::class, 'remainingObjects']);
+
 //GET sentence(s) using a random question type and guessed attribute
 Route::get('/user-guess', [UserGuessController::class, 'index']);
 
 //User POST guessed attribute
-//returns matching objects
+//returns "correct": bool
 Route::post('/user-guess/verify-attribute', [UserGuessController::class, 'verifyAttribute']);
 
+//User POST guessed sentence
+//returns "correct": bool
+Route::post('/user-guess/verify-sentence', [UserGuessController::class, 'verifySentence']);
+
 //User POST guessed attribute
-//returns matching objects
+//returns correct sentence
+Route::get('/user-guess/correct-sentence', [UserGuessController::class, 'correctSentence']);
+
+//User POST guessed attribute
+//returns correct or false
 Route::post('/user-guess', [UserGuessController::class, 'attribute']);
 
 //User POST guessed object
 //returns boolean
-Route::post('/user-guess/object', [UserGuessController::class, 'object']);
+Route::post('/user-guess/object', [UserGuessController::class, 'object'])
+    ->middleware('customthrottle:rate_limit,1');
+
+Route::get('/stats/visitsday', [StatisticsController::class, 'visitsday']);
+Route::get('/stats/leaderboard', [StatisticsController::class, 'leaderboard']);

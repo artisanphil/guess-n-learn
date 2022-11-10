@@ -14,21 +14,23 @@ class SentenceService
 
     public function __construct(string $chosenAttributeKey)
     {
-        $this->sentenceRepository = new SentenceRepository();
-        $this->correctSentence = $this->sentenceRepository->getSentenceByAttribute($chosenAttributeKey);
+        $this->sentenceRepository = new SentenceRepository();        
         $this->chosenAttributeKey = $chosenAttributeKey;
     }
 
     public function handle(string $questionType, string $attributeValue): array
     {
         $strategy = SentenceStrategy::handle($questionType);
-
+        $removeGap = true;
         $attribute = $this->chosenAttributeKey;
 
         if (get_class($strategy) === GapService::class) {
             $attribute = $attributeValue;
+            $removeGap = false;
         }
 
-        return $strategy->handle($attribute, $this->correctSentence);
+        $correctSentence = $this->sentenceRepository->getSentenceByAttribute($this->chosenAttributeKey, $removeGap);
+
+        return $strategy->handle($attribute, $correctSentence);
     }
 }

@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Constants\QuestionType;
+use App\Helpers\LogHelper;
 use App\Constants\UserType;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
-use App\Services\GuessService;
-use App\Http\Requests\AttributeGuessRequest;
-use App\Http\Requests\ObjectGuessRequest;
-use App\Http\Requests\VerifyAnswerRequest;
-use App\Services\SentenceService;
-use App\Services\VerifyAnswerService;
-use App\Structs\AttributeAnswerStruct;
 use Illuminate\Http\Response;
+use App\Services\GuessService;
+use App\Constants\QuestionType;
+use App\Services\SentenceService;
+use App\Structs\SentenceAnswerStruct;
+use App\Structs\AttributeAnswerStruct;
+use Illuminate\Support\Facades\Session;
+use App\Repositories\SentenceRepository;
+use App\Http\Requests\ObjectGuessRequest;
+use App\Http\Requests\AttributeGuessRequest;
+use App\Http\Requests\VerifySentenceRequest;
+use App\Http\Requests\VerifyAttributeRequest;
+use App\Services\VerifySentenceAnswerService;
+use App\Services\VerifyAttributeAnswerService;
+use App\Http\Requests\GetCorrectSentenceRequest;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Log;
 
 class UserGuessController extends BaseController
 {
@@ -53,20 +61,66 @@ class UserGuessController extends BaseController
         $computer = UserType::COMPUTER;
         $computerSelection = $request->session()->get("{$computer}-selection");
 
+        LogHelper::saveAction(false, 'character-guess', $request->name);
+        LogHelper::saveAction(false, 'wins', $request->name === $computerSelection['name']);
+
         return [
             'correct' => $request->name === $computerSelection['name']
         ];
     }
 
-    public function verifyAttribute(VerifyAnswerRequest $request): array
+    public function remainingObjects(): array
+    {
+        if (!Session::get("remaining-person-objects")) {
+            return [];
+        }
+
+        return Arr::pluck(Session::get("remaining-person-objects"), 'name');
+    }
+
+    public function verifyAttribute(VerifyAttributeRequest $request): array
     {
         $answer = new AttributeAnswerStruct();
         $answer->chosenAttribute = $request->chosenAttribute;
         $answer->answerAttribute = $request->answerAttribute;
+        $correct = (new VerifyAttributeAnswerService())
+            ->handle($answer, $request->type);
+
+        $questionNr = LogHelper::saveQuestion($request->type, $request->chosenAttribute, $request->answerAttribute, $correct);
+        $mistake = $correct ? 0 : 1;
+        LogHelper::saveAction(false, 'question', $questionNr, $mistake);
 
         return [
-            'correct' => (new VerifyAnswerService())
-                ->handle($answer)
+            'correct' => $correct
+        ];
+    }
+
+    public function verifySentence(VerifySentenceRequest $request): array
+    {
+        $answer = new SentenceAnswerStruct();
+        $answer->chosenAttribute = $request->chosenAttribute;
+        $answer->answerSentence = $request->answerSentence;
+        $correct = (new VerifySentenceAnswerService())
+            ->handle($answer);
+
+        $questionNr = LogHelper::saveQuestion('drag-drop', $request->chosenAttribute, $request->answerSentence, $correct);
+        $mistake = $correct ? 0 : 1;
+        LogHelper::saveAction(false, 'question', $questionNr, $mistake);
+
+        return [
+            'correct' => $correct
+        ];
+    }
+
+    public function correctSentence(GetCorrectSentenceRequest $request): array
+    {
+        $learnLanguage = Session::get('learn-language', 'en');
+
+        $sentenceRepository = new SentenceRepository();
+        $correctSentence = $sentenceRepository->getSentenceByAttribute($request->chosenAttribute);
+
+        return [
+            'sentence' => __($correctSentence, [], $learnLanguage)
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Attribute extends Model
@@ -22,5 +23,22 @@ class Attribute extends Model
             'id',
             'sentence_id'
         );
+    }
+
+    public function relatedTranslation(): HasOneThrough
+    {
+        return $this->hasOneThrough(
+            Translation::class,
+            AttributeTranslation::class,
+            'attribute_id',
+            'id',
+            'id',
+            'translation_id'
+        );
+    }
+
+    public function relatedAttributeAlternatives(): HasMany
+    {
+        return $this->hasMany(AttributeAlternative::class, 'attribute_id');
     }
 }

@@ -1,0 +1,183 @@
+[
+    {
+        "attribute": "male",
+        "attribute_es": "hombre",
+        "attribute_kr": "남자",
+        "sentence": "Is the person {male}?",
+        "sentence_es": "¿Es la persona un {hombre}?",
+        "sentence_kr": "그 사람은 {남자}입니까?"
+    },
+    {
+        "attribute": "mustache",
+        "attribute_es": "bigote",
+        "attribute_kr": "수염",
+        "sentence": "Does the person have a {mustache}?",
+        "sentence_es": "¿Tiene la persona un {bigote}?",
+        "alternatives_en": ["moustache"],
+        "sentence_kr": "그 사람은 수염이 있습니까?"
+    },
+    {
+        "attribute": "brown eyes",
+        "attribute_es": "ojos marrones",
+        "sentence": "Does the person have {brown eyes}?",
+        "attribute_kr": "갈색 눈동자",
+        "sentence_es": "¿Tiene la persona {ojos marrones}?",
+        "alternatives_es": ["ojos castaños", "ojos cafés"],
+        "alternatives_kr": ["갈색 눈"],
+        "sentence_kr": "그 사람의 {눈동자는 갈색}입니까?"
+    },
+    {
+        "attribute": "brown hair",
+        "attribute_es": "cabello castaño",
+        "attribute_kr": "갈색 머리",
+        "sentence": "Does the person have {brown hair}?",
+        "sentence_es": "¿Tiene la persona {cabello castaño}?",
+        "alternatives_es": ["pelo castaño", "cabello moreno", "pelo moreno"],
+        "sentence_kr": "그 사람의 {머리카락은 갈색}입니까?"
+    },
+    {
+        "attribute": "wide mouth",
+        "attribute_es": "boca ancha",
+        "attribute_kr": "큰 입",
+        "sentence": "Does the person have a {wide mouth}?",
+        "sentence_es": "¿Tiene la persona una {boca ancha}?",
+        "sentence_kr": "그 사람의 {입은 큽}니까?"
+    },
+    {
+        "attribute": "small nose",
+        "attribute_es": "nariz pequeña",
+        "attribute_kr": "작은 코",
+        "sentence": "Does the person have a {small nose}?",
+        "sentence_es": "¿Tiene la persona una {nariz pequeña}?",
+        "sentence_kr": "그 사람의 {코는 작}습니까?"
+    },
+    {
+        "attribute": "white hair",
+        "attribute_es": "cabello blanco",
+        "attribute_kr": "흰색 머리",
+        "sentence": "Does the person have {white hair}?",
+        "sentence_es": "¿Tiene la persona {cabello blanco}?",
+        "sentence_kr": "그 사람의 {머리카락은 흰색} 입까?",
+        "alternatives_es": ["pelo blanco"]
+    },
+    {
+        "attribute": "big nose",
+        "attribute_es": "nariz grande",
+        "attribute_kr": "큰 코",
+        "sentence": "Does the person have a {big nose}?",
+        "sentence_es": "¿Tiene la persona una {nariz grande}?",
+        "sentence_kr": "그 사람의 {코는 큽}니까?"
+    },
+    {
+        "attribute": "blue eyes",
+        "attribute_es": "ojos azules",
+        "attribute_kr": "파란색 눈동자",
+        "sentence": "Does the person have {blue eyes}?",
+        "alternatives_kr": ["파란색 눈"],        
+        "sentence_es": "¿Tiene la persona {ojos azules}?",
+        "sentence_kr": "그 사람의 {눈동자는 파란색}입니까?"
+    },
+    {
+        "attribute": "female",
+        "attribute_es": "mujer",
+        "attribute_kr": "여자",
+        "sentence": "Is the person {female}?",
+        "sentence_es": "¿Es la persona una {mujer}?",
+        "sentence_kr": "그 사람은 {여자}입니까?"
+    },
+    {
+        "attribute": "hat",
+        "attribute_es": "sombrero",
+        "attribute_kr": "모자",
+        "sentence": "Does the person wear a {hat}?",
+        "sentence_es": "¿Lleva la persona un {sombrero}?",
+        "sentence_kr": "그 사람은 {모자를 쓰고} 있습니까?"
+    },
+    {
+        "attribute": "small mouth",
+        "attribute_es": "boca pequeña",
+        "attribute_kr": "작은 입",
+        "sentence": "Does the person have a {small mouth}?",
+        "sentence_es": "¿Tiene la persona una {boca pequeña}?",
+        "sentence_kr": "그 사람의 {입은 작}습니까?"
+    },
+    {
+        "attribute": "long hair",
+        "attribute_es": "cabello largo",
+        "attribute_kr": "긴 머리",
+        "sentence": "Does the person have {long hair}?",
+        "sentence_es": "¿Tiene la persona {cabello largo}?",
+        "sentence_kr": "그 사람의 {머리는 깁}니까?",
+        "alternatives_es": ["pelo largo"]
+    },
+    {
+        "attribute": "black hair",
+        "attribute_es": "cabello negro",
+        "attribute_kr": "검은색 머리",
+        "sentence": "Does the person have {black hair}?",
+        "sentence_es": "¿Tiene la persona {cabello negro}?",
+        "sentence_kr": "그 사람의 {머리는 검은색} 입니까?",
+        "alternatives_es": ["pelo negro"]
+    },
+    {
+        "attribute": "earrings",
+        "attribute_es": "pendientes",
+        "attribute_kr": "귀걸이",
+        "sentence": "Does the person wear {earrings}?",
+        "sentence_es": "¿Lleva la persona {pendientes}?",
+        "sentence_kr": "그 사람은 {귀걸이를} 하고 있습니까?",
+        "alternatives_es": ["aretes"]
+    },
+    {
+        "attribute": "blond hair",
+        "attribute_es": "cabello rubio",
+        "attribute_kr": "금발 머리",
+        "alternatives_en": ["blonde hair"],
+        "sentence": "Does the person have {blond hair}?",
+        "sentence_es": "¿Tiene la persona {cabello rubio}?",
+        "sentence_kr": "그 사람의 {머리는 금발} 입니까?",
+        "alternatives_es": ["pelo rubio"]
+    },
+    {
+        "attribute": "glasses",
+        "attribute_es": "gafas",
+        "attribute_kr": "안경",
+        "sentence": "Does the person wear {glasses}?",
+        "sentence_es": "¿Lleva la persona {gafas}?",
+        "sentence_kr": "그 사람은 {안경을} 끼고 있습니까?",
+        "alternatives_es": ["lentes"]
+    },
+    {
+        "attribute": "ginger hair",
+        "attribute_es": "cabello pelirrojo",
+        "attribute_kr": "연한 적갈색 머리",
+        "sentence": "Does the person have {ginger hair}?",
+        "sentence_es": "¿Tiene la persona {cabello pelirrojo}?",
+        "sentence_kr": "그 사람의 {머리는 연한 적갈색} 입니까?",
+        "alternatives_es": ["pelo pelirrojo"]
+    },
+    {
+        "attribute": "beard",
+        "attribute_es": "barba",
+        "attribute_kr": "수염",
+        "sentence": "Does the person have a {beard}?",        
+        "sentence_es": "¿Tiene la persona {barba}?",
+        "sentence_kr": "그 사람은 {수염이} 있습니까?"
+    },
+    {
+        "attribute": "bald",
+        "attribute_es": "calva",
+        "attribute_kr": "대머리",
+        "sentence": "Is the person {bald}?",
+        "sentence_es": "¿Es la persona {calva}?",
+        "sentence_kr": "그 사람은 {대머리} 입니까?"
+    },
+    {
+        "attribute": "green eyes",
+        "attribute_es": "ojos verdes",
+        "attribute_kr": "초록색 눈동자",
+        "sentence": "Does the person have {green eyes}?",
+        "sentence_es": "¿Tiene la persona {ojos verdes}?",
+        "sentence_kr": "그 사람 {눈동자는 초록색} 입니까?"
+    }
+]

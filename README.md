@@ -1,6 +1,6 @@
 ## Guess N Learn
 
-This games is based on Guess Who, but for language learning.
+This game is based on Guess Who, but for language learning.
 
 There will be 3 quiz modes:
 
